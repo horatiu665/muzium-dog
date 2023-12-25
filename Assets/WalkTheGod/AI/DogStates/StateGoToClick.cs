@@ -5,7 +5,7 @@ namespace DogAI
     using PlantmanAI4;
     using UnityEngine;
 
-    public class Idle : MonoBehaviour, IState
+    public class StateGoToClick : MonoBehaviour, IState
     {
 
         private ControllerState _controller;
@@ -21,7 +21,6 @@ namespace DogAI
             }
         }
 
-
         private DogRefs _dogRefs;
         public DogRefs dogRefs
         {
@@ -35,10 +34,14 @@ namespace DogAI
             }
         }
 
+        public float priority = 10;
+        
+        // a hack...
+        public DogMouseControl dogMouseControl => dogRefs.GetComponent<DogMouseControl>();
 
         string IState.GetName()
         {
-            return "Idle";
+            return "StateGoToClick";
         }
 
         bool IState.GetUninterruptible()
@@ -48,7 +51,7 @@ namespace DogAI
 
         float IState.GetPriority()
         {
-            return 0;
+            return priority;
         }
 
         void IState.OnEnter()
@@ -65,7 +68,8 @@ namespace DogAI
 
         bool IState.ConditionsMet()
         {
-            return true;
+            return dogMouseControl.HasClickDestination;
+
         }
 
     }

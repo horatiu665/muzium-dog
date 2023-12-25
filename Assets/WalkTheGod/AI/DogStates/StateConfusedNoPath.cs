@@ -5,7 +5,7 @@ namespace DogAI
     using PlantmanAI4;
     using UnityEngine;
 
-    public class Idle : MonoBehaviour, IState
+    public class StateConfusedNoPath : MonoBehaviour, IState
     {
 
         private ControllerState _controller;
@@ -35,10 +35,14 @@ namespace DogAI
             }
         }
 
+        public float priority = 10;
+
+        public float confusionTime = 1f;
+
 
         string IState.GetName()
         {
-            return "Idle";
+            return "StateConfusedNoPath";
         }
 
         bool IState.GetUninterruptible()
@@ -48,11 +52,13 @@ namespace DogAI
 
         float IState.GetPriority()
         {
-            return 0;
+            return priority;
         }
 
         void IState.OnEnter()
         {
+            dogRefs.dogLocomotion.StopMovement();
+            // look confusied?
         }
 
         void IState.OnExecute(float deltaTime)
@@ -65,7 +71,10 @@ namespace DogAI
 
         bool IState.ConditionsMet()
         {
-            return true;
+            if (Time.time - dogRefs.dogBrain.dogAstar.cantFindPathTime < confusionTime)
+                return true;
+
+            return false;
         }
 
     }

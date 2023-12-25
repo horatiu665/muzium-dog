@@ -17,6 +17,8 @@ public class DogAstar : MonoBehaviour
     public float rareNodeRaycastCheck = 0.2f;
     private float rareNodeRaycastLastTime;
 
+    public bool startNodeIgnoresRaycast = false;
+
     private AStar.Node startNode, endNode;
 
     public void SetDestination(Vector3 destination)
@@ -53,9 +55,8 @@ public class DogAstar : MonoBehaviour
                         rareNodeRaycastLastTime = Time.time;
                         if (_path.Count > 1)
                         {
-                            var dirToPath1 = _path[1].position - transform.position;
                             // if no obstacle detected, remove [0].
-                            if (!Physics.Raycast(transform.position, dirToPath1, out RaycastHit hit, dirToPath1.magnitude, aStar.layerMask))
+                            if (!FindObstacle(transform.position, _path[1].position))
                             {
                                 _path.RemoveAt(0);
                             }
@@ -84,13 +85,17 @@ public class DogAstar : MonoBehaviour
                 if (startNode == null)
                 {
                     startNode = aStar.AddNode(transform.position);
-                    // an attempt to reduce the moments when it got stuck. but it kinda backfired.
-                    // startNode.ignoreRaycast = true;
-                
+                    if (startNodeIgnoresRaycast)
+                    {
+                        // an attempt to reduce the moments when it got stuck. but it might cause glitches thru walls n stuff.
+                        startNode.ignoreRaycast = true;
+                    }
+
                 }
                 else
                 {
                     startNode.position = transform.position;
+                    aStar.AssignNeighbors(startNode);
                 }
                 if (endNode == null)
                 {
@@ -99,9 +104,15 @@ public class DogAstar : MonoBehaviour
                 else
                 {
                     endNode.position = destination;
+                    aStar.AssignNeighbors(endNode);
+
                 }
                 // consider how to optimize the RedoNeighbors....?!?!
-                aStar.RedoNeighbors();
+                // it's def bad to do it every time we do a new path.
+                if (aStar.aStarSettings.redoNeighborsOnPath)
+                {
+                    aStar.RedoNeighbors();
+                }
 
                 _path = aStar.GetPath(startNode, endNode);
                 if (_path == null)
@@ -120,8 +131,18 @@ public class DogAstar : MonoBehaviour
 
     }
 
+    private bool FindObstacle(Vector3 pointA, Vector3 pointB)
+    {
+        var dir = pointB - pointA;
+        return Physics.Raycast(pointA, dir, out RaycastHit hit, dir.magnitude, aStar.layerMask);
+    }
+
+    public float cantFindPathTime;
+
     void CantFindAPath()
     {
+        cantFindPathTime = Time.time;
+
         // obvious option: stop movement. can't go there, stop trying.
         // StopMovement();
 

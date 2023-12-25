@@ -24,13 +24,14 @@ public class AStar : MonoBehaviour
 
     public List<Node> nodes = new List<Node>();
 
+    public DisjointSet disjointSet = new DisjointSet();
+
     public AStarSettings aStarSettings;
     public LayerMask layerMask => aStarSettings.layerMask;
 
     public float nodeUpdateInterval = 0.5f;
     private float nodeUpdateTimer;
 
-    public float neighborDistance = 5f;
 
     List<Node> openSet = new List<Node>();
     HashSet<Node> closedSet = new HashSet<Node>();
@@ -46,7 +47,7 @@ public class AStar : MonoBehaviour
         // find all moving nodes
         foreach (var ntm in AStarNodeThatMoves.all)
         {
-            nodes.Add(ntm.specialNode);
+            AddNode(ntm.specialNode);
         }
         AStarNodeThatMoves.OnNodeAdded += OnMovingNodeAdded;
         AStarNodeThatMoves.OnNodeRemoved += OnMovingNodeRemoved;
@@ -63,7 +64,11 @@ public class AStar : MonoBehaviour
 
     private void OnMovingNodeAdded(AStarNodeThatMoves nodeThatMoves)
     {
-        nodes.Add(nodeThatMoves.specialNode);
+        AddNode(nodeThatMoves.specialNode);
+
+        // nodes.Add(nodeThatMoves.specialNode);
+        // AssignNeighbors(nodeThatMoves.specialNode, aStarSettings.neighborDistance);
+
     }
 
     private void OnMovingNodeRemoved(AStarNodeThatMoves nodeThatMoves)
@@ -78,7 +83,14 @@ public class AStar : MonoBehaviour
 
     private void OnStaticNodesAdded(AStarStaticNodes staticNodes)
     {
-        nodes.AddRange(staticNodes.nodes);
+        // nodes.AddRange(staticNodes.nodes);
+
+        var n = staticNodes.nodes.Count;
+        for (int i = 0; i < n; i++)
+        {
+            var node = staticNodes.nodes[i];
+            AddNode(node);
+        }
 
     }
 
@@ -126,8 +138,10 @@ public class AStar : MonoBehaviour
         Node nearestNode = null;
         float nearestDistance = float.MaxValue;
 
-        foreach (var node in nodes)
+        for (int i = 0; i < nodes.Count; i++)
         {
+            // foreach (var node in nodes)
+            var node = nodes[i];
             var dist = Vector3.Distance(node.position, position);
             if (dist < nearestDistance)
             {
@@ -165,6 +179,12 @@ public class AStar : MonoBehaviour
     public List<Node> GetPath(Node startNode, Node endNode)
     {
         if (startNode == null || endNode == null)
+        {
+            return null;
+        }
+
+        // easy way to check if there is a path at all. at the expense of the daily neighbor operation
+        if (!disjointSet.Connected(startNode, endNode))
         {
             return null;
         }
@@ -248,12 +268,18 @@ public class AStar : MonoBehaviour
 
     public void RemoveOldNodes()
     {
+        int removedCount = 0;
         for (int i = nodes.Count - 1; i >= 0; i--)
         {
             if (nodes[i].expirationTime < Time.time)
             {
                 nodes.RemoveAt(i);
+                removedCount++;
             }
+        }
+        if (removedCount > 0)
+        {
+            RedoNeighbors();
         }
     }
 
@@ -280,6 +306,9 @@ public class AStar : MonoBehaviour
 
             AddNode(groundedPos);
         }
+
+        // bad idea. it recalculates far too many nodes.
+        // RedoNeighbors();
     }
 
     private bool IsTooCloseToAnotherNode(Vector3 pos, float minDistance)
@@ -298,13 +327,24 @@ public class AStar : MonoBehaviour
         return tooClose;
     }
 
-    public Node AddNode(Vector3 position, float duration = 0)
+    public Node AddNode(Node existingNode)
+    {
+        AssignNeighbors(existingNode);
+
+        nodes.Add(existingNode);
+
+        return existingNode;
+    }
+
+    public Node AddNode(Vector3 position, float duration = 0, bool recalcNeighbors = true)
     {
         Node newNode = new Node()
         {
             position = position,
             expirationTime = duration > 0 ? Time.time + duration : float.MaxValue,
         };
+
+        AssignNeighbors(newNode);
 
         nodes.Add(newNode);
 
@@ -325,30 +365,98 @@ public class AStar : MonoBehaviour
 
     public void RedoNeighbors()
     {
-        RedoNeighbors(neighborDistance);
+        RedoNeighbors(aStarSettings.neighborDistance);
+    }
+
+    public void AssignNeighbors(Node node)
+    {
+        float maxDistance = aStarSettings.neighborDistance;
+
+        // remove node from neighbors list...
+        foreach (var neighbor in node.neighbors)
+        {
+            neighbor.neighbors.Remove(node);
+        }
+        // remove node's neighbors.
+        node.neighbors.Clear();
+
+        disjointSet.Add(node);
+
+        // redo neighbors only for this node
+        var maxSqrDist = maxDistance * maxDistance;
+        var nodesCount = nodes.Count;
+        for (int j = 0; j < nodesCount; j++)
+        {
+            var otherNode = nodes[j];
+            if (otherNode == node)
+                continue;
+
+            var sqrDist = (node.position - otherNode.position).sqrMagnitude;
+            if (sqrDist < maxSqrDist)
+            {
+                // if nodes are not ignoring raycast, and if there is a raycast hit, don't add them as neighbors.
+                // raycast. if it's blocked, don't add
+                if (!(node.ignoreRaycast || otherNode.ignoreRaycast)
+                    && Physics.Raycast(node.position + Vector3.up * nodeVerticalOffset, otherNode.position - node.position, out RaycastHit hit, Mathf.Sqrt(sqrDist), layerMask))
+                {
+                    continue;
+                }
+                node.neighbors.Add(otherNode);
+                otherNode.neighbors.Add(node);
+                disjointSet.Union(node, otherNode);
+            }
+        }
     }
 
     public void RedoNeighbors(float maxDistance)
     {
-        foreach (var node in nodes)
+        var nodesCount = nodes.Count;
+        var maxSqrDist = maxDistance * maxDistance;
+        // start with clearing neighbors.
+        for (int i = 0; i < nodesCount; i++)
         {
-            node.neighbors.Clear();
-            foreach (var otherNode in nodes)
-            {
-                if (node == otherNode)
-                {
-                    continue;
-                }
+            nodes[i].neighbors.Clear();
+        }
+        // reset disjoint set
+        disjointSet.Clear();
+        disjointSet.Add(nodes);
 
-                var dist = Vector3.Distance(node.position, otherNode.position);
-                if (dist < maxDistance)
+        // check each pair of nodes.
+        for (int i = 0; i < nodesCount; i++)
+        {
+            var node = nodes[i];
+
+            // foreach (var node in nodes)
+            // {
+            // node.neighbors.Clear();
+            for (int j = i + 1; j < nodesCount; j++)
+            {
+                var otherNode = nodes[j];
+
+                // foreach method (too slow to GetNext())
+                // foreach (var otherNode in nodes)
+                // {
+                // if (node == otherNode)
+                // {
+                //     continue;
+                // }
+
+
+                // var dist = Vector3.Distance(node.position, otherNode.position);
+                // if (dist < maxDistance)
+                var sqrDist = (node.position - otherNode.position).sqrMagnitude;
+                if (sqrDist < maxSqrDist)
                 {
+                    // if nodes are not ignoring raycast, and if there is a raycast hit, don't add them as neighbors.
                     // raycast. if it's blocked, don't add
-                    if (!node.ignoreRaycast && Physics.Raycast(node.position + Vector3.up * nodeVerticalOffset, otherNode.position - node.position, out RaycastHit hit, dist, layerMask))
+                    if (!(node.ignoreRaycast || otherNode.ignoreRaycast)
+                        && Physics.Raycast(node.position + Vector3.up * nodeVerticalOffset, otherNode.position - node.position, out RaycastHit hit, Mathf.Sqrt(sqrDist), layerMask))
                     {
                         continue;
                     }
                     node.neighbors.Add(otherNode);
+                    otherNode.neighbors.Add(node);
+                    disjointSet.Union(node, otherNode);
                 }
             }
         }
@@ -363,7 +471,7 @@ public class AStar : MonoBehaviour
 
             RemoveOldNodes();
 
-            RedoNeighbors(neighborDistance);
+            // RedoNeighbors(neighborDistance);
         }
     }
     void OnDrawGizmos()

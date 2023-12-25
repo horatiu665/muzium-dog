@@ -13,13 +13,31 @@ public class DogMouseControl : MonoBehaviour
 
     public bool useShiftForDirect = true;
 
+    private Vector3 clickTarget;
+    private bool hasClickDestination;
+    public bool HasClickDestination => hasClickDestination;
+
     void Update()
     {
+        if (hasClickDestination)
+        {
+            if (Vector3.Distance(dogLocomotion.rbRoot.position, clickTarget) <= dogLocomotion.stopDistance)
+            {
+                hasClickDestination = false;
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 999f, dogAstar.aStar.layerMask))
             {
+                // for keeping track of click-locomotion-requests
+                clickTarget = hit.point;
+                hasClickDestination = true;
+
+                dogLocomotion.targetSpeed01 = 1f;
+
                 if (useShiftForDirect)
                 {
                     if (Input.GetKey(KeyCode.LeftShift))
@@ -43,6 +61,8 @@ public class DogMouseControl : MonoBehaviour
         // stop. 1 is right click
         if (Input.GetMouseButtonDown(1))
         {
+            hasClickDestination = false;
+
             if (doAstar)
             {
                 dogAstar.StopMovement();

@@ -14,4 +14,11 @@ public class DogRefs : MonoBehaviour
 
     public Transform tail;
 
+    public DogBrain dogBrain;
+
+    public DogLocomotion dogLocomotion;
+    
+
+
+
 }

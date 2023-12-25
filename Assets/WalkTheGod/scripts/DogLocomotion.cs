@@ -9,7 +9,9 @@ public class DogLocomotion : MonoBehaviour
 
     public Rigidbody rbRoot;
 
-    public float speed = 20f;
+    public float topSpeed = 20f;
+    public float targetSpeed01 = 1f;
+
     public float stopDistance = 0.1f;
     public float rotationSpeed = 10;
 
@@ -27,7 +29,7 @@ public class DogLocomotion : MonoBehaviour
     {
         get
         {
-            return fakeVelocity.magnitude / speed;
+            return fakeVelocity.magnitude / topSpeed;
         }
     }
 
@@ -61,7 +63,9 @@ public class DogLocomotion : MonoBehaviour
         {
             Vector3 dir = destination - rbRoot.position;
 
-            rbRoot.MovePosition(rbRoot.position + dir.normalized * speed * Time.fixedDeltaTime);
+
+
+            rbRoot.MovePosition(rbRoot.position + dir.normalized * topSpeed * targetSpeed01 * Time.fixedDeltaTime);
 
             if (Vector3.Distance(rbRoot.position, destination) < stopDistance)
             {
@@ -91,7 +95,7 @@ public class DogLocomotion : MonoBehaviour
             Vector3 dir = destination - rbRoot.position;
             dir.y = 0f;
 
-            Gizmos.DrawRay(rbRoot.position, dir.normalized * speed);
+            Gizmos.DrawRay(rbRoot.position, dir.normalized * topSpeed * targetSpeed01);
 
         }
 

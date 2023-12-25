@@ -1,11 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using PlantmanAI4;
-
-namespace SelfieTennis
+﻿namespace SelfieTennis
 {
+    using UnityEngine;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using PlantmanAI4;
 
     public class ControllerState : MonoBehaviour, PlantmanAI4.IState
     {
@@ -56,20 +55,21 @@ namespace SelfieTennis
         bool InitStates()
         {
             // sets initial state, etc
-            var validStates = states.Where(s => s.ConditionsMet() && (s as MonoBehaviour).isActiveAndEnabled).ToList();
+            var validStates = states.Where(s => s.ConditionsMet() && (s as MonoBehaviour).isActiveAndEnabled);
             if (!validStates.Any())
             {
                 return false;
             }
             IState highestPriorityState = validStates.First();
             float maxPriority = float.MinValue;
-            for (int i = 0; i < validStates.Count(); i++)
+            // for (int i = 0; i < validStates.Count(); i++)
+            foreach (var s in validStates)
             {
-                var p = validStates[i].GetPriority();
+                var p = s.GetPriority();
                 if (p > maxPriority)
                 {
                     maxPriority = p;
-                    highestPriorityState = validStates[i];
+                    highestPriorityState = s;
                 }
             }
             currentState = highestPriorityState;
@@ -77,7 +77,6 @@ namespace SelfieTennis
             return true;
         }
 
-        // OPTIMIZE THE .TOLIST() OUT OF THERE
         void UpdateStates(float deltaTime)
         {
             if (currentState == null)
@@ -91,31 +90,32 @@ namespace SelfieTennis
             if (!currentState.GetUninterruptible())
             {
                 // takes list of valid states, chooses highest distTargetPriority. 
-                var validStates = states.Where(s => s.ConditionsMet() && (s as MonoBehaviour).isActiveAndEnabled).ToList();
+                var validStates = states.Where(s => s.ConditionsMet() && (s as MonoBehaviour).isActiveAndEnabled);
                 if (!validStates.Any())
                 {
                     return;
                 }
                 IState highestPriorityState = validStates.First();
                 float maxPriority = float.MinValue;
-                for (int i = 0; i < validStates.Count(); i++)
+                foreach (var s in validStates)
+                // for (int i = 0; i < validStates.Count(); i++)
                 {
-                    var p = validStates[i].GetPriority();
+                    var p = s.GetPriority();
                     if (p > maxPriority)
                     {
                         maxPriority = p;
-                        highestPriorityState = validStates[i];
+                        highestPriorityState = s;
                     }
                 }
-                //var highestPriorityState = validStates.Aggregate((s1, s2)
-                //	=> s1.GetPriority() < s2.GetPriority() ? s2 : s1);
 
                 // if different than current state, switch to it.
                 if (highestPriorityState != currentState)
                 {
                     currentState.OnExit();
+                    RemoveStarFromName();
                     currentState = highestPriorityState;
                     currentState.OnEnter();
+                    AddStarToName();
                 }
             }
 
@@ -149,6 +149,26 @@ namespace SelfieTennis
             // find the highest distTargetPriority among states. not just current state (because nothing will activate ever if only current state is considered
             var maxPriority = states.Max(s => s.ConditionsMet() ? s.GetPriority() : 0);
             return priority + maxPriority;
+        }
+
+        private void RemoveStarFromName()
+        {
+#if UNITY_EDITOR
+            var n = (currentState as Component).name;
+            if (n[0] == '*')
+                n = n.Substring(1);
+            (currentState as Component).name = n;
+#endif
+        }
+
+        private void AddStarToName()
+        {
+#if UNITY_EDITOR
+            var n = (currentState as Component).name;
+            if (n[0] != '*')
+                n = "*" + n;
+            (currentState as Component).name = n;
+#endif
         }
 
         public void OnEnter()

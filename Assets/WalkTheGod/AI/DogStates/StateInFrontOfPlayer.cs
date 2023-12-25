@@ -5,7 +5,7 @@ namespace DogAI
     using PlantmanAI4;
     using UnityEngine;
 
-    public class StateFollowPlayer : MonoBehaviour, IState
+    public class StateInFrontOfPlayer : MonoBehaviour, IState
     {
         private ControllerState _controller;
         public ControllerState controller
@@ -24,7 +24,9 @@ namespace DogAI
         public float priority = 1;
 
         public float minDistanceForStartFollow = 5;
-        public float maxDistanceToEndFollow = 2f;
+
+        public float minTimeInFrontOfPlayerToEnd = 3f;
+        private float timeInFrontOfPlayer;
 
         public float minTimeBetweenFollows = 3;
 
@@ -32,8 +34,12 @@ namespace DogAI
         private float prevPathTime;
 
         public float targetSpeed01 = 1;
+        public float targetSpeedWhenInFrontOfPlayer = 0.5f;
+        private float curTargetSpeed01;
 
         public float frontOfPlayerDistance = 2.5f;
+
+        public float maxPlayerExtrapolateVelocity = 5;
 
         private DogRefs _dogRefs;
         public DogRefs dogRefs
@@ -50,6 +56,9 @@ namespace DogAI
 
         public Transform player => dogRefs.dogBrain.player;
 
+        public Transform playerCamera => dogRefs.dogBrain.mainCamera.transform;
+
+        public DogBrain dogBrain => dogRefs.dogBrain;
 
         private float lastTimeThisStateWasActive = 0;
         private bool _isActive;
@@ -57,7 +66,7 @@ namespace DogAI
 
         string IState.GetName()
         {
-            return "StateFollowPlayer";
+            return "StateInFrontOfPlayer";
         }
 
         bool IState.GetUninterruptible()
@@ -87,19 +96,50 @@ namespace DogAI
                 var playerFront = player.position;
                 var playerY = player.position.y;
                 playerFront += player.forward * frontOfPlayerDistance + Random.onUnitSphere * 0.4f * frontOfPlayerDistance;
-                
+                var pfv = dogBrain.playerFakeVelocity;
+                var playerFakeVelocity = pfv.velocity;
+                playerFront += Vector3.ClampMagnitude(playerFakeVelocity, maxPlayerExtrapolateVelocity);
+
                 playerFront.y = playerY;
+
+                // find nearest node to playerFront and use that Y to avoid airborne destination.
+                var nearestNode = dogBrain.dogAstar.aStar.GetNearestNode(playerFront);
+                playerFront.y = nearestNode.position.y;
 
                 Debug.DrawLine(transform.position, playerFront, Color.yellow, 0.5f);
 
                 dogRefs.dogBrain.dogAstar.SetDestination(playerFront);
-                dogRefs.dogBrain.dogAstar.dogLocomotion.targetSpeed01 = targetSpeed01;
+                dogRefs.dogBrain.dogAstar.dogLocomotion.targetSpeed01 = curTargetSpeed01;
             }
+
+            if (!IsInFrontOfPlayer())
+            {
+                timeInFrontOfPlayer = 0;
+                curTargetSpeed01 = Mathf.Lerp(curTargetSpeed01, targetSpeed01, 0.1f);
+
+            }
+            else
+            {
+                timeInFrontOfPlayer += deltaTime;
+                curTargetSpeed01 = Mathf.Lerp(curTargetSpeed01, targetSpeedWhenInFrontOfPlayer, 0.1f);
+
+            }
+
+        }
+
+        public bool IsInFrontOfPlayer()
+        {
+            var dir = transform.position - player.position;
+            dir.y *= 0.2f; // care less for y axis distance
+            if (Vector3.Dot(dir.normalized, playerCamera.forward) < 0.5f)
+                return false;
+            return true;
         }
 
         void IState.OnExit()
         {
             _isActive = false;
+            timeInFrontOfPlayer = 0;
             lastTimeThisStateWasActive = Time.time;
 
         }
@@ -127,13 +167,24 @@ namespace DogAI
             }
             else //if (_isActive)
             {
-                if (dist < maxDistanceToEndFollow)
-                    return false;
                 // keep active until we are close enough to the player
+                // if (dist < maxDistanceToEndFollow)
+                //     return false;
+
+                // keep active until we are in front of the player for long enough
+
                 return true;
             }
 
         }
 
+
+        private void OnGUI()
+        {
+            if (_isActive)
+            {
+                GUI.Label(new Rect(10, 10, 200, 20), "front: " + timeInFrontOfPlayer.ToString("F2"));
+            }
+        }
     }
 }
