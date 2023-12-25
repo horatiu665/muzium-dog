@@ -18,6 +18,8 @@ public class AStar : MonoBehaviour
         public Node previous;
 
         public float expirationTime;
+
+        public bool ignoreRaycast = false;
     }
 
     public List<Node> nodes = new List<Node>();
@@ -342,7 +344,7 @@ public class AStar : MonoBehaviour
                 if (dist < maxDistance)
                 {
                     // raycast. if it's blocked, don't add
-                    if (Physics.Raycast(node.position + Vector3.up * nodeVerticalOffset, otherNode.position - node.position, out RaycastHit hit, dist, layerMask))
+                    if (!node.ignoreRaycast && Physics.Raycast(node.position + Vector3.up * nodeVerticalOffset, otherNode.position - node.position, out RaycastHit hit, dist, layerMask))
                     {
                         continue;
                     }

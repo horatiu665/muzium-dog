@@ -11,6 +11,7 @@ public class DogMouseControl : MonoBehaviour
     public bool doAstar = false;
     public DogAstar dogAstar;
 
+    public bool useShiftForDirect = true;
 
     void Update()
     {
@@ -19,6 +20,15 @@ public class DogMouseControl : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 999f, dogAstar.aStar.layerMask))
             {
+                if (useShiftForDirect)
+                {
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        dogLocomotion.SetDestination(hit.point);
+                        return;
+                    }
+                }
+
                 if (doAstar)
                 {
                     dogAstar.SetDestination(hit.point);

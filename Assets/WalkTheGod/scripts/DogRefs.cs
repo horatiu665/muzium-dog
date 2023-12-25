@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DogRefs : MonoBehaviour
 {
+    public Animator anim;
+    
     public Transform head;
 
     public Transform eyeRight, eyeLeft;

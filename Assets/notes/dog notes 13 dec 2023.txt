@@ -1,0 +1,64 @@
+
+DOG
+===
+
+- commands?
+
+- misbehaving dog!
+
+- how to interact with dog?
+	- come back
+	- stay
+	- come! follow!
+	- go back to the house
+
+- DOG IS MISSING!!! 
+	- you want to take it back and forth.
+
+- coming back to the dog is saved in playerprefs. => dog excited 2nd time u see it
+	- leaving the dog at the castle vs leaving it around in the game, is remembered and the dogg tells you later.
+	-
+
+- interactions with other pieces
+	- bark at a thing
+	- sniff point
+	- staring point
+	- petting point (for the artwork)
+
+
+- dog is a guide. 
+
+
+- convince Michael to let us put stuff all over that the dog can eat and pee on
+
+- dog lifts ass
+- dog sleeping spot
+- dog jumping around???
+
+
+
+
+- build dog castle / dog home (task for Nomi)
+	- gate? 
+	- where can the player walk? 
+	- where can the dog walk?
+
+
+- DOG ADOPT / RELEASE mechanic.
+	- implement based on a trigger or whatev?
+	- then we can test different ways and entrances to castle
+
+
+- investigate CLICKING in the ZIUM experience
+	- we hijack their click interaction
+
+
+- idea for dog to leave you messages
+	- against having it live / on the dog / tohught bubble
+	- nice to have a poem when u come back to the dog.
+	- a new poem every time you return 
+	- 
+
+
+
+

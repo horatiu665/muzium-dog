@@ -84,6 +84,9 @@ public class DogAstar : MonoBehaviour
                 if (startNode == null)
                 {
                     startNode = aStar.AddNode(transform.position);
+                    // an attempt to reduce the moments when it got stuck. but it kinda backfired.
+                    // startNode.ignoreRaycast = true;
+                
                 }
                 else
                 {
@@ -133,7 +136,9 @@ public class DogAstar : MonoBehaviour
             }
             else
             {
-                SetDestination(nearestNode.position);
+                // direct line to nearest node
+                dogLocomotion.SetDestination(nearestNode.position);
+                //SetDestination(nearestNode.position);
             }
         }
     }
