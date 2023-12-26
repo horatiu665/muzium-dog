@@ -155,14 +155,15 @@ public class AStar : MonoBehaviour
     public Node GetNearestNeighborNode(Vector3 destination, Node connectedTo, int iterations = 10)
     {
         Node nearestNode = null;
-        float nearestDistance = float.MaxValue;
+        float nearestSqrDistance = float.MaxValue;
 
         foreach (var node in connectedTo.neighbors)
         {
-            var dist = Vector3.Distance(node.position, destination);
-            if (dist < nearestDistance)
+            // var dist = Vector3.Distance(node.position, destination);
+            var sqrDist = (node.position - destination).sqrMagnitude;
+            if (sqrDist < nearestSqrDistance)
             {
-                nearestDistance = dist;
+                nearestSqrDistance = sqrDist;
                 nearestNode = node;
             }
         }
@@ -489,4 +490,28 @@ public class AStar : MonoBehaviour
         }
     }
 
+    public Node GetNearestNodeToLine(Vector3 position, Vector3 forward, List<Node> exceptNodes)
+    {
+        Node nearestNode = null;
+        float nearestDistance = float.MaxValue;
+
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            // foreach (var node in nodes)
+            var node = nodes[i];
+            if (exceptNodes.Contains(node))
+                continue;
+
+            // calculate distance to line that passes through position and has direction forward
+            var dist = Vector3.Cross(forward, node.position - position).magnitude;
+            if (dist < nearestDistance)
+            {
+                nearestDistance = dist;
+                nearestNode = node;
+            }
+        }
+
+        return nearestNode;
+
+    }
 }

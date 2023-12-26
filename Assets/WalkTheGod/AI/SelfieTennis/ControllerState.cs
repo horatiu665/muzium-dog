@@ -37,6 +37,8 @@
         // if this is not part of another state machine, it should run based on unity's events
         public bool runIndependently = false;
 
+        public bool debugStateOnScreen = false;
+
         public void EditorInitStates()
         {
             if (_states == null || _states.Count == 0)
@@ -268,8 +270,25 @@
 
             if (drawStateSphere)
             {
-                Gizmos.color = color.Evaluate(states.IndexOf(currentState) / (float)(states.Count - 1));
+                Gizmos.color = GetCurStateDebugColor();
                 Gizmos.DrawSphere(transform.position + Vector3.up * stateSphereSize.x, stateSphereSize.y);
+            }
+        }
+
+        public Color GetCurStateDebugColor()
+        {
+            return color.Evaluate(states.IndexOf(currentState) / (float)(states.Count - 1));
+        }
+
+        private void OnGUI()
+        {
+            if (debugStateOnScreen)
+            {
+                if (currentState == null)
+                    return;
+
+                GUI.color = GetCurStateDebugColor();
+                GUI.Label(new Rect(Screen.width * 0.33f, 10, 300, 20), currentState.GetName());
             }
         }
 

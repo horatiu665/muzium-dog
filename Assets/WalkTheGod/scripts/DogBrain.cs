@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DogBrain : MonoBehaviour
@@ -38,6 +39,7 @@ public class DogBrain : MonoBehaviour
     }
 
     public DogAstar dogAstar;
+    public DogLocomotion dogLocomotion => dogRefs.dogLocomotion;
 
     private FakeVelocity _playerFakeVelocity;
     public FakeVelocity playerFakeVelocity
@@ -58,11 +60,14 @@ public class DogBrain : MonoBehaviour
 
     private void Awake()
     {
-        // find player
-        // player = Camera.main.transform.GetComponentInParent<Rigidbody>().transform;
-        player = mainCamera.transform;
+        // find player. replace with code from ZIUM
+        player = Camera.main.transform.GetComponentInParent<Rigidbody>().transform;
+        // player = mainCamera.transform;
 
     }
 
-
+    public bool IsThisThePlayer(Collider collider)
+    {
+        return collider.transform == player;
+    }
 }
