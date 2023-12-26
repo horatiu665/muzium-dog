@@ -1,3 +1,4 @@
+using System.Threading;
 namespace DogAI
 {
     using System.Collections;
@@ -37,7 +38,9 @@ namespace DogAI
 
         public float priority = 10;
 
-        public float confusionTime = 1f;
+        public float confusionTime = 3f;
+
+        private float lookAroundConfusedTime;
 
 
         string IState.GetName()
@@ -57,16 +60,31 @@ namespace DogAI
 
         void IState.OnEnter()
         {
+            dogRefs.dogBrain.dogAstar.StopMovement();
             dogRefs.dogLocomotion.StopMovement();
-            // look confusied?
+            dogRefs.dogLocomotion.StopRotation();
+
+            // look confused?
+            LookAtRandomPlace();
+        }
+
+        private void LookAtRandomPlace()
+        {
+            dogRefs.dogBrain.dogLook.LookAtDirection(Random.onUnitSphere);
+            lookAroundConfusedTime = Time.time + Mathf.Lerp(0.5f, 1.5f, Random.value);
         }
 
         void IState.OnExecute(float deltaTime)
         {
+            if (Time.time > lookAroundConfusedTime)
+            {
+                LookAtRandomPlace();
+            }
         }
 
         void IState.OnExit()
         {
+            dogRefs.dogBrain.dogLook.LookAt(null);
         }
 
         bool IState.ConditionsMet()

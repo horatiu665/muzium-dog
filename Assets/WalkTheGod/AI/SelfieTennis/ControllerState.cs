@@ -229,10 +229,18 @@
 
         }
 
-        // unity messages
-
-        void Start()
+        public Color GetCurStateDebugColor()
         {
+            return color.Evaluate(states.IndexOf(currentState) / (float)(states.Count - 1));
+        }
+
+
+
+        // Unity messages
+
+        void OnEnable()
+        {
+            // consider starting this after a frame? it used to be on Start() but we need it OnEnable for restarting the AI.
             SetupStates();
 
             if (initStates)
@@ -242,6 +250,11 @@
 
             // always run RunIndependent coroutine, which does nothing when runIndependently is false.
             StartCoroutine(UpdateInfreq());
+
+        }
+
+        void OnDisable()
+        {
 
         }
 
@@ -273,11 +286,6 @@
                 Gizmos.color = GetCurStateDebugColor();
                 Gizmos.DrawSphere(transform.position + Vector3.up * stateSphereSize.x, stateSphereSize.y);
             }
-        }
-
-        public Color GetCurStateDebugColor()
-        {
-            return color.Evaluate(states.IndexOf(currentState) / (float)(states.Count - 1));
         }
 
         private void OnGUI()

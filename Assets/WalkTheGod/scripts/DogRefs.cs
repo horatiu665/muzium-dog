@@ -7,6 +7,7 @@ public class DogRefs : MonoBehaviour
     public Animator anim;
     
     public Transform head;
+    public Transform headForwardNoRotation;
 
     public Transform eyeRight, eyeLeft;
     public Transform tongue;

@@ -63,7 +63,8 @@ public class DogLocomotion : MonoBehaviour
         {
             Vector3 dir = destination - rbRoot.position;
 
-
+            rbRoot.velocity *= 0.6f;
+            rbRoot.angularVelocity *= 0.6f;
 
             rbRoot.MovePosition(rbRoot.position + dir.normalized * topSpeed * targetSpeed01 * Time.fixedDeltaTime);
 
@@ -75,8 +76,16 @@ public class DogLocomotion : MonoBehaviour
 
         if (hasTargetRotation)
         {
+            rbRoot.angularVelocity *= 0.6f;
+
             Quaternion target = Quaternion.LookRotation(targetForward, Vector3.up);
             rbRoot.MoveRotation(Quaternion.RotateTowards(rbRoot.rotation, target, rotationSpeed * 360f * Time.fixedDeltaTime));
+
+            // when rotated, stop having a target rotation.
+            if (Quaternion.Angle(rbRoot.rotation, target) < 1f)
+            {
+                StopRotation();
+            }
         }
 
         var fv = (rbRoot.position - prevPos) / Time.fixedDeltaTime;

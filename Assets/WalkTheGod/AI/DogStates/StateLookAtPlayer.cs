@@ -67,6 +67,10 @@ namespace DogAI
         private float lastTimeThisStateWasActive = 0;
         private bool _isActive;
 
+        public float distBeforeWeRaycastFromNode = 7;
+
+        private bool _isLookingAtPlayer;
+
 
         string IState.GetName()
         {
@@ -92,11 +96,7 @@ namespace DogAI
             lastTimeThisStateWasActive = Time.time;
 
             notGoodNodes.Clear();
-
         }
-        public float distBeforeWeRaycastFromNode = 7;
-
-        private bool _isLookingAtPlayer;
 
         void IState.OnExecute(float deltaTime)
         {
@@ -111,10 +111,12 @@ namespace DogAI
             if (!_isLookingAtPlayer)
             {
                 timeLookingAtPlayer = 0;
+                dogBrain.dogLook.LookAt(null);
             }
             else
             {
                 timeLookingAtPlayer += deltaTime;
+                dogBrain.dogLook.LookAt(playerCamera.transform);
             }
 
             if (Time.time - prevPathTime > followPathDelay)
@@ -212,6 +214,7 @@ namespace DogAI
             _isActive = false;
             timeInFrontOfPlayer = 0;
             lastTimeThisStateWasActive = Time.time;
+            dogBrain.dogLook.LookAt(null);
 
         }
 

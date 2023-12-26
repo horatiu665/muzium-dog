@@ -56,6 +56,7 @@ MonoBehaviour:
   name: dog ai
   priority: 0
   runIndependently: 1
+  debugStateOnScreen: 1
   updateTime: 0.5
   color:
     serializedVersion: 2
@@ -135,8 +136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 3
   minDistanceForStartFollow: 4
-  minTimeInFrontOfPlayerToEnd: 3
-  minTimeBetweenFollows: 3
+  minTimeInFrontOfPlayerToEnd: 2
+  minTimeBetweenFollows: 10
   followPathDelay: 0.5
   targetSpeed01: 1
   targetSpeedWhenInFrontOfPlayer: 0.5
@@ -270,10 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc4294c5029e4e6b9e69933bb850a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 5
+  priorityWhenPlayerIsMoving: 1.5
+  priorityWhenPlayerIsStill: 5
   minTimeInFrontOfPlayerToEnd: 3
   minTimeLookingAtPlayer: 3
-  minTimeBetweenLooks: 3
+  minTimeBetweenLooks: 9
   followPathDelay: 0.5
   targetSpeed01: 1
   targetSpeedWhenInFrontOfPlayer: 0.5
@@ -446,6 +448,7 @@ GameObject:
   - component: {fileID: 7469781139469790497}
   - component: {fileID: 3853134229190789630}
   - component: {fileID: 6660028680411522864}
+  - component: {fileID: 1164898141063847991}
   m_Layer: 12
   m_Name: Dog
   m_TagString: Untagged
@@ -484,7 +487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4246853421948240093}
-  head: {fileID: 7217751921694140590}
+  head: {fileID: 5727677173241089779}
+  headForwardNoRotation: {fileID: 341167853098931048}
   eyeRight: {fileID: 0}
   eyeLeft: {fileID: 0}
   tongue: {fileID: 0}
@@ -538,6 +542,7 @@ MonoBehaviour:
   _dogRefs: {fileID: 6098441059665146737}
   player: {fileID: 0}
   dogAstar: {fileID: 8547330104227770343}
+  dogLook: {fileID: 1164898141063847991}
 --- !u!114 &4077100967814972511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,7 +568,7 @@ Rigidbody:
   m_GameObject: {fileID: 6863227645618225541}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.21
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -608,6 +613,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layerName: DOG
+--- !u!114 &1164898141063847991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863227645618225541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcff2dc6a31f8439a871d3d7068aee65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dogRefs: {fileID: 6098441059665146737}
+  lookSmoothness: 0.2
+  headLookAngleLimit: 45
+  lookingAtVector: 0
+  lookAtForward: 0
+  factor: 2
 --- !u!1 &6998521515863420705
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +676,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 20
-  confusionTime: 1
+  confusionTime: 5
+--- !u!1 &7081099884590681614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 341167853098931048}
+  m_Layer: 12
+  m_Name: head GIZMO forward NO rotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &341167853098931048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081099884590681614}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.64144397, y: -0, z: -0, w: 0.76716995}
+  m_LocalPosition: {x: 0, y: -1.0342631, z: 2.1635408}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3888361781148817646}
+  m_LocalEulerAnglesHint: {x: 99.43399, y: 0, z: 0}
+--- !u!1 &7860074696309885616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5727677173241089779}
+  m_Layer: 12
+  m_Name: head GIZMO
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5727677173241089779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7860074696309885616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.64144397, y: -0, z: -0, w: 0.76716995}
+  m_LocalPosition: {x: 0, y: -1.0342631, z: 2.1635408}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3888361781148817646}
+  m_LocalEulerAnglesHint: {x: 99.43399, y: 0, z: 0}
 --- !u!1 &8518575444459253825
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +1026,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -2417461624253930078, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5727677173241089779}
+    - targetCorrespondingSourceObject: {fileID: -2417461624253930078, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 341167853098931048}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1452996374261818790, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
       insertIndex: -1
@@ -1009,6 +1100,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4037423660109783129, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4958452298440635881}
+    - targetCorrespondingSourceObject: {fileID: 4037423660109783129, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8687514088459957691}
     - targetCorrespondingSourceObject: {fileID: 5373371953673341963, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5172739982848198946}
@@ -1262,6 +1356,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8208951, y: 1.295396, z: 2.3062918}
   m_Center: {x: -0.8428841, y: -0.31424755, z: -0.9594811}
+--- !u!4 &3888361781148817646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2417461624253930078, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
+  m_PrefabInstance: {fileID: 7747685622350888268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4046864442656956421 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3194153010261779127, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
@@ -1480,6 +1579,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3660266, y: 2.9719105, z: 1.6557639}
   m_Center: {x: 0, y: -0.59629583, z: 0.36485773}
+--- !u!114 &8687514088459957691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6017513250163907861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ae00f59d8b94a2c84523388bd24ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fakeParent: {fileID: 5727677173241089779}
+  pos: 1
+  rot: 1
+  useOffset: 1
+  offsetPos: {x: 0, y: -0.059235454, z: -0.049652338}
+  offsetRot: {x: -0.76286167, y: 0, z: 0, w: 0.6465623}
+  update: 0
+  fixedUpdate: 0
+  lateUpdate: 1
 --- !u!1 &6323941683101930008 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4880098304048517292, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
@@ -1558,11 +1678,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.22000001, y: 0.22000009, z: 0.22000007}
   m_Center: {x: 0.0000038146973, y: 0, z: -0.00000023841858}
---- !u!4 &7217751921694140590 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8093016737385490974, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
-  m_PrefabInstance: {fileID: 7747685622350888268}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7696559477145378342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 93136429102310250, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}

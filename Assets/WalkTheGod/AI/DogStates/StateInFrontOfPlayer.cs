@@ -162,6 +162,7 @@ namespace DogAI
 
                 if (dist > minDistanceForStartFollow)
                     return true;
+                    
                 return false;
 
             }
@@ -172,8 +173,10 @@ namespace DogAI
                 //     return false;
 
                 // keep active until we are in front of the player for long enough
+                if (timeInFrontOfPlayer < minTimeInFrontOfPlayerToEnd)
+                    return true;
 
-                return true;
+                return false;
             }
 
         }

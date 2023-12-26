@@ -41,6 +41,8 @@ public class DogBrain : MonoBehaviour
     public DogAstar dogAstar;
     public DogLocomotion dogLocomotion => dogRefs.dogLocomotion;
 
+    public DogLookAttention dogLook;
+
     private FakeVelocity _playerFakeVelocity;
     public FakeVelocity playerFakeVelocity
     {

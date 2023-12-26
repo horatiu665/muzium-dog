@@ -21,6 +21,8 @@ public class DogAstar : MonoBehaviour
 
     private AStar.Node startNode, endNode;
 
+    public float cantFindPathTime;
+
     public void SetDestination(Vector3 destination)
     {
         this.destination = destination;
@@ -136,8 +138,6 @@ public class DogAstar : MonoBehaviour
         var dir = pointB - pointA;
         return Physics.Raycast(pointA, dir, out RaycastHit hit, dir.magnitude, aStar.layerMask);
     }
-
-    public float cantFindPathTime;
 
     void CantFindAPath()
     {
