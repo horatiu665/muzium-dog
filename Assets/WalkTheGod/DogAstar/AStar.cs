@@ -7,6 +7,14 @@ public class AStar : MonoBehaviour
     public class Node
     {
         public Vector3 position;
+
+        public Vector3 GetGroundedPosition(AStar aStarRef)
+        {
+            var p = position;
+            p.y -= aStarRef.aStarSettings.nodeVerticalOffset;
+            return p;
+        }
+
         public List<Node> neighbors = new List<Node>();
 
         // gCost is the cost of getting from the start node to this node
@@ -41,6 +49,15 @@ public class AStar : MonoBehaviour
 
     private void OnEnable()
     {
+        // find all existing static nodes.
+        foreach (var sn in AStarStaticNodes.allStaticNodes)
+        {
+            for (int i = 0; i < sn.nodes.Count; i++)
+            {
+                var node = sn.nodes[i];
+                AddNode(node);
+            }
+        }
         AStarStaticNodes.OnStaticNodesRemoved += OnStaticNodesRemoved;
         AStarStaticNodes.OnStaticNodesAdded += OnStaticNodesAdded;
 
@@ -60,6 +77,10 @@ public class AStar : MonoBehaviour
 
         AStarNodeThatMoves.OnNodeAdded -= OnMovingNodeAdded;
         AStarNodeThatMoves.OnNodeRemoved -= OnMovingNodeRemoved;
+
+        nodes.Clear();
+        disjointSet.Clear();
+
     }
 
     private void OnMovingNodeAdded(AStarNodeThatMoves nodeThatMoves)
@@ -352,12 +373,15 @@ public class AStar : MonoBehaviour
         return newNode;
     }
 
-    public Vector3 GetGroundedPosition(Vector3 position, out bool grounded, float raycastHeight = 3f, float raycastDistance = 6f)
+    public Vector3 GetGroundedPosition(Vector3 position, out bool grounded, float raycastHeight = 3f, float raycastDistance = 6f, float verticalOffset = -1f)
     {
+        if (verticalOffset == -1)
+            verticalOffset = aStarSettings.nodeVerticalOffset;
+
         if (Physics.Raycast(position + Vector3.up * raycastHeight, Vector3.down, out RaycastHit hit, raycastDistance, layerMask))
         {
             grounded = true;
-            return hit.point + Vector3.up * aStarSettings.nodeVerticalOffset;
+            return hit.point + Vector3.up * verticalOffset;
         }
 
         grounded = false;

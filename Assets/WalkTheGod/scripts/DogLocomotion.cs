@@ -9,6 +9,9 @@ public class DogLocomotion : MonoBehaviour
 
     public Rigidbody rbRoot;
 
+    // this lets the DogLocomotion control rigidbody.isKinematic status. otherwise, it remains set from the inspector.
+    public bool allowKinematicControl = true;
+
     public float topSpeed = 20f;
     public float targetSpeed01 = 1f;
 
@@ -55,6 +58,14 @@ public class DogLocomotion : MonoBehaviour
     public void StopRotation()
     {
         hasTargetRotation = false;
+    }
+
+    public void SetKinematic(bool isKinematic)
+    {
+        if (allowKinematicControl)
+        {
+            rbRoot.isKinematic = isKinematic;
+        }
     }
 
     private void FixedUpdate()

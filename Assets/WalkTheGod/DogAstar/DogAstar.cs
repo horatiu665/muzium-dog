@@ -65,7 +65,8 @@ public class DogAstar : MonoBehaviour
                         }
                     }
 
-                    Vector3 dir = _path[0].position - transform.position;
+                    // Vector3 dir = _path[0].position - transform.position;
+                    Vector3 dir = _path[0].GetGroundedPosition(aStar) - transform.position;
 
                     dogLocomotion.SetDestination(transform.position + dir);
                     dogLocomotion.SetTargetRotation(dir);

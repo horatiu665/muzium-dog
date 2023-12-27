@@ -13,6 +13,8 @@ public class DogMouseControl : MonoBehaviour
 
     public bool useShiftForDirect = true;
 
+    [Range(0, 1f)]
+    public float clickTargetSpeed = 1f;
     private Vector3 clickTarget;
     private bool hasClickDestination;
     public bool HasClickDestination => hasClickDestination;
@@ -36,7 +38,7 @@ public class DogMouseControl : MonoBehaviour
                 clickTarget = hit.point;
                 hasClickDestination = true;
 
-                dogLocomotion.targetSpeed01 = 1f;
+                dogLocomotion.targetSpeed01 = clickTargetSpeed;
 
                 if (useShiftForDirect)
                 {

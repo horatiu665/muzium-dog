@@ -523,7 +523,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dogRefs: {fileID: 6098441059665146737}
   rbRoot: {fileID: 7469781139469790497}
-  topSpeed: 20
+  allowKinematicControl: 1
+  topSpeed: 15
   targetSpeed01: 1
   stopDistance: 0.5
   rotationSpeed: 2.5
@@ -559,6 +560,7 @@ MonoBehaviour:
   doAstar: 1
   dogAstar: {fileID: 8547330104227770343}
   useShiftForDirect: 1
+  clickTargetSpeed: 1
 --- !u!54 &7469781139469790497
 Rigidbody:
   m_ObjectHideFlags: 0
