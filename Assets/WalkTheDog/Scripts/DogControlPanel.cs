@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class DogControlPanel : MonoBehaviour
 {
+    private static DogControlPanel _instance;
+    public static DogControlPanel instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<DogControlPanel>();
+            }
+            return _instance;
+        }
+    }
+    
     public DogRefs dog;
 
     public bool startDogEnabled = true;
-    private bool dogEnabled;
+    public bool dogEnabled { get; private set;}
 
     public ControlPanelToggle c_toggleDogEnabled;
 
