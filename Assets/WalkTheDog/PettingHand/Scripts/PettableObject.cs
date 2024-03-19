@@ -8,16 +8,33 @@ public class PettableObject : MonoBehaviour
 {
     public static List<PettableObject> allPettableObjects = new List<PettableObject>();
 
+    public bool isDog { get; private set; }
+
     [Header("If set, chooses the nearest one to the petting hand and pets there. Rotation is automatic.")]
     public Transform[] optionalPettingPositions;
 
     [Header("If no pet locations are set, it uses the nearest collider.ClosestPoint(hand.position) to the camera. Rotation is automatic.")]
-    public bool computePetPositionUsingCollider = false;
+    public bool computePetPositionUsingCollider = true;
     public Collider[] pettingColliders;
 
     [Header("Otherwise, it uses the transform.position as petting location. Rotation is automatic.")]
     [ReadOnly]
     public bool pettingFallbackToTransform = true;
+
+    public event Action OnPettingStart, OnPettingEnd;
+
+
+    // only called by DogPettingHand
+    public void TriggerPettingStart()
+    {
+        OnPettingStart?.Invoke();
+    }
+
+    // only called by DogPettingHand
+    public void TriggerPettingEnd()
+    {
+        OnPettingEnd?.Invoke();
+    }
 
     [DebugButton]
     private void GetAllCollidersInChildren()
@@ -26,9 +43,10 @@ public class PettableObject : MonoBehaviour
 
     }
 
-
     private void OnEnable()
     {
+        isDog = GetComponentInParent<DogRefs>() != null;
+
         allPettableObjects.Add(this);
     }
 
@@ -85,6 +103,7 @@ public class PettableObject : MonoBehaviour
 
         return (transform.position, transform.rotation);
     }
+
 
     public bool IsPickupableByPlayer()
     {

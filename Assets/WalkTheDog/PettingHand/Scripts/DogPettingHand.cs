@@ -42,6 +42,9 @@ public class DogPettingHand : MonoBehaviour
 
     public float smoothnes = 0.2f;
 
+    [Range(0, 1f)]
+    public float spherecastRadius = 0.2f;
+
     [Space]
 
     public bool ignorePickupable = true;
@@ -53,6 +56,9 @@ public class DogPettingHand : MonoBehaviour
         new Keyframe(0.5f, 1),
         new Keyframe(1, 0)
         );
+
+    public event System.Action<PettableObject> OnPettingStart, OnPettingEnd;
+    private PettableObject _currentPettableObject;
 
     public void PetThis(Transform petTarget)
     {
@@ -146,12 +152,12 @@ public class DogPettingHand : MonoBehaviour
             handTransform.rotation = Quaternion.Lerp(handTransform.rotation, pettingTargetRotation, smoothnes);
         }
 
-        // detect pettable object under hand and update handPettiness;
+        // detect pettable object under hand, update handPettiness, do petting events.
         {
             handPettiness = HandPettiness.Hidden;
 
             RaycastHit hit;
-            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 2f))
+            if (Physics.SphereCast(mainCamera.transform.position, spherecastRadius, mainCamera.transform.forward, out hit, 2f))
             {
                 var isPettable = PettableObject.IsPettable(hit.collider, out var pettableObj);
 
@@ -172,11 +178,40 @@ public class DogPettingHand : MonoBehaviour
                     // if we have petting input, start petting
                     if (PettableInputPressed())
                     {
-                        (var petPosition, var petRotation) = pettableObj.GetPetLocation(handReadyPosition);
+                        if (_currentPettableObject == null)
+                        {
+                            _currentPettableObject = pettableObj;
+                            _currentPettableObject.TriggerPettingStart();
+                            OnPettingStart?.Invoke(pettableObj);
+                        }
+                        else
+                        {
+                            // change current pettable object
+                            if (_currentPettableObject != pettableObj)
+                            {
+                                _currentPettableObject.TriggerPettingEnd();
+                                OnPettingEnd?.Invoke(_currentPettableObject);
+                                _currentPettableObject = pettableObj;
+                                _currentPettableObject.TriggerPettingStart();
+                                OnPettingStart?.Invoke(pettableObj);
+                            }
+                        }
 
+                        (var petPosition, var petRotation) = pettableObj.GetPetLocation(handReadyPosition);
 
                         PetThis(petPosition, petRotation);
                     }
+                }
+            }
+
+            if (handPettiness == HandPettiness.Hidden || handPettiness == HandPettiness.Ready)
+            {
+                // end petting.
+                if (_currentPettableObject != null)
+                {
+                    _currentPettableObject.TriggerPettingEnd();
+                    OnPettingEnd?.Invoke(_currentPettableObject);
+                    _currentPettableObject = null;
                 }
             }
         }

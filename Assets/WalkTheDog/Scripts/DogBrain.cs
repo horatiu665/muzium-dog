@@ -42,7 +42,7 @@ public class DogBrain : MonoBehaviour
     /// smart pathfinding movement
     /// </summary>
     public DogAstar dogAstar;
-    
+
     /// <summary>
     /// DIRECT movement
     /// </summary>
@@ -51,6 +51,10 @@ public class DogBrain : MonoBehaviour
     public DogLookAttention dogLook;
 
     public DogSniffingBrain dogSniffableObservation;
+
+    public DogPettingBrain dogPettingBrain;
+
+    public DogEmotionBrain dogEmotionBrain;
 
     private FakeVelocity _playerFakeVelocity;
     public FakeVelocity playerFakeVelocity
