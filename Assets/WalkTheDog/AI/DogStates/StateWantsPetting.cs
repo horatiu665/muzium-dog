@@ -30,7 +30,7 @@ namespace DogAI
 
         public float minTimeBetweenFollows = 3;
 
-        public float followPathDelay = 0.5f;
+        public float recalculatePathDelay = 0.5f;
         private float prevPathTime;
 
         public float targetSpeed01 = 1;
@@ -94,12 +94,17 @@ namespace DogAI
             {
                 dogRefs.dogBrain.dogAstar.StopMovement();
 
+                // look at player while petting.
+                // maybe change look target to random...??? sometimes ????
+                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform);
+
+
                 // be happy for getting pets
                 dogRefs.dogBrain.dogEmotionBrain.AddHappiness(this, 10f);
                 return;
             }
 
-            if (Time.time - prevPathTime > followPathDelay)
+            if (Time.time - prevPathTime > recalculatePathDelay)
             {
                 prevPathTime = Time.time;
                 var playerFront = player.position;
@@ -115,6 +120,9 @@ namespace DogAI
                 var nearestNode = dogBrain.dogAstar.aStar.GetNearestNode(playerFront);
                 playerFront.y = nearestNode.position.y;
 
+                // unless the player is looking over a ledge.... thus maybe we should raycast down from the front of the player.
+                //
+
                 Debug.DrawLine(transform.position, playerFront, Color.yellow, 0.5f);
 
                 dogRefs.dogBrain.dogAstar.SetDestination(playerFront);
@@ -126,11 +134,15 @@ namespace DogAI
                 timeInFrontOfPlayer = 0;
                 curTargetSpeed01 = Mathf.Lerp(curTargetSpeed01, targetSpeed01, 0.1f);
 
+                dogRefs.dogBrain.dogLook.LookAt(null);
             }
             else
             {
                 timeInFrontOfPlayer += deltaTime;
                 curTargetSpeed01 = Mathf.Lerp(curTargetSpeed01, targetSpeedWhenInFrontOfPlayer, 0.1f);
+
+                // look at player
+                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform);
 
             }
 

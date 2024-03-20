@@ -28,6 +28,39 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-3227468581399068070
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 5006bb97989e7407487b1d81fa73c589
+  m_EffectName: Attenuation
+  m_MixLevel: 59f77966f6ff940baa1b2c86ffb33ffc
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-1088371707207493386
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: petting
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 4c75a893a12f343d997697c925fab51b
+  m_Children: []
+  m_Volume: 3df36b578780a46ed8c548c38e70c346
+  m_Pitch: 444b7fbc0968d49a0aa137cba0fc11bc
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -3227468581399068070}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -49,6 +82,7 @@ AudioMixerController:
     - 7158c01a3b72b41458e590932e62e179
     - 048bad6f6dd9a4cff9c7a28b0d51288e
     - 0b2026002f5bd4df282f0319b47409f4
+    - 4c75a893a12f343d997697c925fab51b
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -63,6 +97,7 @@ AudioMixerGroupController:
   m_GroupID: 7158c01a3b72b41458e590932e62e179
   m_Children:
   - {fileID: 1817835026145096149}
+  - {fileID: -1088371707207493386}
   - {fileID: 3949816604581418812}
   m_Volume: aea3f393287ec4b759711e2fd1d9a444
   m_Pitch: 33b399b95489a4d02a4f0bcf9ff5f775
@@ -97,6 +132,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 16543c0df536f408da79ba8b5fcf1920
   m_FloatValues:
+    3df36b578780a46ed8c548c38e70c346: 5.1526933
     d540b197378b249cb80338e4c138678e: 6.0865803
     f37324effea834521b7dd2960fb0714c: -3.5090396
   m_TransitionOverrides: {}

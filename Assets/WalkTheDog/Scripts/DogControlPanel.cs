@@ -28,6 +28,8 @@ public class DogControlPanel : MonoBehaviour
 
     public ControlPanelToggle c_toggleDogEnabled;
 
+    public bool skipIntro = false;
+
     public Transform dogStartPosition;
 
     public PlayableDirector dogIntroTimeline;
@@ -46,12 +48,15 @@ public class DogControlPanel : MonoBehaviour
     {
         this.dogEnabled = dogEnabled;
         dog.gameObject.SetActive(dogEnabled);
-        dog.transform.position = dogStartPosition.position;
-        dog.transform.rotation = dogStartPosition.rotation;
+        if (skipIntro)
+        {
+            dog.transform.position = dogStartPosition.position;
+            dog.transform.rotation = dogStartPosition.rotation;
+        }
 
         c_toggleDogEnabled.SetUI(dogEnabled);
 
-        if (playTimeline)
+        if (playTimeline && !skipIntro)
         {
             if (dogEnabled)
             {

@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 1413090819953131876}
   - component: {fileID: 1876726704312379818}
   - component: {fileID: 8547330104227770343}
+  - component: {fileID: 3322089810364517574}
   m_Layer: 12
   m_Name: a star
   m_TagString: Untagged
@@ -468,6 +469,21 @@ MonoBehaviour:
   rareNodeRaycastCheck: 0.2
   startNodeIgnoresRaycast: 1
   cantFindPathTime: 0
+--- !u!114 &3322089810364517574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106362117396842578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa62e8b630302475981a3d80fd2f5a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dogRefs: {fileID: 0}
+  minDistanceToCheck: 3.5
+  nodeDuration: 30
 --- !u!1 &2121771549273067742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,9 +2012,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dogRefs: {fileID: 6098441059665146737}
   pettingNeed: 0
-  pettingNeedRange: {x: -1, y: 1}
+  pettingNeedRange: {x: -2, y: 1}
   pettingNeedIncrease: 0.1
-  pettingNeedReducedWhenPetted: 0.2
+  pettingNeedReducedWhenPetted: 1.5
 --- !u!114 &8646537814792367390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,7 +2275,7 @@ MonoBehaviour:
   minDistanceForStartFollow: 5
   minTimeInFrontOfPlayerToEnd: 3
   minTimeBetweenFollows: 3
-  followPathDelay: 0.5
+  recalculatePathDelay: 0.5
   targetSpeed01: 1
   targetSpeedWhenInFrontOfPlayer: 0.5
   frontOfPlayerDistance: 2.5

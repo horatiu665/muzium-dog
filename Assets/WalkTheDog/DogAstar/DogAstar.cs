@@ -135,6 +135,24 @@ public class DogAstar : MonoBehaviour
 
     }
 
+    public AStar.Node GetNextNode()
+    {
+        if (_path.Count > 0)
+        {
+            return _path[0];
+        }
+        return null;
+    }
+
+    public AStar.Node GetNextNextNode()
+    {
+        if (_path.Count > 1)
+        {
+            return _path[1];
+        }
+        return null;
+    }
+
     private bool FindObstacle(Vector3 pointA, Vector3 pointB)
     {
         var dir = pointB - pointA;

@@ -7,6 +7,8 @@ public class DogLookAttention : MonoBehaviour
 {
     public DogRefs dogRefs;
 
+    public DogAstar dogAstar => dogRefs.dogBrain.dogAstar;
+
     // this is where it looks with the head/eyes.
     private Transform _currentLookObject;
 
@@ -42,6 +44,8 @@ public class DogLookAttention : MonoBehaviour
 
     void Update()
     {
+
+        // if we have a current look object
         if (_currentLookObject != null && !lookingAtVector)
         {
             // look at the current look object.
@@ -52,14 +56,24 @@ public class DogLookAttention : MonoBehaviour
             // look at the vector. lookTarget already set.
         }
         else
-        {
-            // look at nothing
-        }
-
         if (lookAtForward)
         {
             lookTarget = dogRefs.headForwardNoRotation.position + dogRefs.headForwardNoRotation.forward;
         }
+        // if we're currently moving, look at node[i+1]
+        else if (dogAstar.hasDestination && dogAstar.hasPath)
+        {
+            var nextNextNode = dogAstar.GetNextNextNode();
+            if (nextNextNode != null)
+            {
+                lookTarget = nextNextNode.position;
+            }
+        }
+        else
+        {
+            // look at nothing
+        }
+
 
         // animate head
         Update_AnimateHead();

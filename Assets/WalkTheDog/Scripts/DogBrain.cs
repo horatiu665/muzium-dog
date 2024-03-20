@@ -21,6 +21,9 @@ public class DogBrain : MonoBehaviour
     // player ref
     public Transform player;
 
+    // zium player
+    public FirstPersonController playerFPC;
+
     private Camera _mainCamera;
     public Camera mainCamera
     {
@@ -81,6 +84,8 @@ public class DogBrain : MonoBehaviour
         try
         {
             player = Camera.main.transform.GetComponentInParent<CharacterController>().transform;
+
+            playerFPC = player.GetComponent<FirstPersonController>();
 
         }
         catch (Exception e)

@@ -548,7 +548,7 @@ PrefabInstance:
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: quitDogSound
       value: 
-      objectReference: {fileID: 2148827298418653289}
+      objectReference: {fileID: 0}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: castleReferences
       value: 
@@ -599,6 +599,14 @@ PrefabInstance:
     - target: {fileID: 4815060064925764111, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -73.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320811098900176021, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -78.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320811098900176021, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.3
       objectReference: {fileID: 0}
     - target: {fileID: 6169429041238688670, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -660,17 +668,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6169429041238688670, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
   m_PrefabInstance: {fileID: 4786690840141064964}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2148827298418653289 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6899399179166978925, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
-  m_PrefabInstance: {fileID: 4786690840141064964}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba914f0447774d0aba619bc5d79d5e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3810642964511545749 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8543225565869781649, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}

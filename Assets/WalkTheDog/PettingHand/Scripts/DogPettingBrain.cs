@@ -15,7 +15,7 @@ public class DogPettingBrain : MonoBehaviour
         {
             if (_dogRefs == null)
             {
-                _dogRefs = GetComponent<DogRefs>();
+                _dogRefs = GetComponentInParent<DogRefs>();
             }
             return _dogRefs;
         }
