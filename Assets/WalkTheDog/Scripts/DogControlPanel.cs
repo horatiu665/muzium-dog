@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class DogControlPanel : MonoBehaviour
 {
@@ -16,15 +17,23 @@ public class DogControlPanel : MonoBehaviour
             return _instance;
         }
     }
-    
+
+
+
     public DogRefs dog;
 
     public bool startDogEnabled = true;
-    public bool dogEnabled { get; private set;}
+    public bool dogEnabled { get; private set; }
 
     public ControlPanelToggle c_toggleDogEnabled;
 
     public Transform dogStartPosition;
+
+    public PlayableDirector dogIntroTimeline;
+
+    public Collider doNotAllowPlayerInsideHereIfDoorIsClosed;
+
+    public Transform playerInFrontOfDoorPosition;
 
 
     // API to set dog status.
@@ -36,6 +45,11 @@ public class DogControlPanel : MonoBehaviour
         dog.transform.rotation = dogStartPosition.rotation;
 
         c_toggleDogEnabled.SetUI(dogEnabled);
+
+        if (dogEnabled)
+        {
+            dogIntroTimeline.Play();
+        }
     }
 
 
@@ -49,6 +63,8 @@ public class DogControlPanel : MonoBehaviour
 
     private void Update()
     {
+        // consider only doing this when within range of the thing (<5m??)
+
         // consider highlighting the control panel buttons when the player raycasts in front of them. 
         // that's more of an interaction system thing for the main game tho.
         c_toggleDogEnabled.SetHighlight(false);
@@ -68,10 +84,45 @@ public class DogControlPanel : MonoBehaviour
                     // toggle dog enabled
                     dogEnabled = !dogEnabled;
                     SetDogEnabled(dogEnabled);
+
+                    if (!dogEnabled)
+                    {
+                        if (IsInside(doNotAllowPlayerInsideHereIfDoorIsClosed, dog.dogBrain.mainCamera.transform.position))
+                        {
+                            // move player outside
+
+                            // this doesn't work because of ZIUM controller.
+
+                            var player = dog.dogBrain.player;
+                            
+
+                            player.position = playerInFrontOfDoorPosition.position;
+                            player.rotation = playerInFrontOfDoorPosition.rotation;
+
+                            // Physics.SyncTransforms();
+                            
+                            // StartCoroutine(pTween.WaitFrames(1, ()=>{
+
+                            // player.position = playerInFrontOfDoorPosition.position;
+                            // player.rotation = playerInFrontOfDoorPosition.rotation;
+
+                            // Physics.SyncTransforms();
+                            
+                            // }));
+                        }
+
+
+                    }
                 }
             }
 
         }
     }
 
+    // adjusted from https://discussions.unity.com/t/check-if-position-is-inside-a-collider/12667/3
+    public static bool IsInside(Collider c, Vector3 point)
+    {
+        Vector3 closest = c.ClosestPoint(point);
+        return (closest - point).magnitude <= Mathf.Epsilon;
+    }
 }

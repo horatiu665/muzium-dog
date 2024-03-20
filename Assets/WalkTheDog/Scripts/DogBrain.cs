@@ -80,7 +80,8 @@ public class DogBrain : MonoBehaviour
         // find player. replace with code from ZIUM
         try
         {
-            player = Camera.main.transform.GetComponentInParent<Rigidbody>().transform;
+            player = Camera.main.transform.GetComponentInParent<CharacterController>().transform;
+
         }
         catch (Exception e)
         {

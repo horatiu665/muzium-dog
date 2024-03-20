@@ -51,6 +51,8 @@ public class DogPettingHand : MonoBehaviour
     public bool ignorePickupable = true;
 
     private float _pettingTime;
+    private float _prevPettingOffsetCurveValue;
+    private bool _prevOffsetWasDescending;
     public float pettingOffsetAmount = 0.2f;
     public AnimationCurve pettingOffsetCurve = new AnimationCurve(
         new Keyframe(0, 0),
@@ -61,7 +63,21 @@ public class DogPettingHand : MonoBehaviour
     public event System.Action<PettableObject> OnPettingStart, OnPettingEnd;
     private PettableObject _currentPettableObject;
 
-    public SmartSoundDog defaultPettingSound;
+    public AudioClip pettingClip
+    {
+        get
+        {
+            if (_currentPettableObject != null && _currentPettableObject.customPettingClips.Length > 0)
+            {
+                return _currentPettableObject.customPettingClips[Random.Range(0, _currentPettableObject.customPettingClips.Length)];
+            }
+            return defaultPettingClips[Random.Range(0, defaultPettingClips.Length)];
+        }
+    }
+
+    public AudioClip[] defaultPettingClips;
+
+    public SmartSoundDog pettingSound;
 
     public void PetThis(Transform petTarget)
     {
@@ -144,11 +160,25 @@ public class DogPettingHand : MonoBehaviour
         // lerp hand to petting target
         {
             _pettingTime += Time.deltaTime;
-            var offsetPosition = handTransform.up * pettingOffsetCurve.Evaluate(_pettingTime) * pettingOffsetAmount;
+            var pettingOffsetCurveValue = pettingOffsetCurve.Evaluate(_pettingTime);
+            var offsetPosition = handTransform.up * pettingOffsetCurveValue * pettingOffsetAmount;
             // var offsetRotation = Quaternion.identity;
             if (handPettiness != HandPettiness.Petting)
             {
                 offsetPosition = Vector3.zero;
+            }
+            else
+            {
+                // when the offset hits zero / changes direction upwards, play sound
+                var isDescending = _prevPettingOffsetCurveValue > pettingOffsetCurveValue;
+                if (isDescending && !_prevOffsetWasDescending)
+                {
+                    pettingSound.audio.clip = pettingClip;
+                    pettingSound.Play();
+                }
+                _prevOffsetWasDescending = isDescending;
+                _prevPettingOffsetCurveValue = pettingOffsetCurveValue;
+
             }
 
             handTransform.position = Vector3.Lerp(handTransform.position, pettingTargetPosition + offsetPosition, smoothnes);
