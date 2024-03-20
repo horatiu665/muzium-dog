@@ -23,6 +23,7 @@ public class PettableObject : MonoBehaviour
 
     public event Action OnPettingStart, OnPettingEnd;
 
+    public AudioClip[] pettingSounds;
 
     // only called by DogPettingHand
     public void TriggerPettingStart()

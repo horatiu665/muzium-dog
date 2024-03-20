@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AStarSettings", menuName = "AStarSettings", order = 0)]
+[CreateAssetMenu(fileName = "AStarSettings", menuName = "Dog/AStarSettings", order = 0)]
 public class AStarSettings : ScriptableObject
 {
 

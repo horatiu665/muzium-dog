@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ToyBoxHHH;
 using UnityEngine;
 
 public class DogPettingHand : MonoBehaviour
@@ -59,6 +60,8 @@ public class DogPettingHand : MonoBehaviour
 
     public event System.Action<PettableObject> OnPettingStart, OnPettingEnd;
     private PettableObject _currentPettableObject;
+
+    public SmartSoundDog defaultPettingSound;
 
     public void PetThis(Transform petTarget)
     {
