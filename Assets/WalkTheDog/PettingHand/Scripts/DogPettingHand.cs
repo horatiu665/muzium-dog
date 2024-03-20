@@ -100,6 +100,12 @@ public class DogPettingHand : MonoBehaviour
     {
         prevHandPettiness = handPettiness;
 
+        // parent this root object under the main camera, to make use of local position
+        transform.SetParent(mainCamera.transform);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+
+
     }
 
     void Update()
@@ -181,8 +187,17 @@ public class DogPettingHand : MonoBehaviour
 
             }
 
-            handTransform.position = Vector3.Lerp(handTransform.position, pettingTargetPosition + offsetPosition, smoothnes);
-            handTransform.rotation = Quaternion.Lerp(handTransform.rotation, pettingTargetRotation, smoothnes);
+            if (handPettiness == HandPettiness.Petting)
+            {
+                handTransform.position = Vector3.Lerp(handTransform.position, pettingTargetPosition + offsetPosition, smoothnes);
+                handTransform.rotation = Quaternion.Lerp(handTransform.rotation, pettingTargetRotation, smoothnes);
+            }
+            else 
+            // if (handPettiness == HandPettiness.Ready)
+            {
+                handTransform.localPosition = Vector3.Lerp(handTransform.localPosition, handTransform.parent.InverseTransformPoint(pettingTargetPosition + offsetPosition), smoothnes);
+                handTransform.rotation = Quaternion.Lerp(handTransform.rotation, pettingTargetRotation, smoothnes);
+            }
         }
 
         // detect pettable object under hand, update handPettiness, do petting events.
@@ -254,7 +269,10 @@ public class DogPettingHand : MonoBehaviour
 
     public bool PettableInputPressed()
     {
-        return Input.GetMouseButton(0);
+        // use the ZIUM method (if they change I'ma have to update)
+        return Input.GetKey(KeyCode.E) || Input.GetMouseButton(0);
+
+        // return Input.GetMouseButton(0);
     }
 }
 

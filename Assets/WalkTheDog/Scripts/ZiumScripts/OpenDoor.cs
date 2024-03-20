@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenDoor : ItemBehaviour
+public class OpenDoor : MonoBehaviour
 {
     [Header("Door")]
     public Transform doorRoot;
@@ -16,23 +16,23 @@ public class OpenDoor : ItemBehaviour
     public Transform knob;
 
 
-    public override void OnFocus()
-    {
-    }
+    // public override void OnFocus()
+    // {
+    // }
 
-    public override void OnInteract()
-    {
-        // isOpen = !isOpen;
-    }
+    // public override void OnInteract()
+    // {
+    //     // isOpen = !isOpen;
+    // }
 
-    public override void OnLoseFocus()
-    {
-    }
+    // public override void OnLoseFocus()
+    // {
+    // }
 
     private void Update()
     {
         var isOpen = false;
-    var isFocused =         false;
+        var isFocused = false;
 
         if (DogControlPanel.instance.dogEnabled)
         {

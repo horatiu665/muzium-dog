@@ -89,7 +89,7 @@ MonoBehaviour:
   smoothnes: 0.2
   spherecastRadius: 0.2
   ignorePickupable: 1
-  pettingOffsetAmount: 0.13
+  pettingOffsetAmount: 0.17
   pettingOffsetCurve:
     serializedVersion: 2
     m_Curve:
@@ -115,7 +115,14 @@ MonoBehaviour:
     m_PostInfinity: 0
     m_RotationOrder: 4
   defaultPettingClips:
-  - {fileID: 8300000, guid: 78b07ad52c74e4dd18985ea3ed75bbac, type: 3}
+  - {fileID: 8300000, guid: ef002c23818604647a8842963e7d4367, type: 3}
+  - {fileID: 8300000, guid: 6496acd3a46c94290aac9c85c9d36e76, type: 3}
+  - {fileID: 8300000, guid: 2ba2f06353a7e4fc0aa8d94bc14db597, type: 3}
+  - {fileID: 8300000, guid: 770f0aa63aaf549719be860dc9cc98ae, type: 3}
+  - {fileID: 8300000, guid: 63fd4c2748c344e57812a24860df8ecf, type: 3}
+  - {fileID: 8300000, guid: 29f862240acb64b5b9703a439857713f, type: 3}
+  - {fileID: 8300000, guid: 2fd4577c6d1004fbeb673d0c7275cc4f, type: 3}
+  - {fileID: 8300000, guid: 02bb5f836ce5b4d69ba19ecb88724c16, type: 3}
   pettingSound: {fileID: 8049246205644563628}
 --- !u!1 &2655167574080095359
 GameObject:
@@ -246,11 +253,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 8278885436127445291}
-  clips:
-  - {fileID: 8300000, guid: 78b07ad52c74e4dd18985ea3ed75bbac, type: 3}
-  playRandomClip: 1
+  clips: []
+  playRandomClip: 0
   doNotInterrupt: 0
-  randomPitchRange: {x: 1, y: 1}
+  randomPitchRange: {x: 0.98, y: 1.03}
 --- !u!82 &8278885436127445291
 AudioSource:
   m_ObjectHideFlags: 0
