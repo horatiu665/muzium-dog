@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ToyBoxHHH;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -30,14 +31,18 @@ public class DogControlPanel : MonoBehaviour
     public Transform dogStartPosition;
 
     public PlayableDirector dogIntroTimeline;
+    public DogCastleReferences castleReferences;
 
     public Collider doNotAllowPlayerInsideHereIfDoorIsClosed;
 
     public Transform playerInFrontOfDoorPosition;
 
+    public SmartSoundDog quitDogSound;
+
+
 
     // API to set dog status.
-    public void SetDogEnabled(bool dogEnabled)
+    public void SetDogEnabled(bool dogEnabled, bool playTimeline = true)
     {
         this.dogEnabled = dogEnabled;
         dog.gameObject.SetActive(dogEnabled);
@@ -46,9 +51,20 @@ public class DogControlPanel : MonoBehaviour
 
         c_toggleDogEnabled.SetUI(dogEnabled);
 
-        if (dogEnabled)
+        if (playTimeline)
         {
-            dogIntroTimeline.Play();
+            if (dogEnabled)
+            {
+                dogIntroTimeline.playableAsset = castleReferences.dogIntro;
+                dogIntroTimeline.Play();
+            }
+            else
+            {
+                dogIntroTimeline.playableAsset = castleReferences.dogLeaveCastleReset;
+                dogIntroTimeline.Play();
+
+                quitDogSound.Play();
+            }
         }
     }
 
@@ -58,7 +74,7 @@ public class DogControlPanel : MonoBehaviour
     private void OnEnable()
     {
         // start disabled...
-        SetDogEnabled(startDogEnabled);
+        SetDogEnabled(startDogEnabled, false);
     }
 
     private void Update()
@@ -94,20 +110,20 @@ public class DogControlPanel : MonoBehaviour
                             // this doesn't work because of ZIUM controller.
 
                             var player = dog.dogBrain.player;
-                            
+
 
                             player.position = playerInFrontOfDoorPosition.position;
                             player.rotation = playerInFrontOfDoorPosition.rotation;
 
-                            // Physics.SyncTransforms();
-                            
+                            Physics.SyncTransforms();
+
                             // StartCoroutine(pTween.WaitFrames(1, ()=>{
 
                             // player.position = playerInFrontOfDoorPosition.position;
                             // player.rotation = playerInFrontOfDoorPosition.rotation;
 
                             // Physics.SyncTransforms();
-                            
+
                             // }));
                         }
 

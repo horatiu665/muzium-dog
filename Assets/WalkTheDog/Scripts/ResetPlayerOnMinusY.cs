@@ -18,6 +18,10 @@ public class ResetPlayerOnMinusY : MonoBehaviour
         if (transform.position.y < threshold)
         {
             transform.position = initPos;
+            var cc = GetComponent<CharacterController>();
+            if (cc!=null){
+                Physics.SyncTransforms();
+            }
             if (alsoRb)
             {
                 var rb = GetComponent<Rigidbody>();

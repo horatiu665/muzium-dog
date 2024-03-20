@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 725910977196700855}
   - component: {fileID: 3236571663680375411}
   - component: {fileID: 3669686920980900393}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: do not allow player when door closed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
