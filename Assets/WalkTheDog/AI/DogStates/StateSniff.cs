@@ -34,7 +34,7 @@ namespace DogAI
             }
         }
 
-        public DogSniffingBrain sniffBrain => dogRefs.dogBrain.dogSniffableObservation;
+        public DogSniffingBrain sniffBrain => dogRefs.dogBrain.dogSniffingBrain;
 
         public float priority = 10;
 

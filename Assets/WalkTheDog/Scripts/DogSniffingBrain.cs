@@ -77,7 +77,7 @@ public class DogSniffingBrain : MonoBehaviour
     {
         // check for sniffable objects within range.
         sniffablesWithinRange.Clear();
-        foreach (var sniffable in DogSniffableObject.allSniffableObjects)
+        foreach (var sniffable in DogSniffableObject.all)
         {
             if (Vector3.Distance(transform.position, sniffable.transform.position) < sniffableRadius)
             {

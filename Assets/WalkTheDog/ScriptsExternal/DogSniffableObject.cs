@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class DogSniffableObject : MonoBehaviour
 {
+    public static List<DogSniffableObject> all = new List<DogSniffableObject>();
 
-    public static List<DogSniffableObject> allSniffableObjects = new List<DogSniffableObject>();
-
-    [Header("Place this marker where the dog should sniff.")]
+    [Header("The dog will walk to and sniff this object, and face towards the transform this script is on.")]
+    [Tooltip("The dog will walk to and sniff this object, and face towards the transform this script is on.")]
     public Transform sniffPositionMarker;
 
     public Vector3 sniffPosition
@@ -24,14 +24,19 @@ public class DogSniffableObject : MonoBehaviour
         }
     }
 
+    private void Reset()
+    {
+        sniffPositionMarker = transform;
+    }
+
     private void OnEnable()
     {
-        allSniffableObjects.Add(this);
+        all.Add(this);
     }
 
     private void OnDisable()
     {
-        allSniffableObjects.Remove(this);
+        all.Remove(this);
     }
 
     private void OnDrawGizmos()

@@ -257,10 +257,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6169429041238688670}
     m_Modifications:
-    - target: {fileID: 1275317467148177562, guid: 8ffe3e5aa18104ca58424b8b23ec9480, type: 3}
-      propertyPath: m_audioClip
+    - target: {fileID: 60873633750966107, guid: 8ffe3e5aa18104ca58424b8b23ec9480, type: 3}
+      propertyPath: dogSniffingBrain
       value: 
-      objectReference: {fileID: 8300000, guid: 85b30ec2543504548bceb3328df3a386, type: 3}
+      objectReference: {fileID: 2570462557357544780}
     - target: {fileID: 6085706162362604351, guid: 8ffe3e5aa18104ca58424b8b23ec9480, type: 3}
       propertyPath: m_LocalPosition.x
       value: -79.061
@@ -310,6 +310,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ffe3e5aa18104ca58424b8b23ec9480, type: 3}
+--- !u!114 &2570462557357544780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 728643463397910104, guid: 8ffe3e5aa18104ca58424b8b23ec9480, type: 3}
+  m_PrefabInstance: {fileID: 3004102493400675092}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccc3a6e865024d209588bfbb289c332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4192000024968639088 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1413090819953131876, guid: 8ffe3e5aa18104ca58424b8b23ec9480, type: 3}
