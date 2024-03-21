@@ -5,15 +5,30 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.12
+    second: {fileID: 2100000, guid: 6c7f1ceefa528414aa690354299d7fa8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: l
+    second: {fileID: 2100000, guid: 7f358a3071866422192458e928403615, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: r
+    second: {fileID: 2100000, guid: 42b46af9fc8454d7da8d328be57dbdeb, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: thundehuahua_l_centre
-    second: {fileID: 2800000, guid: cc19fe92cbf16496a8e6a3e935769708, type: 3}
+    second: {fileID: 2800000, guid: 2513f1b705b0a46ccabf35896864bd35, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: thundehuahua_r_centre
-    second: {fileID: 2800000, guid: dfa1c6e386bc84538814790742655cc3, type: 3}
+    second: {fileID: 2800000, guid: 8a0e6d0d2a7fa4e30aaff604ae61aa62, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

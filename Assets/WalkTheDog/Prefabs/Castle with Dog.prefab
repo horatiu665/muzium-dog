@@ -131,14 +131,14 @@ PlayableDirector:
   m_GameObject: {fileID: 4379729472221495358}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 253ed18b4b2d34890a092865f875dba5, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 738b341c38ec7425692af1f7752efa60, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 6738883370566975526, guid: 738b341c38ec7425692af1f7752efa60, type: 2}
-    value: {fileID: 6355378577253218310}
+    value: {fileID: 4432817647678518531}
   - key: {fileID: 5711935425924351732, guid: 738b341c38ec7425692af1f7752efa60, type: 2}
     value: {fileID: 6579550506279610115}
   - key: {fileID: 473993103210985633, guid: 738b341c38ec7425692af1f7752efa60, type: 2}
@@ -146,13 +146,13 @@ PlayableDirector:
   - key: {fileID: -7467188066710670843, guid: 738b341c38ec7425692af1f7752efa60, type: 2}
     value: {fileID: 4150015737620782643}
   - key: {fileID: 6738883370566975526, guid: 253ed18b4b2d34890a092865f875dba5, type: 2}
-    value: {fileID: 6355378577253218310}
+    value: {fileID: 4432817647678518531}
   - key: {fileID: 5711935425924351732, guid: 253ed18b4b2d34890a092865f875dba5, type: 2}
     value: {fileID: 6579550506279610115}
   - key: {fileID: 473993103210985633, guid: 253ed18b4b2d34890a092865f875dba5, type: 2}
     value: {fileID: 5025438158473127372}
   - key: {fileID: -7467188066710670843, guid: 253ed18b4b2d34890a092865f875dba5, type: 2}
-    value: {fileID: 4150015737620782643}
+    value: {fileID: 6886619233202522012}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &2929679549876852816
@@ -492,7 +492,7 @@ PrefabInstance:
     - target: {fileID: 2250618378633012973, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: knob
       value: 
-      objectReference: {fileID: 7002152095684936538}
+      objectReference: {fileID: 5454681160766400104}
     - target: {fileID: 2250618378633012973, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: doorRoot
       value: 
@@ -546,9 +546,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4575386111677115233}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
+      propertyPath: skipIntro
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: quitDogSound
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6868544457205696296}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: castleReferences
       value: 
@@ -584,6 +588,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8582176090127253667, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
   m_PrefabInstance: {fileID: 3275331530382477942}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6868544457205696296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8225165452812012894, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
+  m_PrefabInstance: {fileID: 3275331530382477942}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba914f0447774d0aba619bc5d79d5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &6886619233202522012 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8279444709453942250, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
+  m_PrefabInstance: {fileID: 3275331530382477942}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4786690840141064964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,18 +615,6 @@ PrefabInstance:
     - target: {fileID: 1483745693698491663, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: m_Name
       value: Dog with control panel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4815060064925764111, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -73.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320811098900176021, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -78.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320811098900176021, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 13.3
       objectReference: {fileID: 0}
     - target: {fileID: 6169429041238688670, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -678,6 +686,11 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 8933572271416784183, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
   m_PrefabInstance: {fileID: 4786690840141064964}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &4432817647678518531 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9216957345690328583, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
+  m_PrefabInstance: {fileID: 4786690840141064964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4575386111677115233 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9012464369534779493, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
@@ -689,11 +702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc798800101d5492a8b9b5532a98bc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &6355378577253218310 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1900355015910314754, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
-  m_PrefabInstance: {fileID: 4786690840141064964}
-  m_PrefabAsset: {fileID: 0}
 --- !u!65 &8106731369118286125 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3669686920980900393, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
@@ -858,6 +866,10 @@ PrefabInstance:
     - target: {fileID: 7677657194451102688, guid: 5a0c3ae8bceb143b48cdc68d2e6de7e8, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835705161459126060, guid: 5a0c3ae8bceb143b48cdc68d2e6de7e8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8775878950689472020, guid: 5a0c3ae8bceb143b48cdc68d2e6de7e8, type: 3}
       propertyPath: m_IsActive

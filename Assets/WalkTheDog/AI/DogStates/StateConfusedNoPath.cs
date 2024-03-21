@@ -42,6 +42,11 @@ namespace DogAI
 
         private float lookAroundConfusedTime;
 
+        public Vector2 whimperDelayRange = new Vector2(5, 10);
+        private float whimperTime;
+
+        public float whimperChance = 0.7f;
+
 
         string IState.GetName()
         {
@@ -66,6 +71,11 @@ namespace DogAI
 
             // look confused?
             LookAtRandomPlace();
+            if (Random.value < whimperChance)
+            {
+                dogRefs.dogBrain.dogVoice.Whimper();
+            }
+            whimperTime = Time.time + Random.Range(whimperDelayRange.x, whimperDelayRange.y);
         }
 
         private void LookAtRandomPlace()
@@ -79,6 +89,15 @@ namespace DogAI
             if (Time.time > lookAroundConfusedTime)
             {
                 LookAtRandomPlace();
+            }
+
+            if (Time.time > whimperTime)
+            {
+                if (Random.value < whimperChance)
+                {
+                    dogRefs.dogBrain.dogVoice.Whimper();
+                }
+                whimperTime = Time.time + Random.Range(whimperDelayRange.x, whimperDelayRange.y);
             }
         }
 

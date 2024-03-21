@@ -12,7 +12,7 @@ public class DogBrain : MonoBehaviour
         {
             if (_dogRefs == null)
             {
-                _dogRefs = GetComponent<DogRefs>();
+                _dogRefs = GetComponentInParent<DogRefs>();
             }
             return _dogRefs;
         }
@@ -59,6 +59,8 @@ public class DogBrain : MonoBehaviour
 
     public DogEmotionBrain dogEmotionBrain;
 
+    public DogVoice dogVoice;
+
     private FakeVelocity _playerFakeVelocity;
     public FakeVelocity playerFakeVelocity
     {
@@ -83,15 +85,28 @@ public class DogBrain : MonoBehaviour
         // find player. replace with code from ZIUM
         try
         {
-            player = Camera.main.transform.GetComponentInParent<CharacterController>().transform;
+            var cc = Camera.main.transform.GetComponentInParent<CharacterController>();
+            if (cc != null)
+            {
+                player = cc.transform;
+                if (player != null)
+                {
+                    playerFPC = player.GetComponent<FirstPersonController>();
+                }
+            }
 
-            playerFPC = player.GetComponent<FirstPersonController>();
+            if (player == null)
+            {
+                player = Camera.main.transform.GetComponentInParent<Rigidbody>().transform;
+            }
+
 
         }
         catch (Exception e)
         {
             if (mainCamera != null)
             {
+                Debug.Log("No player found! Using main camera as player!");
                 player = mainCamera.transform;
             }
             else

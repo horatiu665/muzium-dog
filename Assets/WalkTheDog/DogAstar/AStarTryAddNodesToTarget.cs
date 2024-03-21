@@ -28,7 +28,7 @@ public class AStarTryAddNodesUnderPlayer : MonoBehaviour
     public float minDistanceToCheck = 1;
 
     public float nodeDuration = 30f;
-    private List<AStar.Node> allAddedNodes = new List<AStar.Node>();
+    // private List<AStar.Node> allAddedNodes = new List<AStar.Node>();
 
     private void OnEnable()
     {
@@ -44,15 +44,18 @@ public class AStarTryAddNodesUnderPlayer : MonoBehaviour
         var p = dogRefs.dogBrain.player;
         if (p != null)
         {
-            if (fpc != null)
+            if (fpc != null) // we have Zium player
             {
                 // only if player is grounded
                 if (fpc.isGrounded)
                 {
                     CheckPositionAndAddNode(p.position);
-
-
                 }
+            }
+            else // we have regular player
+            {
+                CheckPositionAndAddNode(p.position);
+
             }
         }
 
@@ -70,7 +73,8 @@ public class AStarTryAddNodesUnderPlayer : MonoBehaviour
             if (node == null || Vector3.Distance(node.position, playerPosition) > minDistanceToCheck)
             {
                 var newNode = aStar.AddNode(playerPosition, nodeDuration);
-                allAddedNodes.Add(newNode);
+                Debug.DrawRay(playerPosition, Vector3.up * 0.5f, Color.red, 30);
+                // allAddedNodes.Add(newNode);
             }
         }
 

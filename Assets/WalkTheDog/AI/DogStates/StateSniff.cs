@@ -111,6 +111,10 @@ namespace DogAI
                 {
                     dogRefs.dogBrain.dogAstar.SetDestination(_targetSniffable.sniffPosition);
                     sniffBrain.sniffAnimationTarget = null;
+
+                    dogRefs.dogBrain.dogLook.LookAt(null);
+                    dogRefs.dogBrain.dogVoice.Sniff(0f);
+
                 }
                 else
                 // if we're close enough to the target.
@@ -123,10 +127,17 @@ namespace DogAI
                         _sniffStartTime = Time.time;
 
                         sniffBrain.sniffAnimationTarget = _targetSniffable;
+
+                        var lookFwd = dogRefs.transform.forward;
+                        dogRefs.dogBrain.dogLook.LookAtDirection(lookFwd);
+
+                        dogRefs.dogBrain.dogVoice.Sniff(1f);
+
                     }
                     else if (_isSniffing)
                     {
                         // continue sniffing.
+                        dogRefs.dogBrain.dogVoice.Sniff(1f);
 
                         // if time is out, find new sniff target.
                         if (Time.time - _sniffStartTime > timeSpentSniffingPerObject)
@@ -159,6 +170,11 @@ namespace DogAI
             sniffBrain.sniffAnimationTarget = null;
             _isSniffing = false;
             objectsSniffed.Clear();
+
+            dogRefs.dogBrain.dogLook.LookAt(null);
+
+            dogRefs.dogBrain.dogVoice.Sniff(0f);
+
 
         }
 

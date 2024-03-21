@@ -112,11 +112,17 @@ namespace DogAI
             {
                 timeLookingAtPlayer = 0;
                 dogBrain.dogLook.LookAt(null);
+
+                dogRefs.dogBrain.dogVoice.Pant(0);
+
             }
             else
             {
                 timeLookingAtPlayer += deltaTime;
                 dogBrain.dogLook.LookAt(playerCamera.transform);
+
+                dogRefs.dogBrain.dogVoice.Pant(0.7f);
+
             }
 
             if (Time.time - prevPathTime > followPathDelay)
@@ -215,6 +221,8 @@ namespace DogAI
             timeInFrontOfPlayer = 0;
             lastTimeThisStateWasActive = Time.time;
             dogBrain.dogLook.LookAt(null);
+
+            dogRefs.dogBrain.dogVoice.Pant(0);
 
         }
 

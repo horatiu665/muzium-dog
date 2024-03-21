@@ -146,6 +146,8 @@ public class DogPettingHand : MonoBehaviour
         {
             if (handPettiness == HandPettiness.Hidden)
             {
+                pettingTargetPosition = handHiddenPosition.position;
+                pettingTargetRotation = handHiddenPosition.rotation;
                 if (Time.time > _handHiddenTime + 1f)
                 {
                     handVisual.SetActive(false);
@@ -153,11 +155,11 @@ public class DogPettingHand : MonoBehaviour
             }
             else if (handPettiness == HandPettiness.Ready)
             {
-
+                pettingTargetPosition = handReadyPosition.position;
+                pettingTargetRotation = handReadyPosition.rotation;
             }
             else if (handPettiness == HandPettiness.Petting)
             {
-                // petting animation???
 
 
             }

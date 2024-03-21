@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3295057945129467972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7448658292334877769}
+  m_Layer: 0
+  m_Name: sniff position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7448658292334877769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3295057945129467972}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.16, y: 2.55, z: 1.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1375213233150268562}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1485911192066847609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22,31 +53,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -84.401
+      value: -29.94
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.227
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.016
+      value: 19.77
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.28620335
+      value: -0.018731622
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.2862034
+      value: 0.018731572
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.64659697
+      value: 0.7068587
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.64659697
+      value: 0.70685863
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -58,7 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -227.751
+      value: -176.964
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -74,13 +105,16 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 438551161982682023}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7448658292334877769}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1461280861195026995}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4374513743335812996}
+      addedObject: {fileID: 2535313052000409108}
     - targetCorrespondingSourceObject: {fileID: 1534051760688407905, guid: 95c2cf6cd143c494787ec4afa953efc2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 969347085409075074}
@@ -139,8 +173,8 @@ MonoBehaviour:
   pettingColliders:
   - {fileID: 969347085409075074}
   pettingFallbackToTransform: 1
-  pettingSounds: []
---- !u!114 &4374513743335812996
+  customPettingClips: []
+--- !u!114 &2535313052000409108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,13 +183,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1755961346994130472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b93f9da0554341828ab7441cd4aaedb, type: 3}
+  m_Script: {fileID: 11500000, guid: eb83a4e579d4540d29fc0a840379a9fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dogSound: {fileID: 0}
-  settings: {fileID: 0}
-  dogToMove: {fileID: 0}
-  playRandomSounds: 1
+  sniffPositionMarker: {fileID: 7448658292334877769}
 --- !u!1001 &5786114462377961955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,6 +195,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1375213233150268562}
     m_Modifications:
+    - target: {fileID: 3554383684884215924, guid: f36a0cb234c0f4c50b659ee1b1826150, type: 3}
+      propertyPath: clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554383684884215924, guid: f36a0cb234c0f4c50b659ee1b1826150, type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7d2da393d94f448028175ad92e363456, type: 3}
     - target: {fileID: 4513553319458996821, guid: f36a0cb234c0f4c50b659ee1b1826150, type: 3}
       propertyPath: settings
       value: 
@@ -172,6 +211,10 @@ PrefabInstance:
       propertyPath: dogToMove
       value: 
       objectReference: {fileID: 1375213233150268562}
+    - target: {fileID: 4513553319458996821, guid: f36a0cb234c0f4c50b659ee1b1826150, type: 3}
+      propertyPath: playRandomSounds
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6118024291373168315, guid: f36a0cb234c0f4c50b659ee1b1826150, type: 3}
       propertyPath: m_Name
       value: DOG SOUND

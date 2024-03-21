@@ -12,7 +12,6 @@ public class DogBarkAnim : MonoBehaviour
     [Space]
     public DogBarkSettings settings;
 
-
     public Transform dogToMove;
 
     private Vector3 prevOffset;
@@ -20,8 +19,29 @@ public class DogBarkAnim : MonoBehaviour
 
     public bool playRandomSounds = true;
 
+    public float maxDistanceFromPlayer = 10f;
+    public float maxDistanceFromDawg = 10f;
+
     void Update()
     {
+        if (DogControlPanel.instance.dog.dogBrain.player == null)
+            return;
+
+        var distToPlayer = Vector3.Distance(dogToMove.position, DogControlPanel.instance.dog.dogBrain.player.position);
+        var distToDog = Vector3.Distance(dogToMove.position, DogControlPanel.instance.dog.transform.position);
+        if (distToPlayer > maxDistanceFromPlayer && distToDog > maxDistanceFromDawg)
+        {
+            smoothOffset = Vector3.zero;
+            dogToMove.position += smoothOffset - prevOffset;
+            prevOffset = Vector3.zero;
+
+            var ssd = GetComponent<SmartSoundDog>();
+            ssd.Stop();
+            return;
+        }
+
+
+
         // animate
         var newOffset =
             Vector3.up * settings.upCurve.Evaluate(envelope) * settings.upAmount

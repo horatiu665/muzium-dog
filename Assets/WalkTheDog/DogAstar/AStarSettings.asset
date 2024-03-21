@@ -15,6 +15,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 49
-  nodeVerticalOffset: 0
+  nodeVerticalOffset: 0.33
   neighborDistance: 5
   redoNeighborsOnPath: 0

@@ -28,7 +28,7 @@ namespace DogAI
         public float minTimeInFrontOfPlayerToEnd = 3f;
         private float timeInFrontOfPlayer;
 
-        public float minTimeBetweenFollows = 3;
+        public float minTimeBetweenStateActive = 3;
 
         public float recalculatePathDelay = 0.5f;
         private float prevPathTime;
@@ -60,9 +60,16 @@ namespace DogAI
 
         public DogBrain dogBrain => dogRefs.dogBrain;
 
-        private float lastTimeThisStateWasActive = 0;
+        private float _lastTimeThisStateWasActive = 0;
         private bool _isActive;
 
+        private float _pettingNeedOnStartPetting;
+
+        public float pettingStopDelayAmount = 2f;
+        private float _pettingStopTime;
+
+        public float timeWithoutPetsBeforeGivingUp = 10f;
+        private float _stateEnterTime;
 
         string IState.GetName()
         {
@@ -82,13 +89,16 @@ namespace DogAI
         void IState.OnEnter()
         {
             _isActive = true;
-            lastTimeThisStateWasActive = Time.time;
+            _lastTimeThisStateWasActive = Time.time;
+            _stateEnterTime = Time.time;
 
+            _pettingNeedOnStartPetting = dogRefs.dogBrain.dogPettingBrain.pettingNeed;
         }
+
 
         void IState.OnExecute(float deltaTime)
         {
-            lastTimeThisStateWasActive = Time.time;
+            _lastTimeThisStateWasActive = Time.time;
 
             if (dogRefs.dogBrain.dogPettingBrain.IsBeingPetted())
             {
@@ -98,10 +108,26 @@ namespace DogAI
                 // maybe change look target to random...??? sometimes ????
                 dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform);
 
-
                 // be happy for getting pets
                 dogRefs.dogBrain.dogEmotionBrain.AddHappiness(this, 10f);
+
+                dogRefs.dogBrain.dogVoice.Pant(1f);
+
+                _pettingStopTime = Time.time + pettingStopDelayAmount;
                 return;
+            }
+            else if (_pettingStopTime > Time.time)
+            {
+                // keep panting and sitting still
+                dogRefs.dogBrain.dogAstar.StopMovement();
+                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform);
+                dogRefs.dogBrain.dogVoice.Pant(1f);
+                return;
+            }
+            else
+            {
+                dogRefs.dogBrain.dogVoice.Pant(0);
+
             }
 
             if (Time.time - prevPathTime > recalculatePathDelay)
@@ -161,7 +187,22 @@ namespace DogAI
         {
             _isActive = false;
             timeInFrontOfPlayer = 0;
-            lastTimeThisStateWasActive = Time.time;
+            _lastTimeThisStateWasActive = Time.time;
+
+            dogRefs.dogBrain.dogVoice.Pant(0);
+
+            // was satisfied?
+            var pettingNeedAfter = dogRefs.dogBrain.dogPettingBrain.pettingNeed;
+            var pettingNeedChange = pettingNeedAfter - _pettingNeedOnStartPetting;
+            // we want pettingNeed to be reduced, to be effective.
+            if (pettingNeedChange < -1.5f)
+            {
+                dogRefs.dogBrain.dogVoice.BarkHappy();
+            }
+            else if (pettingNeedChange < -0.5f)
+            {
+                dogRefs.dogBrain.dogVoice.BarkIntensity(Random.Range(0, 0.5f));
+            }
 
         }
 
@@ -175,6 +216,30 @@ namespace DogAI
                 return true;
             }
 
+            // if we have a petting stop time, the dog waits before it leaves the petting state.
+            if (_pettingStopTime > Time.time)
+            {
+                return true;
+            }
+
+            // if state not active 
+            if (!_isActive)
+            {
+                // wait between follows
+                if (Time.time - _lastTimeThisStateWasActive < minTimeBetweenStateActive)
+                    return false;
+
+            }
+            else // if state is active
+            {
+                // if we're active for too long without pets maybe give up for a while.
+                if (Time.time - _stateEnterTime > timeWithoutPetsBeforeGivingUp)
+                {
+                    return false;
+                }
+
+            }
+
             // if we don't have enough pets, we want pets
             return dogRefs.dogBrain.dogPettingBrain.pettingNeed > 0.7f;
 
@@ -186,7 +251,7 @@ namespace DogAI
             if (!_isActive)
             {
                 // wait between follows
-                if (Time.time - lastTimeThisStateWasActive < minTimeBetweenFollows)
+                if (Time.time - _lastTimeThisStateWasActive < minTimeBetweenStateActive)
                     return false;
 
                 if (dist > minDistanceForStartFollow)
