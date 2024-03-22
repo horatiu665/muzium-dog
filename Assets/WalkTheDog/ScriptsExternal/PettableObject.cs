@@ -11,11 +11,11 @@ public class PettableObject : MonoBehaviour
     public bool isDog { get; private set; }
 
     [Header("If set, chooses the nearest one to the petting hand and pets there. Rotation is automatic.")]
-    public Transform[] optionalPettingPositions;
+    public Transform[] optionalPettingPositions = new Transform[0];
 
-    [Header("If no pet locations are set, it uses the nearest collider.ClosestPoint(hand.position) to the camera. Rotation is automatic.")]
+    [Header("If optionalPettingPositions is empty, it uses the nearest collider.ClosestPoint(hand.position) to the camera. Rotation is automatic.")]
     public bool computePetPositionUsingCollider = true;
-    public Collider[] pettingColliders;
+    public Collider[] pettingColliders = new Collider[0];
 
     [Header("Otherwise, it uses the transform.position as petting location. Rotation is automatic.")]
     [ReadOnly]
@@ -23,7 +23,7 @@ public class PettableObject : MonoBehaviour
 
     public event Action OnPettingStart, OnPettingEnd;
 
-    public AudioClip[] customPettingClips;
+    public AudioClip[] customPettingClips = new AudioClip[0];
 
     // only called by DogPettingHand
     public void TriggerPettingStart()
@@ -109,6 +109,7 @@ public class PettableObject : MonoBehaviour
     public bool IsPickupableByPlayer()
     {
         // TODO: implement! by checking for the component used by Zium.
+        // for now just don't put the PettableObject script on an object that can be picked up.
         return false;
     }
 }

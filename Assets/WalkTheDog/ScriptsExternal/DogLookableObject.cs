@@ -8,26 +8,9 @@ public class DogLookableObject : MonoBehaviour
 {
     public static List<DogLookableObject> all = new List<DogLookableObject>();
 
-    [Header("Place this marker where the dog should look.")]
-    [Tooltip("Place this marker where the dog should look.")]
-    public Transform lookPositionMarker;
-
-    public Vector3 lookPosition
-    {
-        get
-        {
-            if (lookPositionMarker == null)
-            {
-                return transform.position;
-            }
-            return lookPositionMarker.position;
-        }
-    }
-
-    private void Reset()
-    {
-        lookPositionMarker = transform;
-    }
+    [Header("Place this script on a transform the dog should look at.")]
+    [Header("Optional: if set, the dog tries to go to this object before looking.")]
+    public Transform optionalDogPosition;
 
     private void OnEnable()
     {
@@ -42,8 +25,21 @@ public class DogLookableObject : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(lookPosition, 0.6f);
-        Gizmos.DrawWireSphere(lookPosition, 0.5f);
+        Gizmos.DrawWireSphere(transform.position, 0.6f);
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
+        if (optionalDogPosition != null)
+        {
+            // draw horizontal circle on the ground
+            for (int i = 0; i < 360; i+=10){
+                var x = Mathf.Cos(i * Mathf.Deg2Rad) * 0.5f;
+                var z = Mathf.Sin(i * Mathf.Deg2Rad) * 0.5f;
+                var nextX = Mathf.Cos((i + 10) * Mathf.Deg2Rad) * 0.5f;
+                var nextZ = Mathf.Sin((i + 10) * Mathf.Deg2Rad) * 0.5f;
+                Gizmos.DrawLine(optionalDogPosition.position + new Vector3(x, 0, z), optionalDogPosition.position + new Vector3(nextX, 0, nextZ));
+            }
+            Gizmos.DrawLine(transform.position, optionalDogPosition.position);
+        }
+
 
     }
 

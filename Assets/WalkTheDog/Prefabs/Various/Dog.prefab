@@ -879,9 +879,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810bf6640ff6449e988b4ea9d8a6f72b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 16.22
+  priority: 19.5
   updatePathfindingRate: 2
-  moveSpeed01Range: {x: 0.5, y: 1}
+  moveSpeed01Range: {x: 0.75, y: 1}
   timeSpentBarkingPerObject: 3
   maxTimeSpentBarkingPerTurn: 10
   _barkStartTime: 0

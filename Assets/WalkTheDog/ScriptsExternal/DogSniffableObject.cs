@@ -43,6 +43,7 @@ public class DogSniffableObject : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, 0.5f);
+        Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, sniffPosition);
 
     }
