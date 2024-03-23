@@ -40,7 +40,10 @@ public class PoemSystem : MonoBehaviour
 
     public TextMeshProUGUI poemText;
 
-    public bool cheatWithP = false;
+    public bool togglePoemWithO = false;
+
+    public bool closePoemWithP = false;
+
 
     [DebugButton]
     public void SetRandomDogBone()
@@ -78,9 +81,14 @@ public class PoemSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && cheatWithP)
+        if (Input.GetKeyDown(KeyCode.O) && togglePoemWithO)
         {
             TogglePoemVisible();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P) && closePoemWithP)
+        {
+            SetPoemVisible(false);
         }
     }
 
