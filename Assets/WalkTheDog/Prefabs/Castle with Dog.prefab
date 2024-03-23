@@ -83,6 +83,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2543680573721957230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 655882702918303139}
+  m_Layer: 12
+  m_Name: Castle DOOR position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &655882702918303139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2543680573721957230}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.69738626, z: -0, w: 0.71669555}
+  m_LocalPosition: {x: 0.284, y: 4.958, z: 0.208}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6503769146255440817}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4379729472221495358
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +153,7 @@ Transform:
   - {fileID: 6532574978454177061}
   - {fileID: 8915906688441702904}
   - {fileID: 6842000078413709283}
+  - {fileID: 655882702918303139}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!320 &8939989870833341799
@@ -924,6 +956,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dog with control panel
       objectReference: {fileID: 0}
+    - target: {fileID: 3632226118737804355, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
+      propertyPath: poemPosition
+      value: 
+      objectReference: {fileID: 655882702918303139}
     - target: {fileID: 6169429041238688670, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 82.9

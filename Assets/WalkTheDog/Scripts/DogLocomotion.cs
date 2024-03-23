@@ -17,6 +17,7 @@ public class DogLocomotion : MonoBehaviour
 
     public float stopDistance = 0.1f;
     public float rotationSpeed = 10;
+    public float rotationLerp = 0.1f;
     private float howManyFriendsOfDog = 1;
 
     public bool hasDestination { get; private set; }
@@ -75,8 +76,11 @@ public class DogLocomotion : MonoBehaviour
         {
             Vector3 dir = destination - rbRoot.position;
 
-            rbRoot.velocity *= 0.6f;
-            rbRoot.angularVelocity *= 0.6f;
+            if (!rbRoot.isKinematic)
+            {
+                rbRoot.velocity *= 0.6f;
+                rbRoot.angularVelocity *= 0.6f;
+            }
 
             rbRoot.MovePosition(rbRoot.position + dir.normalized * topSpeed * targetSpeed01 * Time.fixedDeltaTime);
 
@@ -85,26 +89,41 @@ public class DogLocomotion : MonoBehaviour
                 StopMovement();
             }
         }
-        else {
+        else
+        {
             // slow down cause we don't have a destination
-            rbRoot.velocity *= 0.9f;
+            if (!rbRoot.isKinematic)
+            {
+                rbRoot.velocity *= 0.9f;
+            }
         }
 
         if (hasTargetRotation)
         {
-            rbRoot.angularVelocity *= 0.6f;
 
             Quaternion target = Quaternion.LookRotation(targetForward, Vector3.up);
-            rbRoot.MoveRotation(Quaternion.RotateTowards(rbRoot.rotation, target, rotationSpeed * 360f * Time.fixedDeltaTime));
+            // var lerpTarget = Quaternion.RotateTowards(rbRoot.rotation, target, rotationSpeed * 360f * Time.fixedDeltaTime);
+            var lerpTarget = Quaternion.Slerp(rbRoot.rotation, target, rotationLerp);
+            rbRoot.MoveRotation(lerpTarget);
+
+            if (!rbRoot.isKinematic)
+            {
+                rbRoot.angularVelocity *= 0.6f;
+            }
 
             // when rotated, stop having a target rotation.
             if (Quaternion.Angle(rbRoot.rotation, target) < 1f)
             {
                 StopRotation();
             }
-        } else {
+        }
+        else
+        {
             // slow down rotation cause we don't have a target rotation
-            rbRoot.angularVelocity *= 0.9f;
+            if (!rbRoot.isKinematic)
+            {
+                rbRoot.angularVelocity *= 0.9f;
+            }
         }
 
         var fv = (rbRoot.position - prevPos) / Time.fixedDeltaTime;
@@ -129,4 +148,20 @@ public class DogLocomotion : MonoBehaviour
         }
 
     }
+
+#if UNITY_EDITOR
+    private void OnGUI()
+    {
+        if (allowKinematicControl)
+        {
+            // set gui color
+            GUI.color = rbRoot.isKinematic ? Color.green : Color.red;
+            GUI.Label(new Rect(10, 30, 200, 20), "Dog Kinematic: " + rbRoot.isKinematic);
+
+            // reset gui color
+            GUI.color = Color.white;
+        }
+
+    }
+#endif
 }
