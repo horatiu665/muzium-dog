@@ -1,20 +1,12 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: bb720812739a64141b74080c2c66d5f1
-=======
 guid: 06bfb550546f741359a4d3935a848840
->>>>>>> 1697cc09f505495ae511ff8c9be62f61cfa1b94a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-<<<<<<< HEAD
-    enableMipMap: 1
-=======
     enableMipMap: 0
->>>>>>> 1697cc09f505495ae511ff8c9be62f61cfa1b94a
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -45,43 +37,24 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-<<<<<<< HEAD
     wrapU: 0
     wrapV: 0
-    wrapW: 0
-  nPOTScale: 1
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 0
-=======
-    wrapU: 1
-    wrapV: 1
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
->>>>>>> 1697cc09f505495ae511ff8c9be62f61cfa1b94a
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-<<<<<<< HEAD
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
-  alphaIsTransparency: 0
-  spriteTessellationDetail: -1
-  textureType: 0
-=======
   spriteBorder: {x: 36, y: 36, z: 36, w: 36}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
->>>>>>> 1697cc09f505495ae511ff8c9be62f61cfa1b94a
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -121,8 +94,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-<<<<<<< HEAD
-=======
     buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,7 +107,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
->>>>>>> 1697cc09f505495ae511ff8c9be62f61cfa1b94a
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -155,13 +125,8 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-<<<<<<< HEAD
-    spriteID: 
-    internalID: 0
-=======
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 1537655665
->>>>>>> 1697cc09f505495ae511ff8c9be62f61cfa1b94a
     vertices: []
     indices: 
     edges: []
