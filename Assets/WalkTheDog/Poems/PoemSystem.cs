@@ -86,7 +86,7 @@ public class PoemSystem : MonoBehaviour
             TogglePoemVisible();
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && closePoemWithP)
+        if (poemVisible && Input.GetKeyDown(KeyCode.P) && closePoemWithP)
         {
             SetPoemVisible(false);
         }
