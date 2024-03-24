@@ -80,7 +80,7 @@ namespace DogAI
 
         private void LookAtRandomPlace()
         {
-            dogRefs.dogBrain.dogLook.LookAtDirection(Random.onUnitSphere);
+            dogRefs.dogBrain.dogLook.LookAtDirection(Random.onUnitSphere, this);
             lookAroundConfusedTime = Time.time + Mathf.Lerp(0.5f, 1.5f, Random.value);
         }
 
@@ -103,7 +103,7 @@ namespace DogAI
 
         void IState.OnExit()
         {
-            dogRefs.dogBrain.dogLook.LookAt(null);
+            dogRefs.dogBrain.dogLook.LookAt(null, this);
         }
 
         bool IState.ConditionsMet()

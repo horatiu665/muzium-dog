@@ -62,7 +62,8 @@ namespace DogAI
 
         bool IState.GetUninterruptible()
         {
-            return false;
+            // can't leave this state if has poem. until you pick up the poem. otherwise it will run back to the castle lol
+            return hasPoem;
         }
 
         float IState.GetPriority()

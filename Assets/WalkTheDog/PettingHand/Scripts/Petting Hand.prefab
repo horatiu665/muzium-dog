@@ -84,6 +84,9 @@ MonoBehaviour:
   handHiddenPosition: {fileID: 7233267491436043433}
   handReadyPosition: {fileID: 9044946372884595394}
   handPettiness: 0
+  pettingLayerMask:
+    serializedVersion: 2
+    m_Bits: 4289
   pettingTargetPosition: {x: 0, y: 0, z: 0}
   pettingTargetRotation: {x: 0, y: 0, z: 0, w: 0}
   smoothnes: 0.2

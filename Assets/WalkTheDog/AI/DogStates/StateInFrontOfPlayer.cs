@@ -3,6 +3,7 @@ namespace DogAI
     using System.Collections;
     using System.Collections.Generic;
     using PlantmanAI4;
+    using ToyBoxHHH;
     using UnityEngine;
 
     public class StateInFrontOfPlayer : MonoBehaviour, IState
@@ -63,6 +64,10 @@ namespace DogAI
         private float lastTimeThisStateWasActive = 0;
         private bool _isActive;
 
+        [Space]
+        public bool lookAtPlayerWhenInFront = false;
+        public bool doSoundWhenInFront = false;
+        public SmartSoundDog soundWhenInFront;
 
         string IState.GetName()
         {
@@ -90,6 +95,7 @@ namespace DogAI
         {
             lastTimeThisStateWasActive = Time.time;
 
+            // how often to recalc path
             if (Time.time - prevPathTime > followPathDelay)
             {
                 prevPathTime = Time.time;
@@ -117,12 +123,26 @@ namespace DogAI
                 timeInFrontOfPlayer = 0;
                 curTargetSpeed01 = Mathf.Lerp(curTargetSpeed01, targetSpeed01, 0.1f);
 
+                dogRefs.dogBrain.dogLook.LookAt(null, this);
+
             }
             else
             {
                 timeInFrontOfPlayer += deltaTime;
                 curTargetSpeed01 = Mathf.Lerp(curTargetSpeed01, targetSpeedWhenInFrontOfPlayer, 0.1f);
 
+                if (lookAtPlayerWhenInFront)
+                {
+                    dogRefs.dogBrain.dogLook.LookAt(playerCamera.transform, this);
+                }
+
+                if (doSoundWhenInFront)
+                {
+                    if (!soundWhenInFront.audio.isPlaying)
+                    {
+                        soundWhenInFront.Play();
+                    }
+                }
             }
 
         }
@@ -142,6 +162,8 @@ namespace DogAI
             timeInFrontOfPlayer = 0;
             lastTimeThisStateWasActive = Time.time;
 
+            dogRefs.dogBrain.dogLook.LookAt(null, this);
+
         }
 
         bool IState.ConditionsMet()
@@ -157,12 +179,12 @@ namespace DogAI
             if (!_isActive)
             {
                 // wait between follows
-                if (Time.time - lastTimeThisStateWasActive < minTimeBetweenFollows)
+                if (lastTimeThisStateWasActive != 0 && (Time.time - lastTimeThisStateWasActive < minTimeBetweenFollows))
                     return false;
 
                 if (dist > minDistanceForStartFollow)
                     return true;
-                    
+
                 return false;
 
             }

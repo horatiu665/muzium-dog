@@ -3,7 +3,7 @@ using UnityEngine;
 public class ControlPanelToggle : MonoBehaviour
 {
 
-    public Collider collider;
+    public new Collider collider;
 
     public GameObject dogStatusOn, dogStatusOff;
 

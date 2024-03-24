@@ -63,6 +63,9 @@ namespace DogAI
         private float actualBarkInterval;
         private float _lastBarkTime;
 
+        private float _barkPose;
+        private float _barkPoseSmooth;
+
         string IState.GetName()
         {
             return "StateBarkAtThing";
@@ -102,11 +105,6 @@ namespace DogAI
 
         void IState.OnExecute(float deltaTime)
         {
-            Update_GoToBarkSpot(deltaTime);
-        }
-
-        void Update_GoToBarkSpot(float deltaTime)
-        {
             // if we have a target object
             if (_targetObj != null)
             {
@@ -118,24 +116,28 @@ namespace DogAI
                     dogRefs.dogBrain.dogAstar.SetDestination(_targetObj.barkPosition);
                     barkBrain.dogBarkableObjectTarget = null;
 
-                    dogRefs.dogBrain.dogLook.LookAt(null);
+                    dogRefs.dogBrain.dogLook.LookAt(null, this);
+
+                    _barkPose = 0f;
 
                 }
                 else
                 // if we're close enough to the target.
                 {
 
-                    // if we aren't sniffing yet
+                    // if we aren't barking yet
                     if (!_isBarking)
                     {
-                        // start sniffing
+                        // start barking
                         _isBarking = true;
                         _barkStartTime = Time.time;
 
                         barkBrain.dogBarkableObjectTarget = _targetObj;
 
                         // look at barked obj
-                        dogRefs.dogBrain.dogLook.LookAtPosition(_targetObj.barkPosition);
+                        dogRefs.dogBrain.dogLook.LookAtPosition(_targetObj.barkPosition, this);
+
+                        _barkPose = 1;
 
                         // dogRefs.dogBrain.dogVoice.Sniff(1f);
                         DoBark();
@@ -145,6 +147,8 @@ namespace DogAI
                     {
                         // continue barking
                         DoBark();
+
+                        _barkPose = 1;
 
                         // if time is out, find new sniff target.
                         if (Time.time - _barkStartTime > timeSpentBarkingPerObject)
@@ -156,6 +160,8 @@ namespace DogAI
                             _isBarking = false;
                             FindObjectToBark();
 
+                            _barkPose = 0;
+
                         }
                     }
                 }
@@ -163,6 +169,8 @@ namespace DogAI
             }
             else
             {
+                _barkPose = 0;
+
                 // sniff in the air???
                 // barkBrain.sniffAnimationTarget = null;
             }
@@ -182,6 +190,11 @@ namespace DogAI
             }
         }
 
+        private void Update() {
+            _barkPoseSmooth = Mathf.Lerp(_barkPoseSmooth, _barkPose, 0.2f);
+            dogRefs.anim.SetFloat("BarkPose", _barkPoseSmooth);
+        }
+
         void IState.OnExit()
         {
             _totalTimeBarking = 0;
@@ -192,10 +205,11 @@ namespace DogAI
             _isBarking = false;
             objectsBarked.Clear();
 
-            dogRefs.dogBrain.dogLook.LookAt(null);
+            dogRefs.dogBrain.dogLook.LookAt(null, this);
 
             dogRefs.dogBrain.dogVoice.Sniff(0f);
 
+            _barkPose = 0;
 
         }
 

@@ -82,6 +82,7 @@ Transform:
   - {fileID: 6650645149123149139}
   - {fileID: 8713952902099047387}
   - {fileID: 3396464711762766747}
+  - {fileID: 8713755075479016067}
   - {fileID: 990378764820503669}
   - {fileID: 2922620918256155922}
   - {fileID: 4558861223780869899}
@@ -587,6 +588,9 @@ MonoBehaviour:
   targetSpeedWhenInFrontOfPlayer: 0.5
   frontOfPlayerDistance: 2.5
   maxPlayerExtrapolateVelocity: 5
+  lookAtPlayerWhenInFront: 0
+  doSoundWhenInFront: 0
+  soundWhenInFront: {fileID: 0}
 --- !u!1 &2106362117396842578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,6 +1532,7 @@ MonoBehaviour:
   targetSpeedReturn01: 0.5
   poemPosition: {fileID: 0}
   poemInteractable: {fileID: 8949939334447251323}
+  minTimeBetweenPoems: 180
   distToPlayerToStop: 4
 --- !u!1 &4266274534521796315
 GameObject:
@@ -2133,9 +2138,9 @@ MonoBehaviour:
   updatePathfindingRate: 2
   moveSpeed01Range: {x: 0.4, y: 1}
   timeSpentSniffingPerObject: 3
-  maxTimeSpentSniffingPerTurn: 10
+  maxTimeSpentSniffingPerTurnRange: {x: 3, y: 12}
   _sniffStartTime: 0
-  minTimeBetweenSniffState: 10
+  minTimeBetweenSniffState: 20.3
 --- !u!1 &6863227645618225541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,6 +2166,8 @@ GameObject:
   - component: {fileID: 8646537814792367390}
   - component: {fileID: 6222147925775985939}
   - component: {fileID: 549477761148075898}
+  - component: {fileID: 5830309404068657004}
+  - component: {fileID: 537591028388179491}
   m_Layer: 12
   m_Name: Dog
   m_TagString: Untagged
@@ -2263,6 +2270,8 @@ MonoBehaviour:
   dogBarkingBrain: {fileID: 549477761148075898}
   dogPettingBrain: {fileID: 8841717388332335818}
   dogEmotionBrain: {fileID: 8646537814792367390}
+  dogMouthBrain: {fileID: 537591028388179491}
+  dogTailBrain: {fileID: 5830309404068657004}
   dogVoice: {fileID: 5814840209541239390}
 --- !u!114 &4077100967814972511
 MonoBehaviour:
@@ -2350,9 +2359,8 @@ MonoBehaviour:
   dogRefs: {fileID: 6098441059665146737}
   lookSmoothness: 0.2
   headLookAngleLimit: 45
-  lookingAtVector: 0
-  lookAtForward: 0
   factor: 2
+  showRequestsDebug: 0
 --- !u!114 &728643463397910104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2560,6 +2568,31 @@ MonoBehaviour:
   barkableRadius: 10
   updateRate: 0.5
   dogBarkableObjectTarget: {fileID: 0}
+--- !u!114 &5830309404068657004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863227645618225541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b017aff38e74e0fab58d4b74f89c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &537591028388179491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863227645618225541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0187ad927893046c591d9803f0a38b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dogRefs: {fileID: 0}
 --- !u!1 &6998521515863420705
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,6 +3233,62 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7070831255929112694, guid: 734fbfd21e0ff4730b531b9b674eae2f, type: 3}
+--- !u!1 &9006569705150393581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8713755075479016067}
+  - component: {fileID: 5754268749064676898}
+  m_Layer: 12
+  m_Name: say hello to player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8713755075479016067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006569705150393581}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8206410391004978341}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5754268749064676898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006569705150393581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce0fecc7754964c1cb2bd6abc8e7ccb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 50
+  minDistanceForStartFollow: 1
+  minTimeInFrontOfPlayerToEnd: 0.5
+  minTimeBetweenFollows: 300
+  followPathDelay: 0.5
+  targetSpeed01: 1
+  targetSpeedWhenInFrontOfPlayer: 0.5
+  frontOfPlayerDistance: 2.5
+  maxPlayerExtrapolateVelocity: 5
+  lookAtPlayerWhenInFront: 1
+  doSoundWhenInFront: 1
+  soundWhenInFront: {fileID: 3218486643441593501}
 --- !u!1001 &7747685622350888268
 PrefabInstance:
   m_ObjectHideFlags: 0

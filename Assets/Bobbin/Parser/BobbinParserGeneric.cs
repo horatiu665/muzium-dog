@@ -120,19 +120,18 @@ public class BobbinParserGeneric : MonoBehaviour
             ParsingLine(rowNumber, splitLine);
 
             // Here is an example how to get the data into a data structure of your choice.
-            if (false)
-            {
-                var id = splitLine[0];
-                var name = splitLine[1];
-                var cardType = splitLine[2];
-                var count = 0;
-                if (!int.TryParse(splitLine[3], out count))
-                {
-                    count = -1;
-                    Debug.Log("Error on parsing count at column " + 3 + " row " + rowNumber);
-                }
-
-            }
+            // if (false)
+            // {
+            //     var id = splitLine[0];
+            //     var name = splitLine[1];
+            //     var cardType = splitLine[2];
+            //     var count = 0;
+            //     if (!int.TryParse(splitLine[3], out count))
+            //     {
+            //         count = -1;
+            //         Debug.Log("Error on parsing count at column " + 3 + " row " + rowNumber);
+            //     }
+            // }
 
             rowNumber += 1;
         }

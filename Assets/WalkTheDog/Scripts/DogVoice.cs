@@ -5,6 +5,23 @@ using UnityEngine;
 
 public class DogVoice : MonoBehaviour
 {
+
+    [SerializeField]
+    private DogRefs _dogRefs;
+    public DogRefs dogRefs
+    {
+        get
+        {
+            if (_dogRefs == null)
+            {
+                _dogRefs = GetComponentInParent<DogRefs>();
+            }
+            return _dogRefs;
+        }
+    }
+
+    public DogMouthBrain mouthBrain => dogRefs.dogBrain.dogMouthBrain;
+
     public SmartSoundDog barkAll;
     public AudioClip[] barkIntensities;
 
@@ -15,7 +32,7 @@ public class DogVoice : MonoBehaviour
     public SmartSoundDog whimper;
     public SmartSoundDog growl;
     private float growlTargetVol;
-    
+
     public SmartSoundDog pant;
     private float pantTargetVol;
 
@@ -36,6 +53,7 @@ public class DogVoice : MonoBehaviour
         barkAll.Play();
 
         duckAllSoundsTime = Time.time;
+        mouthBrain.Bark();
     }
 
     public void BarkHappy()
@@ -45,6 +63,8 @@ public class DogVoice : MonoBehaviour
         barkAll.Play();
 
         duckAllSoundsTime = Time.time;
+        mouthBrain.Bark();
+
     }
 
     public void BarkAngry()
@@ -54,6 +74,8 @@ public class DogVoice : MonoBehaviour
         barkAll.Play();
 
         duckAllSoundsTime = Time.time;
+        mouthBrain.Bark();
+
     }
 
     public void BarkNormal()
@@ -63,6 +85,8 @@ public class DogVoice : MonoBehaviour
         barkAll.Play();
 
         duckAllSoundsTime = Time.time;
+        mouthBrain.Bark();
+
     }
 
     public void BarkIntensity(float intensity01)
@@ -73,6 +97,8 @@ public class DogVoice : MonoBehaviour
         barkAll.Play();
 
         duckAllSoundsTime = Time.time;
+        mouthBrain.Bark();
+
     }
 
 
@@ -84,6 +110,8 @@ public class DogVoice : MonoBehaviour
         }
         sniffTargetVol = vol;
 
+        //mouthBrain.MildMouthMovement(vol > 0);
+
     }
 
     public void Pant(float vol)
@@ -94,6 +122,20 @@ public class DogVoice : MonoBehaviour
         }
         pantTargetVol = vol;
 
+        mouthBrain.Pant(vol > 0);
+
+    }
+
+    public void Growl(float vol)
+    {
+        if (!growl.audio.isPlaying)
+        {
+            growl.Play();
+        }
+        growlTargetVol = vol;
+
+        mouthBrain.MildMouthMovement(vol > 0);
+
     }
 
     public void Whimper()
@@ -101,6 +143,9 @@ public class DogVoice : MonoBehaviour
         whimper.Play();
 
         duckAllSoundsTime = Time.time;
+
+        mouthBrain.MildMouthMovement(true);
+        StartCoroutine(pTween.Wait(whimper.audio.clip.length, () => mouthBrain.MildMouthMovement(false)));
 
     }
 

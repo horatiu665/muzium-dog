@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: pant anim
+      name: pant1
       takeName: CINEMA_4D_Main
       internalID: -1498010087492872569
       firstFrame: 559
@@ -126,7 +126,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: look back left
+      name: look back left1
       takeName: CINEMA_4D_Main
       internalID: 417885616478531319
       firstFrame: 583
@@ -183,6 +183,285 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: bark1 mild
+      takeName: CINEMA_4D_Main
+      internalID: 3181262787449724519
+      firstFrame: 600
+      lastFrame: 611
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Null_2
+        weight: 0
+      - path: Null_2/Null
+        weight: 0
+      - path: Null_2/Null/butt_002
+        weight: 0
+      - path: Null_2/Null/butt_002/tail
+        weight: 0
+      - path: Null_2/Null/butt_002/thigh1
+        weight: 0
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1
+        weight: 0
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1/hindlegs2
+        weight: 0
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1/hindlegs2/hindpaws
+        weight: 0
+      - path: Null_2/Null/butt_002/thigh2
+        weight: 0
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2
+        weight: 0
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2/hindlegs2_3
+        weight: 0
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2/hindlegs2_3/hindpaws_2
+        weight: 0
+      - path: Null_2/Null/waist
+        weight: 0
+      - path: Null_2/Null/waist/chest
+        weight: 0
+      - path: Null_2/Null/waist/chest/frontelbows1
+        weight: 0
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2
+        weight: 0
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2/frontlegs1
+        weight: 0
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2/frontlegs1/frontpaws
+        weight: 0
+      - path: Null_2/Null/waist/chest/frontelbows2
+        weight: 0
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2
+        weight: 0
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2/frontlegs1_2
+        weight: 0
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2/frontlegs1_2/frontpaws_2
+        weight: 0
+      - path: Null_2/Null/waist/chest/neck
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/ear1
+        weight: 0
+      - path: Null_2/Null/waist/chest/neck/head/ear2
+        weight: 0
+      - path: Null_2/Null/waist/chest/neck/head/eyes
+        weight: 0
+      - path: Null_2/Null/waist/chest/neck/head/eyes/l
+        weight: 0
+      - path: Null_2/Null/waist/chest/neck/head/eyes/r
+        weight: 0
+      - path: Null_2/Null/waist/chest/neck/head/lowerjaw
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/lowerjaw/tongue
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: bark up
+      takeName: CINEMA_4D_Main
+      internalID: 7281255294880080156
+      firstFrame: 406
+      lastFrame: 428
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Null_2
+        weight: 1
+      - path: Null_2/Null
+        weight: 1
+      - path: Null_2/Null/butt_002
+        weight: 1
+      - path: Null_2/Null/butt_002/tail
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh1
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1/hindlegs2
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1/hindlegs2/hindpaws
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh2
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2/hindlegs2_3
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2/hindlegs2_3/hindpaws_2
+        weight: 1
+      - path: Null_2/Null/waist
+        weight: 1
+      - path: Null_2/Null/waist/chest
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows1
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2/frontlegs1
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2/frontlegs1/frontpaws
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows2
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2/frontlegs1_2
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2/frontlegs1_2/frontpaws_2
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/ear1
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/ear2
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/eyes
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/eyes/l
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/eyes/r
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/lowerjaw
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/lowerjaw/tongue
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: bark pose 2
+      takeName: CINEMA_4D_Main
+      internalID: -6989691942421241084
+      firstFrame: 311
+      lastFrame: 312
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Null_2
+        weight: 1
+      - path: Null_2/Null
+        weight: 1
+      - path: Null_2/Null/butt_002
+        weight: 1
+      - path: Null_2/Null/butt_002/tail
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh1
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1/hindlegs2
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh1/hindlegs1/hindlegs2/hindpaws
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh2
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2/hindlegs2_3
+        weight: 1
+      - path: Null_2/Null/butt_002/thigh2/hindlegs2_2/hindlegs2_3/hindpaws_2
+        weight: 1
+      - path: Null_2/Null/waist
+        weight: 1
+      - path: Null_2/Null/waist/chest
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows1
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2/frontlegs1
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows1/frontlegs2/frontlegs1/frontpaws
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows2
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2/frontlegs1_2
+        weight: 1
+      - path: Null_2/Null/waist/chest/frontelbows2/frontlegs2_2/frontlegs1_2/frontpaws_2
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/ear1
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/ear2
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/eyes
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/eyes/l
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/eyes/r
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/lowerjaw
+        weight: 1
+      - path: Null_2/Null/waist/chest/neck/head/lowerjaw/tongue
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -218,7 +497,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
     strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60

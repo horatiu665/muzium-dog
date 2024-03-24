@@ -69,7 +69,9 @@ public class DogAstar : MonoBehaviour
                     Vector3 dir = _path[0].position - transform.position;
 
                     dogLocomotion.SetDestination(transform.position + dir);
+                    // rotate towards next node
                     dogLocomotion.SetTargetRotation(dir);
+                    
                     // skip node if close enough
                     if (dir.magnitude < stopDistance)
                     {

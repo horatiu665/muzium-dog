@@ -106,7 +106,7 @@ namespace DogAI
 
                 // look at player while petting.
                 // maybe change look target to random...??? sometimes ????
-                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform);
+                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform, this);
 
                 // be happy for getting pets
                 dogRefs.dogBrain.dogEmotionBrain.AddHappiness(this, 10f);
@@ -120,7 +120,7 @@ namespace DogAI
             {
                 // keep panting and sitting still
                 dogRefs.dogBrain.dogAstar.StopMovement();
-                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform);
+                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform, this);
                 dogRefs.dogBrain.dogVoice.Pant(1f);
                 return;
             }
@@ -160,7 +160,7 @@ namespace DogAI
                 timeInFrontOfPlayer = 0;
                 curTargetSpeed01 = Mathf.Lerp(curTargetSpeed01, targetSpeed01, 0.1f);
 
-                dogRefs.dogBrain.dogLook.LookAt(null);
+                dogRefs.dogBrain.dogLook.LookAt(null, this);
             }
             else
             {
@@ -168,7 +168,7 @@ namespace DogAI
                 curTargetSpeed01 = Mathf.Lerp(curTargetSpeed01, targetSpeedWhenInFrontOfPlayer, 0.1f);
 
                 // look at player
-                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform);
+                dogRefs.dogBrain.dogLook.LookAt(dogBrain.mainCamera.transform, this);
 
             }
 
@@ -190,6 +190,8 @@ namespace DogAI
             _lastTimeThisStateWasActive = Time.time;
 
             dogRefs.dogBrain.dogVoice.Pant(0);
+
+            dogRefs.dogBrain.dogLook.LookAt(null, this);
 
             // was satisfied?
             var pettingNeedAfter = dogRefs.dogBrain.dogPettingBrain.pettingNeed;
@@ -242,36 +244,6 @@ namespace DogAI
 
             // if we don't have enough pets, we want pets
             return dogRefs.dogBrain.dogPettingBrain.pettingNeed > 0.7f;
-
-            var dir = transform.position - player.position;
-            dir.y *= 0.2f; // care less for y axis distance
-            var dist = dir.magnitude;
-
-            // if state not active 
-            if (!_isActive)
-            {
-                // wait between follows
-                if (Time.time - _lastTimeThisStateWasActive < minTimeBetweenStateActive)
-                    return false;
-
-                if (dist > minDistanceForStartFollow)
-                    return true;
-
-                return false;
-
-            }
-            else //if (_isActive)
-            {
-                // keep active until we are close enough to the player
-                // if (dist < maxDistanceToEndFollow)
-                //     return false;
-
-                // keep active until we are in front of the player for long enough
-                if (timeInFrontOfPlayer < minTimeInFrontOfPlayerToEnd)
-                    return true;
-
-                return false;
-            }
 
         }
 

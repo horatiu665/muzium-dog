@@ -16,7 +16,7 @@ public class AStarStaticNodes : MonoBehaviour
 
     public List<AStar.Node> nodes = new List<AStar.Node>();
 
-    public Collider collider => GetComponent<Collider>();
+    public new Collider collider => GetComponent<Collider>();
 
     public Bounds bounds => collider.bounds;
 
@@ -61,7 +61,7 @@ public class AStarStaticNodes : MonoBehaviour
     {
         OnStaticNodesRemoved?.Invoke(this);
         nodes.Clear();
-        
+
         if (minNodeDist < 0.02f)
         {
             minNodeDist = 0.02f;

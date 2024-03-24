@@ -32,10 +32,20 @@ public class DogAnimator : MonoBehaviour
     public Animator anim => dogRefs.anim;
     public string animWalkSpeed = "WalkSpeed";
 
-    
+
     private void Update()
     {
-        anim.SetFloat(animWalkSpeed, dogLocomotion.currentSpeed01);
+        if (dogRefs.dogBrain.dogBarkingBrain.isBarking)
+        {
+            anim.SetFloat(animWalkSpeed, 0);
+
+        }
+        else
+        {
+            anim.SetFloat(animWalkSpeed, dogLocomotion.currentSpeed01);
+
+        }
+
     }
 
 

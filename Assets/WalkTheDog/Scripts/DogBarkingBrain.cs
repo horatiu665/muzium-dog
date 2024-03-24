@@ -30,6 +30,8 @@ public class DogBarkingBrain : MonoBehaviour
 
     public DogBarkableObject dogBarkableObjectTarget;
 
+    public bool isBarking {get;private set;}
+
     public bool AnyBarkables()
     {
         return barkablesWithinRange.Count > 0;
@@ -59,19 +61,31 @@ public class DogBarkingBrain : MonoBehaviour
 
         if (dogBarkableObjectTarget != null)
         {
+            isBarking = true;
+
             // do sniff animation towards that object
             dogRefs.dogLocomotion.SetTargetRotation(dogBarkableObjectTarget.barkPosition - transform.position);
-            dogRefs.dogBrain.dogLook.LookAtPosition(dogBarkableObjectTarget.barkPosition);
+            dogRefs.dogBrain.dogLook.LookAtPosition(dogBarkableObjectTarget.barkPosition, this);
+
+            dogRefs.anim.SetFloat("BarkPose", 1f);
         }
         else
         {
-            dogRefs.dogBrain.dogLook.LookAt(null);
+            isBarking = false;
+            
+            dogRefs.dogBrain.dogLook.LookAt(null, this);
+
+            dogRefs.anim.SetFloat("BarkPose", 0);
+
         }
 
     }
 
-    public void Bark(){
+    public void Bark()
+    {
         //???
+        dogRefs.anim.SetTrigger("Bark");
+
     }
 
     private void ComputeBarkablesInRange()

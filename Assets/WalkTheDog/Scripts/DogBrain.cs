@@ -60,6 +60,8 @@ public class DogBrain : MonoBehaviour
     public DogPettingBrain dogPettingBrain;
 
     public DogEmotionBrain dogEmotionBrain;
+    public DogMouthBrain dogMouthBrain;
+    public DogTailBrain dogTailBrain;
 
     public DogVoice dogVoice;
 

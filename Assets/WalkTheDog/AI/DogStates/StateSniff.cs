@@ -49,13 +49,16 @@ namespace DogAI
         private float _totalTimeSniffing = 0f;
         public float timeSpentSniffingPerObject = 3f;
 
-        public float maxTimeSpentSniffingPerTurn = 10f;
+        public Vector2 maxTimeSpentSniffingPerTurnRange = new Vector2(3, 12);
+        private float maxTimeSpentSniffingPerTurn;
         [ReadOnly, SerializeField]
         private float _sniffStartTime;
 
         public float minTimeBetweenSniffState = 7f;
         private float _lastSniffStateTime;
         private bool _isSniffing;
+
+        private bool _isActive; // state
 
         private List<DogSniffableObject> objectsSniffed = new List<DogSniffableObject>();
 
@@ -80,6 +83,8 @@ namespace DogAI
             objectsSniffed.Clear();
             FindObjectToSniff();
             _sniffStartTime = 0;
+            _isActive = true;
+            maxTimeSpentSniffingPerTurn = Random.Range(maxTimeSpentSniffingPerTurnRange.x, maxTimeSpentSniffingPerTurnRange.y);
         }
 
         private void FindObjectToSniff()
@@ -112,7 +117,7 @@ namespace DogAI
                     dogRefs.dogBrain.dogAstar.SetDestination(_targetSniffable.sniffPosition);
                     sniffBrain.sniffAnimationTarget = null;
 
-                    dogRefs.dogBrain.dogLook.LookAt(null);
+                    dogRefs.dogBrain.dogLook.LookAt(null, this);
                     dogRefs.dogBrain.dogVoice.Sniff(0f);
 
                 }
@@ -129,7 +134,7 @@ namespace DogAI
                         sniffBrain.sniffAnimationTarget = _targetSniffable;
 
                         var lookFwd = dogRefs.transform.forward;
-                        dogRefs.dogBrain.dogLook.LookAtDirection(lookFwd);
+                        dogRefs.dogBrain.dogLook.LookAtDirection(lookFwd, this);
 
                         dogRefs.dogBrain.dogVoice.Sniff(1f);
 
@@ -163,15 +168,16 @@ namespace DogAI
 
         void IState.OnExit()
         {
+            _isActive = false;
             _totalTimeSniffing = 0;
-            
+
             _sniffStartTime = 0;
             _lastSniffStateTime = Time.time;
             sniffBrain.sniffAnimationTarget = null;
             _isSniffing = false;
             objectsSniffed.Clear();
 
-            dogRefs.dogBrain.dogLook.LookAt(null);
+            dogRefs.dogBrain.dogLook.LookAt(null, this);
 
             dogRefs.dogBrain.dogVoice.Sniff(0f);
 
@@ -186,9 +192,12 @@ namespace DogAI
                 return false;
             }
 
-            if (_totalTimeSniffing > maxTimeSpentSniffingPerTurn)
+            if (_isActive)
             {
-                return false;
+                if (_totalTimeSniffing > maxTimeSpentSniffingPerTurn)
+                {
+                    return false;
+                }
             }
 
             // if too soon to sniff again

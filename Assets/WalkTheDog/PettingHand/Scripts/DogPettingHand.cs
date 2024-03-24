@@ -38,6 +38,8 @@ public class DogPettingHand : MonoBehaviour
     private HandPettiness prevHandPettiness;
     private float _handHiddenTime;
 
+    public LayerMask pettingLayerMask;
+
     public Vector3 pettingTargetPosition;
     public Quaternion pettingTargetRotation;
 
@@ -207,7 +209,7 @@ public class DogPettingHand : MonoBehaviour
             handPettiness = HandPettiness.Hidden;
 
             RaycastHit hit;
-            if (Physics.SphereCast(mainCamera.transform.position, spherecastRadius, mainCamera.transform.forward, out hit, 2f))
+            if (Physics.SphereCast(mainCamera.transform.position, spherecastRadius, mainCamera.transform.forward, out hit, 2f, pettingLayerMask))
             {
                 var isPettable = PettableObject.IsPettable(hit.collider, out var pettableObj);
 

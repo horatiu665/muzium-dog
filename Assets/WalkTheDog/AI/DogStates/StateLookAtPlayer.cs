@@ -111,7 +111,7 @@ namespace DogAI
             if (!_isLookingAtPlayer)
             {
                 timeLookingAtPlayer = 0;
-                dogBrain.dogLook.LookAt(null);
+                dogBrain.dogLook.LookAt(null, this);
 
                 dogRefs.dogBrain.dogVoice.Pant(0);
 
@@ -119,7 +119,7 @@ namespace DogAI
             else
             {
                 timeLookingAtPlayer += deltaTime;
-                dogBrain.dogLook.LookAt(playerCamera.transform);
+                dogBrain.dogLook.LookAt(playerCamera.transform, this);
 
                 dogRefs.dogBrain.dogVoice.Pant(0.7f);
 
@@ -190,7 +190,7 @@ namespace DogAI
             var anyHits = Physics.Raycast(dogHeadPos, dir, out RaycastHit hit, dir.magnitude, dogBrain.dogAstar.aStar.layerMask);
             if (anyHits)
             {
-                Debug.Log("Looking at player raycast hit: " + hit.collider.name);
+                // Debug.Log("Looking at player raycast hit: " + hit.collider.name);
                 if (dogBrain.IsThisThePlayer(hit.collider))
                 {
                     return true;
@@ -220,7 +220,7 @@ namespace DogAI
             _isActive = false;
             timeInFrontOfPlayer = 0;
             lastTimeThisStateWasActive = Time.time;
-            dogBrain.dogLook.LookAt(null);
+            dogBrain.dogLook.LookAt(null, this);
 
             dogRefs.dogBrain.dogVoice.Pant(0);
 
