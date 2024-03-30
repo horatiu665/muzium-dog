@@ -67,15 +67,12 @@ public class DogBarkingBrain : MonoBehaviour
             dogRefs.dogLocomotion.SetTargetRotation(dogBarkableObjectTarget.barkPosition - transform.position);
             dogRefs.dogBrain.dogLook.LookAtPosition(dogBarkableObjectTarget.barkPosition, this);
 
-            dogRefs.anim.SetFloat("BarkPose", 1f);
         }
         else
         {
             isBarking = false;
-            
-            dogRefs.dogBrain.dogLook.LookAt(null, this);
 
-            dogRefs.anim.SetFloat("BarkPose", 0);
+            dogRefs.dogBrain.dogLook.LookAt(null, this);
 
         }
 
