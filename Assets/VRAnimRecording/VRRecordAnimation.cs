@@ -21,9 +21,9 @@ public class VRRecordAnimation : MonoBehaviour
             {
                 timeSinceLastFrame = 0;
                 VRAnimationData.FullBodyPose pose = new VRAnimationData.FullBodyPose();
-                pose.head = new Pose(vrHead.position, vrHead.rotation);
-                pose.leftHand = new Pose(vrLeft.position, vrLeft.rotation);
-                pose.rightHand = new Pose(vrRight.position, vrRight.rotation);
+                pose.head = new Pose(vrHead.localPosition, vrHead.localRotation);
+                pose.leftHand = new Pose(vrLeft.localPosition, vrLeft.localRotation);
+                pose.rightHand = new Pose(vrRight.localPosition, vrRight.localRotation);
                 animationData.AddKeyframe(pose, Time.time);
             }
         }

@@ -4,8 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "VRAnimationData", menuName = "Dog/VRAnimationData", order = 0)]
 public class VRAnimationData : ScriptableObject
 {
+    [System.Serializable]
     public struct FullBodyPose
     {
+        // these are all LOCAL SPACE naturally.
         public Pose head, leftHand, rightHand;
 
         public static FullBodyPose Lerp(FullBodyPose a, FullBodyPose b, float t)
@@ -18,6 +20,7 @@ public class VRAnimationData : ScriptableObject
         }
     }
 
+    [System.Serializable]
     public class Keyframe
     {
         public FullBodyPose pose;
@@ -27,11 +30,12 @@ public class VRAnimationData : ScriptableObject
 
     public List<Keyframe> keyframes = new List<Keyframe>();
 
-    public void AddKeyframe(FullBodyPose pose, float time)
+    // local space
+    public void AddKeyframe(FullBodyPose poseLocal, float time)
     {
         Keyframe keyframe = new Keyframe()
         {
-            pose = pose,
+            pose = poseLocal,
             time = time
         };
         keyframes.Add(keyframe);
