@@ -1352,7 +1352,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1764634683629476709, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a62b382de60d945b382a790e609e7de7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4f7b0c89834fa4d99b016e8c0ec0d220, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6503,6 +6503,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1611758975}
   - {fileID: 1611245687}
   - {fileID: 352404215}
   - {fileID: 474780328}
@@ -6884,7 +6885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1611245687
 Transform:
   m_ObjectHideFlags: 0
@@ -6926,6 +6927,80 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &1611758974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1527240992}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.49619
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.49619
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.49619
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.65999985
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.60999966
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.13052632
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9914449
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+      propertyPath: m_Name
+      value: horatiu_on_stage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+--- !u!4 &1611758975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 72f6666070845408da7b5d3af567ab91, type: 3}
+  m_PrefabInstance: {fileID: 1611758974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1614184119
 GameObject:
   m_ObjectHideFlags: 0
@@ -7309,7 +7384,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1705968701920646261, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2fcd8f220c60749f0926431a7b528017, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1c7d40db1e86c4358ac852d475c7a871, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -8142,7 +8217,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5211647477348204650, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a8fd80bec96d7481dbb15cf6b53aa368, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 95d569c6265094ae7982828e22b3b95e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -10644,6 +10719,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.00000005255254
       objectReference: {fileID: 0}
+    - target: {fileID: 4823929705312340318, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5519349086680190297, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
@@ -10747,6 +10826,10 @@ PrefabInstance:
     - target: {fileID: 7163956566445431994, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.00000043087934
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507162662826005084, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7546845835474805307, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
