@@ -1352,7 +1352,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1764634683629476709, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a62b382de60d945b382a790e609e7de7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4f7b0c89834fa4d99b016e8c0ec0d220, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -7309,7 +7309,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1705968701920646261, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2fcd8f220c60749f0926431a7b528017, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1c7d40db1e86c4358ac852d475c7a871, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -8142,7 +8142,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5211647477348204650, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a8fd80bec96d7481dbb15cf6b53aa368, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 95d569c6265094ae7982828e22b3b95e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -10644,6 +10644,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.00000005255254
       objectReference: {fileID: 0}
+    - target: {fileID: 4823929705312340318, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5519349086680190297, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
@@ -10747,6 +10751,10 @@ PrefabInstance:
     - target: {fileID: 7163956566445431994, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.00000043087934
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507162662826005084, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7546845835474805307, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
