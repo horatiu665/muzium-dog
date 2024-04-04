@@ -18,6 +18,16 @@ public class VRAnimationData : ScriptableObject
             pose.rightHand = new Pose(Vector3.Lerp(a.rightHand.position, b.rightHand.position, t), Quaternion.Slerp(a.rightHand.rotation, b.rightHand.rotation, t));
             return pose;
         }
+    
+        public void SetLocalPositionsToTargets(Transform headIK, Transform leftHandIK, Transform rightHandIK)
+        {
+            headIK.localPosition = head.position;
+            headIK.localRotation = head.rotation;
+            leftHandIK.localPosition = leftHand.position;
+            leftHandIK.localRotation = leftHand.rotation;
+            rightHandIK.localPosition = rightHand.position;
+            rightHandIK.localRotation = rightHand.rotation;
+        }
     }
 
     [System.Serializable]
@@ -29,6 +39,15 @@ public class VRAnimationData : ScriptableObject
     }
 
     public List<Keyframe> keyframes = new List<Keyframe>();
+
+    public float GetTotalTime()
+    {
+        if (keyframes.Count == 0)
+        {
+            return 0;
+        }
+        return keyframes[keyframes.Count - 1].time;
+    }
 
     // local space
     public void AddKeyframe(FullBodyPose poseLocal, float time)
