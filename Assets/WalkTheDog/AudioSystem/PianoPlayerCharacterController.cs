@@ -33,8 +33,24 @@ public class PianoPlayerCharacterController : MonoBehaviour
     public AudioExposeInfo.EnvVariant torsoEnvAdvanceVariant;
 
     private float torsoWagT;
+    private float torsoWagDelta;
     public float torsoWagAdvance = 1f;
     private float torsoWagFinal;
+    public struct WagData {
+        public float wagDelta;
+        public float wagT;
+        public float wagFinal;
+    }
+
+    public WagData GetTorsoWag()
+    {
+        return new WagData
+        {
+            wagDelta = torsoWagDelta,
+            wagT = torsoWagT,
+            wagFinal = torsoWagFinal
+        };
+    }
 
     [Space]
     public List<Transform> headLookTargets = new List<Transform>();
@@ -73,6 +89,7 @@ public class PianoPlayerCharacterController : MonoBehaviour
         tail.localRotation = Quaternion.Euler(0, 0, Mathf.Sin(tailWagT) * tailWagAmplitude);
 
         var torsoWag = torsoAudioExposer.GetEnv(torsoEnvAdvanceVariant) * torsoWagAdvance;
+        torsoWagDelta = torsoWag;
         torsoWagT += Time.deltaTime * torsoWag;
         torsoWagFinal = Mathf.Sin(torsoWagT);
         pianistAnim.SetFloat("TorsoWag", torsoWagFinal);
