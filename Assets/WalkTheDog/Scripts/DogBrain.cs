@@ -19,10 +19,66 @@ public class DogBrain : MonoBehaviour
     }
 
     // player ref
-    public Transform player;
+    private Transform _player;
+    public Transform player
+    {
+        get
+        {
+            if (_player != null)
+                return _player;
+
+            // find player. replace with code from ZIUM
+            try
+            {
+                var cc = Camera.main.transform.GetComponentInParent<CharacterController>();
+                if (cc != null)
+                {
+                    _player = cc.transform;
+                    if (_player != null)
+                    {
+                        _playerFPC = _player.GetComponent<FirstPersonController>();
+                    }
+                }
+
+                if (_player == null)
+                {
+                    _player = Camera.main.transform.GetComponentInParent<Rigidbody>().transform;
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                if (mainCamera != null)
+                {
+                    Debug.Log("No player found! Using main camera as player!");
+                    _player = mainCamera.transform;
+                }
+                else
+                {
+                    Debug.LogError("No player found! Big problem for the dog!");
+                    dummyPlayer = new GameObject("DummyPlayer");
+                    _player = dummyPlayer.transform;
+                }
+            }
+
+            return _player;
+        }
+    }
 
     // zium player
-    public FirstPersonController playerFPC;
+    private FirstPersonController _playerFPC;
+    public FirstPersonController playerFPC
+    {
+        get
+        {
+            if (_playerFPC == null)
+            {
+                _playerFPC = player.GetComponent<FirstPersonController>();
+            }
+            return _playerFPC;
+        }
+    }
 
     private Camera _mainCamera;
     public Camera mainCamera
@@ -86,41 +142,6 @@ public class DogBrain : MonoBehaviour
 
     private void Awake()
     {
-        // find player. replace with code from ZIUM
-        try
-        {
-            var cc = Camera.main.transform.GetComponentInParent<CharacterController>();
-            if (cc != null)
-            {
-                player = cc.transform;
-                if (player != null)
-                {
-                    playerFPC = player.GetComponent<FirstPersonController>();
-                }
-            }
-
-            if (player == null)
-            {
-                player = Camera.main.transform.GetComponentInParent<Rigidbody>().transform;
-            }
-
-
-        }
-        catch (Exception e)
-        {
-            if (mainCamera != null)
-            {
-                Debug.Log("No player found! Using main camera as player!");
-                player = mainCamera.transform;
-            }
-            else
-            {
-                Debug.LogError("No player found! Big problem for the dog!");
-                dummyPlayer = new GameObject("DummyPlayer");
-                player = dummyPlayer.transform;
-            }
-        }
-        // player = mainCamera.transform;
 
     }
 

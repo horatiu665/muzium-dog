@@ -5,6 +5,19 @@ using UnityEngine.Timeline;
 
 public class DogCastleReferences : MonoBehaviour
 {
+    private static DogCastleReferences _instance;
+    public static DogCastleReferences instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<DogCastleReferences>();
+            }
+            return _instance;
+        }
+    }
+    
     [Header("Timelines")]
     public TimelineAsset dogIntro;
 
@@ -13,6 +26,8 @@ public class DogCastleReferences : MonoBehaviour
 
     [Header("Important objects")]
     public GameObject dog;
+
+    public DogBrain dogBrain;
 
     [Tooltip("The gate where you get the dog. a.k.a. the Dog Control Panel")]
     public GameObject dogGate;

@@ -204,6 +204,7 @@ MonoBehaviour:
   dogIntro: {fileID: 11400000, guid: 738b341c38ec7425692af1f7752efa60, type: 2}
   dogLeaveCastleReset: {fileID: 11400000, guid: 253ed18b4b2d34890a092865f875dba5, type: 2}
   dog: {fileID: 3810642964511545749}
+  dogBrain: {fileID: 7711656279740221259}
   dogGate: {fileID: 3990573573950125661}
   dogElevator: {fileID: 4040849126045095747}
   knockerHandUnderCamera: {fileID: 6883344310863320238}
@@ -1044,6 +1045,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc798800101d5492a8b9b5532a98bc1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7711656279740221259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2983902426096659535, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
+  m_PrefabInstance: {fileID: 4786690840141064964}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810642964511545749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d41ebe4a38e40c29735b8a44af3f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &8106731369118286125 stripped

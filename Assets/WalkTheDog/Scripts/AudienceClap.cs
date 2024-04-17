@@ -12,6 +12,8 @@ public class AudienceClap : MonoBehaviour
     public bool shouldClap;
     private bool isClapping = false;
 
+    // public bool shouldClapSynchronized = false;
+
     [Serializable]
     public class ClapGroups
     {
@@ -60,10 +62,30 @@ public class AudienceClap : MonoBehaviour
     {
         if (shouldClap && !isClapping)
         {
-            isClapping = true;
-            StartCoroutine(Clap());
+            // if (!shouldClapSynchronized)
+            {
+                isClapping = true;
+                StartCoroutine(Clap());
+            }
+            // else
+            // {
+            //     isClapping = true;
+            //     StartCoroutine(ClapSynchronized());
+            // }
 
         }
+    }
+    IEnumerator ClapSynchronized()
+    {
+        // while (shouldClapSynchronized)
+        {
+            // play a single hit clap on all audience members with TINY delay.
+
+            yield return 0;
+
+        }
+
+        isClapping = false;
     }
 
     IEnumerator Clap()

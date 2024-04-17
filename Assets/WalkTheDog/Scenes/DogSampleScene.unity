@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4439372, g: 0.49315345, b: 0.5721989, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6527,6 +6527,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   concertTimeline: {fileID: 0}
+  replaceWith: {fileID: 0}
+  useCheat: 0
+  cheatKey: 107
+  concertCenter: {fileID: 1527240992}
+  distanceForNotHearingConcert: 20.6
+  timeUntilStopMusicWhenLeaving: 15
 --- !u!114 &1527240994
 MonoBehaviour:
   m_ObjectHideFlags: 0

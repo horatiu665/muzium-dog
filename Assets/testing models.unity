@@ -265,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b45af39610560407ba8d3febd0436af0, type: 3}
       propertyPath: m_Name
-      value: doggyman
+      value: DOggymanan WRONG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -718,6 +718,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bfd3266b7f08d46de88e316c4d15cee7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1584373385638309093, guid: bfd3266b7f08d46de88e316c4d15cee7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.6594
+      objectReference: {fileID: 0}
+    - target: {fileID: -1584373385638309093, guid: bfd3266b7f08d46de88e316c4d15cee7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bfd3266b7f08d46de88e316c4d15cee7, type: 3}
       propertyPath: m_Name
