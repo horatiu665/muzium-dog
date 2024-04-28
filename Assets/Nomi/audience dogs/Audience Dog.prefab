@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1053425242926732656}
   - component: {fileID: 3983250531796289311}
   - component: {fileID: 6763233176218710563}
+  - component: {fileID: 4377461974410646668}
   m_Layer: 0
   m_Name: Audience Dog
   m_TagString: Untagged
@@ -34,6 +35,8 @@ Transform:
   - {fileID: 759594601195439278}
   - {fileID: 8390716080684831459}
   - {fileID: 31842986935990808}
+  - {fileID: 322370065589873639}
+  - {fileID: 9063532262714230239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -180, y: 37.634995, z: -180}
 --- !u!114 &3983250531796289311
@@ -76,6 +79,56 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4377461974410646668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409581385221704995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7d1f237b98f4660bb32181b4726e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetAtConcert: {fileID: 322370065589873639}
+  targetHidden: {fileID: 9063532262714230239}
+  isAtConcert: 0
+  walkSpeed: 10
+  steppingSin: 20.6
+  steppingRotSin: 18.5234
+  stepHeight: 0.05
+--- !u!1 &1894875750795944600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9063532262714230239}
+  m_Layer: 0
+  m_Name: TargetHidden
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9063532262714230239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894875750795944600}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.73427963, y: 0.000009335015, z: -9.973007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053425242926732656}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4891752776876202605
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +385,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8603577187731120548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 322370065589873639}
+  m_Layer: 0
+  m_Name: TargetAtConcert
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &322370065589873639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603577187731120548}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0000005823418, y: 0.00000011920994, z: -0.0000007552304}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053425242926732656}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8709944604467533777
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,21 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ToyBoxHHH;
+using ToyBoxHHH.ReadOnlyUtil;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 public class DogConcert : MonoBehaviour
 {
     public Transform player => DogCastleReferences.instance.dogBrain.player;
+    public DogConcertHideShow dogConcertHideShow;
 
     public PlayableDirector concertTimeline;
-    public TimelineAsset replaceWith;
+
+    public PlayableAsset concertMain;
+    public PlayableAsset concertEnding;
+    public PlayableAsset concertEncoreLoop;
+
 
     public bool useCheat = false;
     public KeyCode cheatKey = KeyCode.K;
 
     public ConcertCandleSystem candleSystem;
+
 
     [Header("Rules for approaching")]
     public Transform concertCenter;
@@ -26,6 +34,15 @@ public class DogConcert : MonoBehaviour
     private float playerLeaveTime = 0f;
     public float timeUntilStopMusicWhenLeaving = 15f;
 
+    public UnityEvent OnPlayerEnterConcertRadius_UE = new UnityEvent();
+    public UnityEvent OnPlayerLeaveConcertRadius_UE = new UnityEvent();
+    public event System.Action OnPlayerEnterConcertRadius;
+    public event System.Action OnPlayerLeaveConcertRadius;
+
+    [Header("hack replace timeline")]
+    public TimelineAsset replaceWith;
+
+
     private void Update()
     {
         // cheat
@@ -34,6 +51,17 @@ public class DogConcert : MonoBehaviour
             RestartConcert();
         }
 
+        // todo: maybe this should always run. worried right now about ending the concert and this doesn't run which might result in some issues with the settings applied within.
+        if (dogConcertHideShow.concertState == DogConcertHideShow.ConcertState.Playing)
+        {
+            Update_ConcertDistance();
+        }
+
+    }
+
+
+    private void Update_ConcertDistance()
+    {
         // check if player is close enough to hear the concert
         var playerPos = player.position;
 
@@ -44,17 +72,25 @@ public class DogConcert : MonoBehaviour
         {
             playerIsInConcertRange = true;
             playerEnterTime = Time.time;
+
+            OnPlayerEnterConcertRadius?.Invoke();
+            OnPlayerEnterConcertRadius_UE.Invoke();
         }
         if (playerIsInConcertRange && dist > concertHearingThreshold + 1)
         {
             playerIsInConcertRange = false;
             playerLeaveTime = Time.time;
+
+            OnPlayerLeaveConcertRadius?.Invoke();
+            OnPlayerLeaveConcertRadius_UE.Invoke();
+
         }
 
         // pause and resume the concert based on player's presence
         if (playerIsInConcertRange)
         {
             ContinueConcertSmart();
+
         }
         else if (!playerIsInConcertRange)
         {
@@ -67,7 +103,31 @@ public class DogConcert : MonoBehaviour
                 }
             }
         }
+    }
 
+    public void SetConcert(PlayableAsset whichOne)
+    {
+        concertTimeline.playableAsset = whichOne;
+        RestartConcert();
+
+    }
+
+    [DebugButton]
+    public void SetMainConcert()
+    {
+        SetConcert(concertMain);
+    }
+
+    [DebugButton]
+    public void SetEndingConcert()
+    {
+        SetConcert(concertEnding);
+    }
+
+    [DebugButton]
+    public void SetEncoreConcert()
+    {
+        SetConcert(concertEncoreLoop);
     }
 
     // this resumes the concert based on some rules
@@ -87,6 +147,9 @@ public class DogConcert : MonoBehaviour
 
     public bool IsConcertPlaying()
     {
+        if (concertTimeline.playableGraph.IsValid() == false)
+            return false;
+
         return concertTimeline.playableGraph.GetRootPlayable(0).GetSpeed() > 0;
     }
 
@@ -107,6 +170,12 @@ public class DogConcert : MonoBehaviour
     [DebugButton]
     public void ResumeConcert()
     {
+        if (concertTimeline.playableGraph.IsValid() == false)
+        {
+            RestartConcert();
+            return;
+        }
+
         concertTimeline.time = concertTimeline.time;
         concertTimeline.playableGraph.GetRootPlayable(0).SetSpeed(1);
     }

@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class AudienceGroove : MonoBehaviour
 {
-    public PianoPlayerCharacterController pianoPlayer;
+    public static PianoPlayerCharacterController pianoPlayer;
 
     public enum Methods
     {
@@ -22,8 +22,6 @@ public class AudienceGroove : MonoBehaviour
 
     private Quaternion initRotation;
 
-    public bool rotateParentTowardsPlayer = true;
-
     public bool randomize = true;
 
     [FormerlySerializedAs("audienceAudioSource")]
@@ -38,12 +36,6 @@ public class AudienceGroove : MonoBehaviour
             pianoPlayer = FindObjectOfType<PianoPlayerCharacterController>();
         }
         initRotation = transform.localRotation;
-        if (rotateParentTowardsPlayer)
-        {
-            var target = pianoPlayer.transform.position;
-            target.y = transform.parent.position.y;
-            transform.parent.LookAt(target);
-        }
 
         if (randomize)
         {

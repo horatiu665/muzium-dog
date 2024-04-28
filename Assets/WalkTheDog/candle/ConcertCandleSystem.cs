@@ -5,22 +5,57 @@ using UnityEngine;
 
 public class ConcertCandleSystem : MonoBehaviour
 {
+    public DogConcert dogConcert;
+
+    public List<bool> artworkCompleted = new();
+
     public List<Candle> candles = new List<Candle>();
+
+    public bool AreAllArtworksCompleted()
+    {
+        for (int i = 0; i < artworkCompleted.Count; i++)
+        {
+            if (!artworkCompleted[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public bool IsArtworkCompleted(int artworkId)
     {
-        // todo: implement with Zium code.
-        return Random.value > 0.5f;
+        if (artworkId < artworkCompleted.Count)
+        {
+            return artworkCompleted[artworkId];
+        }
 
+        return false;
     }
 
     private void OnEnable()
     {
+        dogConcert.OnPlayerEnterConcertRadius += OnPlayerEnterConcertRadius;
         SetAllCandlesToArtworksStatus();
     }
 
+    private void OnDisable()
+    {
+        dogConcert.OnPlayerEnterConcertRadius -= OnPlayerEnterConcertRadius;
+
+    }
+
+    private void OnPlayerEnterConcertRadius()
+    {
+        SetAllCandlesToArtworksStatus();
+    }
+
+    /// <summary>
+    /// Sets candles from list to match artwork ID 1..N where N is the number of candles.
+    /// </summary>
     [DebugButton]
-    public void Util_SetCandles1_N()
+    public void Editor_SetCandles1N()
     {
         var foundCandles = GetComponentsInChildren<Candle>();
         for (int i = 0; i < foundCandles.Length; i++)

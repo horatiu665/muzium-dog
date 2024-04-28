@@ -12,6 +12,10 @@ public class AudienceClap : MonoBehaviour
     public bool shouldClap;
     private bool isClapping = false;
 
+    public bool shouldAwoo;
+    private bool isAwooing = false;
+
+
     // public bool shouldClapSynchronized = false;
 
     [Serializable]
@@ -33,8 +37,10 @@ public class AudienceClap : MonoBehaviour
 
     public List<ClapGroups> clapGroups = new List<ClapGroups>();
 
+    public ClapGroups awooGroup = new ClapGroups();
+
     [DebugButton]
-    public void PutAudienceMembersIntoRandomGroups()
+    public void PutAudienceMembersIntoRandomClapGroups()
     {
         foreach (var cg in clapGroups)
         {
@@ -46,6 +52,18 @@ public class AudienceClap : MonoBehaviour
             clapGroups[Random.Range(0, clapGroups.Count)].audienceMembers.Add(ag);
         }
 
+    }
+
+    [DebugButton]
+    public void PutAudienceMembersIntoAwooGroups(float chance01)
+    {
+        awooGroup.audienceMembers.Clear();
+        var am = FindObjectsOfType<AudienceGroove>(true);
+        foreach (var ag in am)
+        {
+            if (Random.value < chance01)
+                awooGroup.audienceMembers.Add(ag);
+        }
     }
 
     private void OnEnable()
@@ -72,6 +90,13 @@ public class AudienceClap : MonoBehaviour
             //     isClapping = true;
             //     StartCoroutine(ClapSynchronized());
             // }
+
+        }
+
+        if (shouldAwoo && !isAwooing)
+        {
+            isAwooing = true;
+            StartCoroutine(Awoo());
 
         }
     }
@@ -124,6 +149,31 @@ public class AudienceClap : MonoBehaviour
 
     }
 
+    IEnumerator Awoo()
+    {
+        awooGroup.clapReorderedCache.Clear();
+        awooGroup.clapReorderedCache.AddRange(awooGroup.clapSounds);
+        awooGroup.clapReorderedCache.Shuffle();
+        for (int i = 0; i < awooGroup.audienceMembers.Count; i++)
+        {
+            awooGroup.audienceMembers[i].clapAudioSource.clip = awooGroup.clapReorderedCache[i % awooGroup.clapReorderedCache.Count];
+            if (awooGroup.audienceMembers[i].isActiveAndEnabled)
+                awooGroup.audienceMembers[i].clapAudioSource.PlayDelayed(awooGroup.maxRandomDelay * Random.value);
+        }
+
+        // wait for the longest sound to finish
+        float longestAwoo = 0;
+        foreach (var ag in awooGroup.audienceMembers)
+        {
+            if (ag.clapAudioSource.clip.length > longestAwoo)
+            {
+                longestAwoo = ag.clapAudioSource.clip.length;
+            }
+        }
+        yield return new WaitForSeconds(longestAwoo);
+
+        isAwooing = false;
+    }
 
 
 
