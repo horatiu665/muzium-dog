@@ -18,6 +18,8 @@ public class CastleRoadblock : MonoBehaviour
 
     public ConcertCandleSystem concertCandleSystem;
 
+    public bool teleportPlayer = false;
+
     public bool isBlocked
     {
         get
@@ -56,12 +58,15 @@ public class CastleRoadblock : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.transform == player)
+        if (teleportPlayer)
         {
-            player.position = resetPlayer.position;
-            player.rotation = resetPlayer.rotation;
+            if (other.transform == player)
+            {
+                player.position = resetPlayer.position;
+                player.rotation = resetPlayer.rotation;
+            }
         }
 
         // show the UI about the roadblock

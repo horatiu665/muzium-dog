@@ -36,6 +36,7 @@ public class DogBrain : MonoBehaviour
                     _player = cc.transform;
                     if (_player != null)
                     {
+                        Debug.Log("Set player to " + _player.name, _player);
                         _playerFPC = _player.GetComponent<FirstPersonController>();
                     }
                 }
@@ -43,6 +44,10 @@ public class DogBrain : MonoBehaviour
                 if (_player == null)
                 {
                     _player = Camera.main.transform.GetComponentInParent<Rigidbody>().transform;
+                    if (_player != null)
+                    {
+                        Debug.Log("Set player to " + _player.name, _player);
+                    }
                 }
 
 
@@ -51,14 +56,14 @@ public class DogBrain : MonoBehaviour
             {
                 if (mainCamera != null)
                 {
-                    Debug.Log("No player found! Using main camera as player!");
                     _player = mainCamera.transform;
+                    Debug.Log("No player found! Using main camera as player!", _player);
                 }
                 else
                 {
-                    Debug.LogError("No player found! Big problem for the dog!");
                     dummyPlayer = new GameObject("DummyPlayer");
                     _player = dummyPlayer.transform;
+                    Debug.LogError("No player found! Big problem for the dog! Set to new dummy object", _player);
                 }
             }
 

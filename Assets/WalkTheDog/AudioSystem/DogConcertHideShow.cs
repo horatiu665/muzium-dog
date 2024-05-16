@@ -53,6 +53,11 @@ public class DogConcertHideShow : MonoBehaviour
     private void OnEnable()
     {
         SetConcertState(initConcertState);
+        // audience rotate on spot...
+        foreach (var a in audience)
+        {
+            a.RotateOnSpot();
+        }
     }
 
     private void Update()
@@ -96,8 +101,6 @@ public class DogConcertHideShow : MonoBehaviour
 
     public void SetConcertState(ConcertState newState)
     {
-
-
         concertState = newState;
 
         if (newState == ConcertState.Hidden)
@@ -105,18 +108,18 @@ public class DogConcertHideShow : MonoBehaviour
             ch.stageTargetRotation = ch.stageRotationHidden.rotation;
             SetAudience(false);
 
-            // set the bridge thing
-            roadblock.RefreshRoadblockState();
         }
         else if (newState == ConcertState.Starting)
         {
             ch.stageTargetRotation = ch.stageRotationVisible.rotation;
             SetAudience(true);
+            
         }
         else if (newState == ConcertState.Playing)
         {
             ch.stageTargetRotation = ch.stageRotationVisible.rotation;
             SetAudience(true);
+            
         }
         else if (newState == ConcertState.Ending)
         {
@@ -124,6 +127,8 @@ public class DogConcertHideShow : MonoBehaviour
             SetAudience(true);
         }
 
+        // refresh bridge thing.
+        roadblock.RefreshRoadblockState();
 
     }
 

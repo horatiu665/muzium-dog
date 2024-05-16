@@ -59,6 +59,14 @@ public class DogConcertAudience : MonoBehaviour
 
     }
 
+    public void RotateOnSpot()
+    {
+        // init in the right direction
+        var targetPos = isAtConcert ? targetAtConcert.position : targetHidden.position;
+        var targetRot = isAtConcert ? targetAtConcert.rotation : targetHidden.rotation;
+        RotateToTarget_Cor(targetPos, targetRot);
+    }
+
     void Update()
     {
         Update_Locomotion();
@@ -88,11 +96,7 @@ public class DogConcertAudience : MonoBehaviour
         if (distToTarget < thresholdForStopMoving)
         {
             isMoving = false;
-            StartCoroutine(pTween.To(0.3f, t =>
-            {
-                transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 0.1f);
-            }));
+            RotateToTarget_Cor(targetPos, targetRot);
             return;
         }
         else
@@ -110,6 +114,15 @@ public class DogConcertAudience : MonoBehaviour
             //     * rotOffset;
         }
 
+    }
+
+    private void RotateToTarget_Cor(Vector3 targetPos, Quaternion targetRot)
+    {
+        StartCoroutine(pTween.To(0.3f, t =>
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 0.1f);
+        }));
     }
 
     private void OnDrawGizmos()

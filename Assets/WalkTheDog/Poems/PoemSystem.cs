@@ -92,7 +92,7 @@ public class PoemSystem : MonoBehaviour
         }
     }
 
-    public void SetPoemVisible(bool visible)
+    public void ShowCustomText(string text, bool visible)
     {
         poemVisible = visible;
 
@@ -102,13 +102,7 @@ public class PoemSystem : MonoBehaviour
             Image dogBoneImage = dogBone.GetComponent<Image>();
             dogBoneImage.color = new Color(1, 1, 1, 0);
 
-            var unusedPoemIndex = GetUnusedPoemIndex();
-            var fullText = allPoems[unusedPoemIndex];
-            // todays date
-            fullText += "\n  " + System.DateTime.Now.ToString("dd-MM-yyyy");
-            fullText += "\n    " + "DOG";
-            poemText.text = fullText;
-
+            poemText.text = text;
             timeline.playableAsset = poemShow;
         }
         else
@@ -118,6 +112,19 @@ public class PoemSystem : MonoBehaviour
         timeline.Play();
         timeline.playableGraph.GetRootPlayable(0).SetSpeed(1);
 
+
+    }
+
+    public void SetPoemVisible(bool visible)
+    {
+        var unusedPoemIndex = GetUnusedPoemIndex();
+        var fullText = allPoems[unusedPoemIndex];
+        // todays date
+        fullText += "\n  " + System.DateTime.Now.ToString("dd-MM-yyyy");
+        fullText += "\n    " + "DOG";
+        //poemText.text = fullText;
+
+        ShowCustomText(fullText, visible);
     }
 
     private int GetUnusedPoemIndex()

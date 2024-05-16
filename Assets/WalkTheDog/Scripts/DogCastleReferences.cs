@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 public class DogCastleReferences : MonoBehaviour
@@ -28,6 +29,8 @@ public class DogCastleReferences : MonoBehaviour
     public GameObject dog;
 
     public DogBrain dogBrain;
+
+    public PlayableDirector dogConcertTimeline;
 
     [Tooltip("The gate where you get the dog. a.k.a. the Dog Control Panel")]
     public GameObject dogGate;
