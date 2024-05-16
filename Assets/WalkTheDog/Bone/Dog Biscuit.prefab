@@ -56,6 +56,10 @@ MonoBehaviour:
   allowRotateX: 1
   allowRotateY: 1
   allowRotateZ: 1
+  boneArt: {fileID: 5434334342779306905}
+  boneArtLift: 0.1
+  customText: "This Bone belongs to Dog.\nIf found, please return to Dog Castle.\nMany
+    thanks, \nDog"
 --- !u!54 &8559513313804281181
 Rigidbody:
   m_ObjectHideFlags: 0

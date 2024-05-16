@@ -44,6 +44,8 @@ public class PoemSystem : MonoBehaviour
 
     public bool closePoemWithP = false;
 
+    public event System.Action OnPoemHidden;
+
 
     [DebugButton]
     public void SetRandomDogBone()
@@ -108,6 +110,8 @@ public class PoemSystem : MonoBehaviour
         else
         {
             timeline.playableAsset = poemHide;
+
+            OnPoemHidden?.Invoke();
         }
         timeline.Play();
         timeline.playableGraph.GetRootPlayable(0).SetSpeed(1);

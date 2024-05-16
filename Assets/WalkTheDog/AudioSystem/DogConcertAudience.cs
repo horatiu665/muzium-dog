@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ToyBoxHHH;
 using UnityEngine;
 
@@ -20,8 +21,23 @@ public class DogConcertAudience : MonoBehaviour
     public float thresholdForStopMoving = 0.1f;
     private bool isMoving;
 
+[Space]
+    public bool toggleRandomDogOnEnable = true;
+
+    public List<AudienceGroove> whichDog = new();
+
+    public void ToggleRandomDog()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, whichDog.Count);
+        for (int i = 0; i < whichDog.Count; i++)
+        {
+            whichDog[i].gameObject.SetActive(i == randomIndex);
+        }
+    }
+
     [Header("Debug")]
     public bool moveHiddenPositions = false;
+
 
     [DebugButton]
     public void SetupTargets()
@@ -56,6 +72,10 @@ public class DogConcertAudience : MonoBehaviour
     {
         targetAtConcert.SetParent(transform.parent, true);
         targetHidden.SetParent(transform.parent, true);
+        if (toggleRandomDogOnEnable)
+        {
+            ToggleRandomDog();
+        }
 
     }
 

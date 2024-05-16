@@ -3871,6 +3871,12 @@ MonoBehaviour:
   - {fileID: 7459150963081665281}
   showThatItIsBlocked: {fileID: 5114324878311693099}
   concertCandleSystem: {fileID: 2784031252177221834}
+  teleportPlayer: 0
+  textComponent: {fileID: 8627572230887025616}
+  text: 'Road to castle is closed due to concert.
+
+    Please come back later!'
+  includeArtworkCountInMessageText: 1
 --- !u!1 &7602357411243182571
 GameObject:
   m_ObjectHideFlags: 0

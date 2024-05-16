@@ -111,7 +111,7 @@ public class DogConcertHideShow : MonoBehaviour
         }
         else if (newState == ConcertState.Starting)
         {
-            ch.stageTargetRotation = ch.stageRotationVisible.rotation;
+            ch.stageTargetRotation = ch.stageRotationHidden.rotation;
             SetAudience(true);
             
         }

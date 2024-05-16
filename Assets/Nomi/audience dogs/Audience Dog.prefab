@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1053425242926732656}
-  - component: {fileID: 3983250531796289311}
-  - component: {fileID: 6763233176218710563}
   - component: {fileID: 4377461974410646668}
   m_Layer: 0
   m_Name: Audience Dog
@@ -39,46 +37,6 @@ Transform:
   - {fileID: 9063532262714230239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -180, y: 37.634995, z: -180}
---- !u!114 &3983250531796289311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409581385221704995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba3bab521186494eaa3924054c2c802, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whichOne: {fileID: 0}
---- !u!114 &6763233176218710563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409581385221704995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 643e7f821e4e637459dab7f790461561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3983250531796289311}
-        m_TargetAssemblyTypeName: ToyBoxHHH.ToggleChildren, ToyBox
-        m_MethodName: ToggleRandom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4377461974410646668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +56,14 @@ MonoBehaviour:
   steppingSin: 20.6
   steppingRotSin: 18.5234
   stepHeight: 0.05
+  thresholdForStartMoving: 0.5
+  thresholdForStopMoving: 0.1
+  toggleRandomDogOnEnable: 1
+  whichDog:
+  - {fileID: 8068759780745423091}
+  - {fileID: 1660070428307806571}
+  - {fileID: 4432375663652516743}
+  moveHiddenPositions: 0
 --- !u!1 &1894875750795944600
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,12 +603,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c672a158ca72b4633be9a18bcb0d4ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pianoPlayer: {fileID: 0}
   method: 2
   wagSinMultiplier: 3
   wagAmount: 6
   wagPhase: 0
-  rotateParentTowardsPlayer: 1
   randomize: 1
   clapAudioSource: {fileID: 6329934260118611656}
   clapMovement:
@@ -1049,6 +1013,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7752501527301084542, guid: d61e579b19da54a83b28b111d6b1dc97, type: 3}
   m_PrefabInstance: {fileID: 6997736560208335312}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8068759780745423091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1073275177207429411, guid: d61e579b19da54a83b28b111d6b1dc97, type: 3}
+  m_PrefabInstance: {fileID: 6997736560208335312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c672a158ca72b4633be9a18bcb0d4ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8048630817806416472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1146,12 +1121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c672a158ca72b4633be9a18bcb0d4ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pianoPlayer: {fileID: 0}
   method: 2
   wagSinMultiplier: 3
   wagAmount: 6
   wagPhase: 0
-  rotateParentTowardsPlayer: 1
   randomize: 1
   clapAudioSource: {fileID: 4527051362459111491}
   clapMovement:

@@ -94,7 +94,7 @@ public class DogConcert : MonoBehaviour
         }
         else if (!playerIsInConcertRange)
         {
-            if (IsConcertPlaying())
+            if (IsTimelinePlaying())
             {
                 var timeSincePlayerLeft = Time.time - playerLeaveTime;
                 if (timeSincePlayerLeft > timeUntilStopMusicWhenLeaving)
@@ -139,13 +139,14 @@ public class DogConcert : MonoBehaviour
     public void ContinueConcertSmart()
     {
         // todo: implement the rules
-        if (!IsConcertPlaying())
+        if (!IsTimelinePlaying())
         {
             ResumeConcert();
         }
     }
 
-    public bool IsConcertPlaying()
+
+    private bool IsTimelinePlaying()
     {
         if (concertTimeline.playableGraph.IsValid() == false)
             return false;

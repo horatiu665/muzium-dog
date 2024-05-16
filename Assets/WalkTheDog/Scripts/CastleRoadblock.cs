@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class CastleRoadblock : MonoBehaviour
@@ -19,6 +21,13 @@ public class CastleRoadblock : MonoBehaviour
     public ConcertCandleSystem concertCandleSystem;
 
     public bool teleportPlayer = false;
+
+    public TextMeshProUGUI textComponent;
+
+    [TextArea(3, 10)]
+    public string text = "Road to castle is closed due to concert."
+            + "\n" + "Please come back later!";
+    public bool includeArtworkCountInMessageText = true;
 
     public bool isBlocked
     {
@@ -85,6 +94,13 @@ public class CastleRoadblock : MonoBehaviour
     void SetUI(bool visible)
     {
         roadblockUI.gameObject.SetActive(visible);
+
+        textComponent.text = text;
+        if (includeArtworkCountInMessageText)
+        {
+            textComponent.text += "\n" +
+                concertCandleSystem.artworkCompleted.Count(ac => ac) + "/" + concertCandleSystem.artworkCompleted.Count + " artworks visited.";
+        }
     }
 
 }
