@@ -106,6 +106,8 @@ public class DogLocomotion : MonoBehaviour
             var lerpTarget = Quaternion.Slerp(rbRoot.rotation, target, rotationLerp);
             rbRoot.MoveRotation(lerpTarget);
 
+            // Debug.DrawRay(transform.position, targetForward * 10, Color.red, 0.5f);
+
             if (!rbRoot.isKinematic)
             {
                 rbRoot.angularVelocity *= 0.6f;

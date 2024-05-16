@@ -5,12 +5,32 @@ using UnityEngine;
 
 public class TileMaterialSwitcher : MonoBehaviour
 {
-    public Renderer r;
+    [SerializeField]
+    private Renderer _r;
+    public Renderer r
+    {
+        get
+        {
+            if (_r == null)
+            {
+                _r = GetComponentInChildren<Renderer>();
+            }
+
+            return _r;
+        }
+    }
+
 
     public List<Material> materials = new();
 
+    public void ToggleRandom()
+    {
+        var randomIndex = Random.Range(0, materials.Count);
+        SwitchTo(randomIndex);
+    }
+
     [DebugButton]
-    public void Editor_SwitchTo(int index)
+    public void SwitchTo(int index)
     {
         if (index < 0 || index >= materials.Count)
         {
@@ -18,7 +38,6 @@ public class TileMaterialSwitcher : MonoBehaviour
             return;
         }
 
-        r = GetComponentInChildren<Renderer>();
         if (r == null)
         {
             Debug.LogError("No renderer found on " + name);
@@ -26,15 +45,15 @@ public class TileMaterialSwitcher : MonoBehaviour
         }
 
         r.sharedMaterial = materials[index];
+
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(r);
 #endif
     }
 
     [DebugButton]
-    public void Editor_SwitchToNext()
+    public void SwitchToNext()
     {
-        r = GetComponentInChildren<Renderer>();
         if (r == null)
         {
             Debug.LogError("No renderer found on " + name);

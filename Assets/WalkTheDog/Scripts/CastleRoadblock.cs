@@ -69,17 +69,17 @@ public class CastleRoadblock : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (teleportPlayer)
+        if (other.transform == player)
         {
-            if (other.transform == player)
+            if (teleportPlayer)
             {
                 player.position = resetPlayer.position;
                 player.rotation = resetPlayer.rotation;
             }
-        }
 
-        // show the UI about the roadblock
-        SetUI(true);
+            // show the UI about the roadblock
+            SetUI(true);
+        }
     }
 
     private void Update()
