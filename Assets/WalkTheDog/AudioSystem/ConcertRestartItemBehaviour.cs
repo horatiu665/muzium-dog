@@ -37,6 +37,11 @@ public class ConcertRestartItemBehaviour : ItemBehaviour
             PoemSystem.instance.OnPoemHidden += OnPoemHidden;
 
         }
+        else
+        {
+            PoemSystem.instance.ShowCustomText("The concert seems to be in progress!", true);
+
+        }
 
     }
 

@@ -104,7 +104,25 @@ public class ConcertCandleSystem : MonoBehaviour
 
     }
 
+    [DebugButton]
+    public void Editor_SetArtworksToRandomCompletion()
+    {
+        for (int i = 0; i < artworkCompleted.Count; i++)
+        {
+            artworkCompleted[i] = Random.value > 0.5f;
+        }
+    }
 
+[DebugButton]
+    public void Editor_ToggleArtworksToCompletedOrNot()
+    {
+        var curValue = artworkCompleted[0];
+        for (int i = 0; i < artworkCompleted.Count; i++)
+        {
+            artworkCompleted[i] = !curValue;
+        }
+
+    }
 
 
 }

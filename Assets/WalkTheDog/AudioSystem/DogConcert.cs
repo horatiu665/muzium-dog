@@ -42,6 +42,11 @@ public class DogConcert : MonoBehaviour
     [Header("hack replace timeline")]
     public TimelineAsset replaceWith;
 
+    private List<PlayableAsset> playedTimelines = new();
+
+    public bool cheatSkipSecondsOnKey = false;
+    public KeyCode cheatSkipKey = KeyCode.L;
+    public float cheatSkipSeconds = 10f;
 
     private void Update()
     {
@@ -55,6 +60,11 @@ public class DogConcert : MonoBehaviour
         if (dogConcertHideShow.concertState == DogConcertHideShow.ConcertState.Playing)
         {
             Update_ConcertDistance();
+        }
+
+        if (cheatSkipSecondsOnKey && Input.GetKeyDown(cheatSkipKey))
+        {
+            ContinueConcertFromTime((float)(concertTimeline.time + cheatSkipSeconds));
         }
 
     }
@@ -89,7 +99,7 @@ public class DogConcert : MonoBehaviour
         // pause and resume the concert based on player's presence
         if (playerIsInConcertRange)
         {
-            ContinueConcertSmart();
+            Update_ContinueConcertSmart();
 
         }
         else if (!playerIsInConcertRange)
@@ -136,15 +146,64 @@ public class DogConcert : MonoBehaviour
     // - if the candles are blown, play the end of the concert and then stop.
     // - do the gameplay of restarting the concert via the concert banner.... 
     // figure out the concert states maybe and let the banner set those states rather than directly playing/stopping the concert.
-    public void ContinueConcertSmart()
+    public void Update_ContinueConcertSmart()
     {
-        // todo: implement the rules
-        if (!IsTimelinePlaying())
+        // by default, it plays / continues the main concert.
+        // if the main concert ends, it plays the encore concert on loop forever.
+        // but if the candle system says all artworks have been found, we play the ending and then stop the concert.
+
+        // if all artworks are completed, play ending once.
+        if (candleSystem.AreAllArtworksCompleted())
         {
-            ResumeConcert();
+            // if we haven't set the ending yet,
+            if (!playedTimelines.Contains(concertEnding))
+            {
+                playedTimelines.Add(concertEnding);
+                // set the ending
+                SetEndingConcert();
+                ResumeConcert();
+            }
+            else
+            {
+                // resume as usual, in case there was a break cause the player left.
+                if (!IsTimelinePlaying())
+                {
+                    ResumeConcert();
+                }
+
+                // the ending will call the SetConcertStateToEndingAndHidden() function when it's done using an object OnEnable in the timeline.
+            }
+        }
+        else // artworks are not all completed
+        {
+            // continue playing main concert.
+            if (!IsTimelinePlaying())
+            {
+                ResumeConcert();
+            }
+
+            // main concert will call the SetConcertToEncore() function with an object OnEnable in the timeline.
         }
     }
 
+    // Called by Ending timeline with an object. easier to setup visually in the timeline, altho confusing in the code.
+    public void SetConcertStateToEndingAndHidden()
+    {
+        dogConcertHideShow.SetConcertState(DogConcertHideShow.ConcertState.Ending);
+
+        // set the concert to hidden after the ending is done.
+        StartCoroutine(pTween.Wait(10, () =>
+        {
+            dogConcertHideShow.SetConcertState(DogConcertHideShow.ConcertState.Hidden);
+        }));
+
+    }
+
+    // Called by Main concert timeline with an object. easier to setup visually in the timeline, altho confusing in the code.
+    public void SetConcertToEncore()
+    {
+        SetEncoreConcert();
+    }
 
     private bool IsTimelinePlaying()
     {
@@ -190,7 +249,7 @@ public class DogConcert : MonoBehaviour
 
 
     [DebugButton]
-    public void ReplaceTimeline()
+    public void Editor_ReplaceTimeline()
     {
         var prevTimeline = concertTimeline.playableAsset as TimelineAsset;
         // save bindings in a list
