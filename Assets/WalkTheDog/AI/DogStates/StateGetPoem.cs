@@ -32,6 +32,8 @@ namespace DogAI
         public float targetSpeedGoAway01 = 1;
         public float targetSpeedReturn01 = 0.5f;
 
+        public float pathCalculationInterval = 5f;
+
         public Transform poemPosition;
 
         private bool hasPoem = false;
@@ -115,23 +117,34 @@ namespace DogAI
                 else
                 {
 
-                    // go to player
-                    var playerFront = player.position;
-                    var playerY = player.position.y;
-                    playerFront += player.forward * 1.5f + Random.onUnitSphere * 0.3f;
-                    var pfv = dogRefs.dogBrain.playerFakeVelocity;
-                    var playerFakeVelocity = pfv.velocity;
-                    playerFront += Vector3.ClampMagnitude(playerFakeVelocity, 3f);
+                    bool shouldRecalcPath = !dogRefs.dogBrain.dogAstar.hasPath;
+                    if (dogRefs.dogBrain.dogAstar.hasPath)
+                    {
+                        if (Time.time - dogRefs.dogBrain.dogAstar.lastPathCalculationTime > pathCalculationInterval)
+                        {
+                            shouldRecalcPath = true;
+                        }
+                    }
+                    if (shouldRecalcPath)
+                    {
+                        // go to player
+                        var playerFront = player.position;
+                        var playerY = player.position.y;
+                        playerFront += player.forward * 1.5f + Random.onUnitSphere * 0.3f;
+                        var pfv = dogRefs.dogBrain.playerFakeVelocity;
+                        var playerFakeVelocity = pfv.velocity;
+                        playerFront += Vector3.ClampMagnitude(playerFakeVelocity, 3f);
 
-                    playerFront.y = playerY;
+                        playerFront.y = playerY;
 
-                    var nearestNode = dogRefs.dogBrain.dogAstar.aStar.GetNearestNode(playerFront);
-                    playerFront.y = nearestNode.position.y;
+                        var nearestNode = dogRefs.dogBrain.dogAstar.aStar.GetNearestNode(playerFront);
+                        playerFront.y = nearestNode.position.y;
 
-                    Debug.DrawLine(transform.position, playerFront, Color.yellow, 0.5f);
+                        Debug.DrawLine(transform.position, playerFront, Color.yellow, 0.5f);
 
-                    dogRefs.dogBrain.dogAstar.SetDestination(playerFront);
-                    dogRefs.dogBrain.dogAstar.dogLocomotion.targetSpeed01 = targetSpeedReturn01;
+                        dogRefs.dogBrain.dogAstar.SetDestination(playerFront);
+                        dogRefs.dogBrain.dogAstar.dogLocomotion.targetSpeed01 = targetSpeedReturn01;
+                    }
                 }
             }
 

@@ -12,6 +12,8 @@ public class AStarNodesAroundMovingTarget : MonoBehaviour
     public float newNodeRadius = 20;
     public int newNodeCount = 20;
 
+    public float newNodeDuration = 0;
+
     void Update()
     {
         Update_AddNodes();
@@ -24,7 +26,7 @@ public class AStarNodesAroundMovingTarget : MonoBehaviour
             addNodesLastTime = Time.time;
 
             // add nodes
-            aStar.CreateNodesNearby(transform.position, newNodeRadius, newNodeCount, nodeNeighborDistance * 0.5f);
+            aStar.CreateNodesNearby(transform.position, newNodeRadius, newNodeCount, nodeNeighborDistance * 0.5f, newNodeDuration);
 
         }
     }

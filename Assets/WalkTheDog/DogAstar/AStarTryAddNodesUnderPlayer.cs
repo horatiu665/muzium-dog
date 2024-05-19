@@ -51,11 +51,26 @@ public class AStarTryAddNodesUnderPlayer : MonoBehaviour
                 {
                     CheckPositionAndAddNode(p.position);
                 }
+                else
+                {
+                    // raycast below player and then add node if it hits
+                    var groundedPos = dogRefs.dogBrain.dogAstar.aStar.GetGroundedPosition(p.position,
+                         out var grounded, raycastHeight: 0.5f, raycastDistance: 7f, verticalOffset: 0f);
+                    if (grounded)
+                    {
+                        Debug.DrawRay(groundedPos, Vector3.up * 100f, Color.green, 30);
+                        CheckPositionAndAddNode(groundedPos);
+                    }
+                }
             }
             else // we have regular player
             {
-                CheckPositionAndAddNode(p.position);
-
+                // raycast below player and then add node if it hits, always.
+                var groundedPos = dogRefs.dogBrain.dogAstar.aStar.GetGroundedPosition(p.position, out var grounded);
+                if (grounded)
+                {
+                    CheckPositionAndAddNode(groundedPos);
+                }
             }
         }
 
@@ -69,10 +84,15 @@ public class AStarTryAddNodesUnderPlayer : MonoBehaviour
         {
             prevPosChecked = playerPosition;
             var aStar = dogRefs.dogBrain.dogAstar.aStar;
+            // nearest node to player
             var node = aStar.GetNearestNode(playerPosition);
+            // if distance to nearest node is more than min distance to check, add the node.
             if (node == null || Vector3.Distance(node.position, playerPosition) > minDistanceToCheck)
             {
                 var newNode = aStar.AddNode(playerPosition, nodeDuration);
+                // ignore nearby so the dog can create permanent nodes near those nodes.
+                newNode.ignoreNearby = true;
+
                 Debug.DrawRay(playerPosition, Vector3.up * 0.5f, Color.red, 30);
                 // allAddedNodes.Add(newNode);
             }

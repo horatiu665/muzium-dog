@@ -19,8 +19,13 @@ public class AStar : MonoBehaviour
         public Node previous;
 
         public float expirationTime;
+        public float remainingLife => expirationTime - Time.time; // might be float.maxvalue if infinite.
+        public float remainingLife01 => Mathf.Clamp01((expirationTime - Time.time) / 60f);
 
+        // if ignoreRaycast, always add as a neighbor if within distance, even if there is an obstacle. Useful for start node etc.
         public bool ignoreRaycast = false;
+        // if ignoreNearby, ignore this node when checking if there are nearby nodes. Useful for temporary nodes like start node, or high frequency nodes.
+        public bool ignoreNearby = false;
     }
 
     public List<Node> nodes = new List<Node>();
@@ -37,6 +42,9 @@ public class AStar : MonoBehaviour
     List<Node> openSet = new List<Node>();
     HashSet<Node> closedSet = new HashSet<Node>();
     List<Node> cancelledNodes = new List<Node>();
+
+    [Header("Debug")]
+    public bool drawObstacleRaycast = false;
 
     private void OnEnable()
     {
@@ -106,6 +114,7 @@ public class AStar : MonoBehaviour
 
     }
 
+    // Gets nearest node, but only the ones that have raycast clear view.
     public Node GetNearestNodeWithClearView(Vector3 position)
     {
         Node nearestNode = null;
@@ -296,7 +305,7 @@ public class AStar : MonoBehaviour
         }
     }
 
-    public void CreateNodesNearby(Vector3 center, float radius, int count, float minDistance)
+    public void CreateNodesNearby(Vector3 center, float radius, int count, float minDistance, float nodeDuration = 0)
     {
         for (int i = 0; i < count; i++)
         {
@@ -317,7 +326,7 @@ public class AStar : MonoBehaviour
                 continue;
             }
 
-            AddNode(groundedPos);
+            AddNode(groundedPos, nodeDuration);
         }
 
         // bad idea. it recalculates far too many nodes.
@@ -332,6 +341,11 @@ public class AStar : MonoBehaviour
         {
             if (Vector3.Distance(node.position, pos) < minDistance)
             {
+                if (node.ignoreNearby)
+                {
+                    continue;
+                }
+
                 tooClose = true;
                 break;
             }
@@ -364,9 +378,9 @@ public class AStar : MonoBehaviour
         return newNode;
     }
 
-/// <summary>
-/// Returns the hit position after a raycast to the ground.  if no hit, returns original position.
-/// </summary>
+    /// <summary>
+    /// Returns the hit position after a raycast to the ground.  if no hit, returns original position.
+    /// </summary>
     public Vector3 GetGroundedPosition(Vector3 position, out bool grounded, float raycastHeight = 3f, float raycastDistance = 6f, float verticalOffset = 0f)
     {
         if (Physics.Raycast(position + Vector3.up * raycastHeight, Vector3.down, out RaycastHit hit, raycastDistance, layerMask))
@@ -415,6 +429,10 @@ public class AStar : MonoBehaviour
                 if (!(node.ignoreRaycast || otherNode.ignoreRaycast)
                     && Physics.Raycast(node.position + Vector3.up * aStarSettings.nodeVerticalOffset, otherNode.position - node.position, out RaycastHit hit, Mathf.Sqrt(sqrDist), layerMask))
                 {
+                    /// draw obstacle raycast
+                    if (drawObstacleRaycast)
+                        Debug.DrawRay(node.position + Vector3.up * aStarSettings.nodeVerticalOffset, otherNode.position - node.position, new Color(0.7f, 0, 0, 1), 10f);
+
                     continue;
                 }
                 node.neighbors.Add(otherNode);
@@ -495,15 +513,31 @@ public class AStar : MonoBehaviour
     {
         foreach (var node in nodes)
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(node.position, 0.1f);
+            Gizmos.color = GetNodeColor(node);
+            // node size = node lifecycle
+            var nodeSize = node.remainingLife01;
+            Gizmos.DrawWireSphere(node.position, nodeSize * 0.1f);
 
             foreach (var neighbor in node.neighbors)
             {
-                Gizmos.color = Color.blue;
+                // Gizmos.color = Color.cyan;
                 Gizmos.DrawLine(node.position, neighbor.position);
             }
         }
+    }
+
+    public Color GetNodeColor(Node node)
+    {
+        var parentNode = disjointSet.Find(node);
+        var prevRandSeed = Random.state;
+        Random.InitState(parentNode.GetHashCode());
+        var color = Random.ColorHSV(0, 1, 0.5f, 1, 0.5f, 1);
+
+        Random.state = prevRandSeed;
+
+        return color;
+
+        //return Color.cyan;
     }
 
     public Node GetNearestNodeToLine(Vector3 position, Vector3 forward, List<Node> exceptNodes)

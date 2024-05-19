@@ -86,6 +86,7 @@ Transform:
   - {fileID: 990378764820503669}
   - {fileID: 2922620918256155922}
   - {fileID: 4558861223780869899}
+  - {fileID: 8057611155410008807}
   - {fileID: 1338820661010242665}
   - {fileID: 5192271483216986815}
   - {fileID: 982774746181842792}
@@ -509,6 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29b849cdd07d47d0931b092e6ab546a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dogRefs: {fileID: 0}
   barkAll: {fileID: 3218486643441593501}
   barkIntensities:
   - {fileID: 8300000, guid: e9736807ff5854308802a57d52db4b66, type: 3}
@@ -535,6 +537,67 @@ MonoBehaviour:
   howl: {fileID: 4258120454248645417}
   wag: {fileID: 5212025435394888432}
   footsteps: {fileID: 3251744488397681557}
+--- !u!1 &1649701576727016299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8057611155410008807}
+  - component: {fileID: 1293604484896004946}
+  m_Layer: 12
+  m_Name: confused advanced no path
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8057611155410008807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649701576727016299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8206410391004978341}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1293604484896004946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649701576727016299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4156db1f6fed4c9d82e25d5e7653ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 10
+  whimperDelayRange: {x: 5, y: 10}
+  confusionStepIncreaseCooldown: 5.5
+  confusionStepDecreaseCooldown: 20
+  steps:
+  - timeSpentConfused: 1
+    whimperChance: 0
+    goToNearestNode: 0
+  - timeSpentConfused: 2
+    whimperChance: 0.23
+    goToNearestNode: 0
+  - timeSpentConfused: 3
+    whimperChance: 0.5
+    goToNearestNode: 0
+  - timeSpentConfused: 5
+    whimperChance: 0.66
+    goToNearestNode: 1
 --- !u!1 &1742927839248269492
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +686,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2053403141256262769}
   m_Father: {fileID: 6085706162362604351}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1413090819953131876
@@ -640,6 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aStarSettings: {fileID: 11400000, guid: fa53c98cf85344ccaae6ae87728345f4, type: 2}
   nodeUpdateInterval: 0.5
+  drawObstacleRaycast: 0
 --- !u!114 &1876726704312379818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,6 +722,7 @@ MonoBehaviour:
   nodeNeighborDistance: 5
   newNodeRadius: 20
   newNodeCount: 20
+  newNodeDuration: 0
 --- !u!114 &8547330104227770343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -689,8 +755,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dogRefs: {fileID: 0}
-  minDistanceToCheck: 3.5
-  nodeDuration: 30
+  minDistanceToCheck: 2
+  nodeDuration: 60
 --- !u!1 &2121771549273067742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1650,56 @@ MonoBehaviour:
   wanderRange: {x: 10, y: 20}
   timeBetweenWanders: {x: 0.4, y: 2.5}
   targetSpeed01: 1
+--- !u!1 &4383343659394028154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2053403141256262769}
+  - component: {fileID: 1517875970279158653}
+  m_Layer: 12
+  m_Name: nearby node scanner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2053403141256262769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383343659394028154}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7884164852703896326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1517875970279158653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383343659394028154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127b1f370bef3491d8734f972d4c4433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aStar: {fileID: 1413090819953131876}
+  addNodesDelay: 0.25
+  nodeNeighborDistance: 2.5
+  newNodeRadius: 5
+  newNodeCount: 5
+  newNodeDuration: 5
 --- !u!1 &4685201297582014275
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,8 +2378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dogRefs: {fileID: 6098441059665146737}
-  player: {fileID: 0}
-  playerFPC: {fileID: 0}
   dogAstar: {fileID: 8547330104227770343}
   dogLook: {fileID: 1164898141063847991}
   dogSniffingBrain: {fileID: 0}
@@ -2580,6 +2694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b017aff38e74e0fab58d4b74f89c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dogRefs: {fileID: 0}
+  wagSpeed: 1
 --- !u!114 &537591028388179491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2593,6 +2709,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dogRefs: {fileID: 0}
+  animBarkTrigger: Bark
+  animPantBool: Pant
+  animMouthMildBool: MouthMild
 --- !u!1 &6998521515863420705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,7 +2728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4558861223780869899
 Transform:
   m_ObjectHideFlags: 0

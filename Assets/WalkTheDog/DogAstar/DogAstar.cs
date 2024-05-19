@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+///  Uses AStar and the DogLocomotion system to move the dog on a path.
+/// </summary>
 public class DogAstar : MonoBehaviour
 {
     public AStar aStar;
@@ -22,6 +25,7 @@ public class DogAstar : MonoBehaviour
     private AStar.Node startNode, endNode;
 
     public float cantFindPathTime;
+    public float lastPathCalculationTime;
 
     public void SetDestination(Vector3 destination)
     {
@@ -71,7 +75,7 @@ public class DogAstar : MonoBehaviour
                     dogLocomotion.SetDestination(transform.position + dir);
                     // rotate towards next node
                     dogLocomotion.SetTargetRotation(dir);
-                    
+
                     // skip node if close enough
                     if (dir.magnitude < stopDistance)
                     {
@@ -102,6 +106,7 @@ public class DogAstar : MonoBehaviour
                     startNode.position = transform.position;
                     aStar.AssignNeighbors(startNode);
                 }
+
                 if (endNode == null)
                 {
                     // node position should be exactly the destination (but destination should be reachable. we assume this in SetDestination()).
@@ -130,6 +135,7 @@ public class DogAstar : MonoBehaviour
                 else
                 {
                     hasPath = true;
+                    lastPathCalculationTime = Time.time;
                 }
 
             }

@@ -82,7 +82,12 @@ public class DogLocomotion : MonoBehaviour
                 rbRoot.angularVelocity *= 0.6f;
             }
 
-            rbRoot.MovePosition(rbRoot.position + dir.normalized * topSpeed * targetSpeed01 * Time.fixedDeltaTime);
+            var nextPosition = rbRoot.position + dir.normalized * topSpeed * targetSpeed01 * Time.fixedDeltaTime;
+
+            // if next position is floating in the air.... avoid it??? how?
+            //()
+
+            rbRoot.MovePosition(nextPosition);
 
             if (Vector3.Distance(rbRoot.position, destination) < stopDistance)
             {

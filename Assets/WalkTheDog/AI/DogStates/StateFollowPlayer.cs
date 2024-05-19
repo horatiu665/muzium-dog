@@ -50,8 +50,10 @@ namespace DogAI
 
         public Transform player => dogRefs.dogBrain.player;
 
+        public float minStateActiveDuration = 5f;
 
         private float lastTimeThisStateWasActive = 0;
+        private float stateEnterTime;
         private bool _isActive;
 
 
@@ -73,6 +75,7 @@ namespace DogAI
         void IState.OnEnter()
         {
             _isActive = true;
+            stateEnterTime = Time.time;
             lastTimeThisStateWasActive = Time.time;
 
         }
@@ -87,7 +90,7 @@ namespace DogAI
                 var playerFront = player.position;
                 var playerY = player.position.y;
                 playerFront += player.forward * frontOfPlayerDistance + Random.onUnitSphere * 0.4f * frontOfPlayerDistance;
-                
+
                 playerFront.y = playerY;
 
                 Debug.DrawLine(transform.position, playerFront, Color.yellow, 0.5f);
@@ -129,6 +132,9 @@ namespace DogAI
             {
                 if (dist < maxDistanceToEndFollow)
                     return false;
+                // keep active for a certain minimum duration
+                if (Time.time - stateEnterTime < minStateActiveDuration)
+                    return true;
                 // keep active until we are close enough to the player
                 return true;
             }
