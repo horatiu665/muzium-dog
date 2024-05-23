@@ -43,6 +43,9 @@ public class DogLookAttention : MonoBehaviour
 
     private LookAtRequest currentTopLookRequest;
 
+    public DogEyes2D dogEyes;
+
+
     [Tooltip("Warning! this might be heavy on performance.")]
     public bool showRequestsDebug = false;
 
@@ -151,7 +154,20 @@ public class DogLookAttention : MonoBehaviour
 
         // animate head
         Update_AnimateHead();
+        Update_AnimateEyes();
 
+    }
+
+    private void Update_AnimateEyes()
+    {
+        if (currentTopLookRequest != null)
+        {
+            dogEyes.LookAt(currentTopLookRequest.GetLookTargetPosition(dogRefs));
+        }
+        else
+        {
+            dogEyes.SetDirection(Vector3.forward);
+        }
     }
 
     private void Update_AnimateHead()
@@ -171,8 +187,8 @@ public class DogLookAttention : MonoBehaviour
 
             var finalLookTarget = dogRefs.headForwardNoRotation.TransformPoint(localLookTarget);
 
-            Debug.DrawLine(dogRefs.head.position, worldLookTarget, Color.yellow, 0.1f);
-            Debug.DrawLine(dogRefs.head.position, finalLookTarget, Color.red, 0.2f);
+            // Debug.DrawLine(dogRefs.head.position, worldLookTarget, Color.yellow, 0.1f);
+            // Debug.DrawLine(dogRefs.head.position, finalLookTarget, Color.red, 0.2f);
 
             var targetRotation = Quaternion.LookRotation(finalLookTarget - dogRefs.head.position);
 

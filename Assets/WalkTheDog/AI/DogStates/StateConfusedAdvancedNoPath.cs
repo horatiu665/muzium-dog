@@ -91,6 +91,11 @@ namespace DogAI
 
         void IState.OnEnter()
         {
+            if (currentConfusionStep == null)
+            {
+                currentConfusionStep = steps[currentConfusionStepIndex];
+            }
+
             dogRefs.dogBrain.dogAstar.StopMovement();
             dogRefs.dogLocomotion.StopMovement();
             dogRefs.dogLocomotion.StopRotation();
@@ -172,6 +177,11 @@ namespace DogAI
 
         bool IState.ConditionsMet()
         {
+            if (currentConfusionStep == null)
+            {
+                currentConfusionStep = steps[0];
+            }
+
             if (Time.time - dogRefs.dogBrain.dogAstar.cantFindPathTime < currentConfusionStep.timeSpentConfused)
                 return true;
 

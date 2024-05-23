@@ -12,6 +12,11 @@ public class DogLocomotion : MonoBehaviour
     // this lets the DogLocomotion control rigidbody.isKinematic status. otherwise, it remains set from the inspector.
     public bool allowKinematicControl = true;
 
+    public bool doOwnGravity = true;
+    public float groundedCastRadius = 0.5f;
+
+    public GameObject groundedDebugThing;
+
     public float topSpeed = 20f;
     public float targetSpeed01 = 1f;
 
@@ -72,6 +77,32 @@ public class DogLocomotion : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (doOwnGravity)
+        {
+            // find out if we are grounded with a sphere cast
+            RaycastHit hit;
+            if (Physics.SphereCast(rbRoot.position + Vector3.up * (groundedCastRadius + 0.1f),
+                groundedCastRadius, Vector3.down, out hit, groundedCastRadius * 2 + 0.1f, dogRefs.dogBrain.dogAstar.aStar.aStarSettings.layerMask))
+            {
+                groundedDebugThing.SetActive(true);
+            }
+            else
+            {
+                groundedDebugThing.SetActive(false);
+                // we are airborne
+                // if (rbRoot.isKinematic)
+                {
+                    rbRoot.MovePosition(rbRoot.position + Physics.gravity * Time.fixedDeltaTime);
+                }
+                // else
+                // {
+                //     rbRoot.AddForce(Physics.gravity, ForceMode.Acceleration);
+                // }
+
+            }
+
+        }
+
         if (hasDestination)
         {
             Vector3 dir = destination - rbRoot.position;
