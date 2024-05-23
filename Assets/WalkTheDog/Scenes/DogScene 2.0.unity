@@ -8678,7 +8678,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4163170327692077165, guid: 078b0385f5ec74de2a449ee5b200b304, type: 3}
+  - {fileID: 2100000, guid: 7a5ffcd0fd414a642b0c29457079cf21, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11901,7 +11901,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc3f7b2cfffe0488b9ad33693467cfcd, type: 2}
+  - {fileID: 2100000, guid: 918c27db1dff5da4d96abfbab731ff43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12145,21 +12145,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: BARK PLANT
       objectReference: {fileID: 0}
-    - target: {fileID: 6771319257868289753, guid: d0855ad92e2694934a6de31e493c35eb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d8547ec91cb7243c18ac0a3f5ea5f3fd, type: 2}
     - target: {fileID: 8608549341031656602, guid: d0855ad92e2694934a6de31e493c35eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.888067
+      value: -6.7057
       objectReference: {fileID: 0}
     - target: {fileID: 8608549341031656602, guid: d0855ad92e2694934a6de31e493c35eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.746256
+      value: 10.653809
       objectReference: {fileID: 0}
     - target: {fileID: 8608549341031656602, guid: d0855ad92e2694934a6de31e493c35eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.80862
+      value: 24.13276
       objectReference: {fileID: 0}
     - target: {fileID: 8608549341031656602, guid: d0855ad92e2694934a6de31e493c35eb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12216,6 +12212,10 @@ PrefabInstance:
       propertyPath: togglePoemWithO
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1378930618757001686, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -23.49002
+      objectReference: {fileID: 0}
     - target: {fileID: 1913931793836873819, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.70710677
@@ -12236,6 +12236,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 3824197775147287488, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dea764f05174446b3a3681e2cd541a6b, type: 2}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog
@@ -12260,10 +12264,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
       objectReference: {fileID: 0}
-    - target: {fileID: 5744583597952383505, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 6098513205910239263, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39b0110de50ed4608a41b7f15af11635, type: 2}
     - target: {fileID: 6206685887020357844, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: skipIntro
       value: 1
@@ -12315,6 +12319,14 @@ PrefabInstance:
     - target: {fileID: 6614791204052090925, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: initConcertState
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550697463455043108, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -23.48996
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222082618241969850, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
