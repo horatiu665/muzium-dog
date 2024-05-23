@@ -53,7 +53,7 @@ public class DogConcert : MonoBehaviour
         // cheat
         if (useCheat && Input.GetKeyDown(cheatKey))
         {
-            RestartConcert();
+            dogConcertHideShow.Editor_SetNextState();
         }
 
         // todo: maybe this should always run. worried right now about ending the concert and this doesn't run which might result in some issues with the settings applied within.

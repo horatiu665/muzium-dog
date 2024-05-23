@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7d1f237b98f4660bb32181b4726e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audienceAstar: {fileID: 0}
   targetAtConcert: {fileID: 322370065589873639}
   targetHidden: {fileID: 9063532262714230239}
   isAtConcert: 0

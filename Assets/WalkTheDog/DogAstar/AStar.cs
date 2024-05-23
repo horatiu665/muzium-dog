@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AStar : MonoBehaviour
 {
+    // NOT  a singleton
+    // can be reused separately.
+
     public class Node
     {
         public Vector3 position;
@@ -26,6 +29,13 @@ public class AStar : MonoBehaviour
         public bool ignoreRaycast = false;
         // if ignoreNearby, ignore this node when checking if there are nearby nodes. Useful for temporary nodes like start node, or high frequency nodes.
         public bool ignoreNearby = false;
+    }
+
+    public class Path
+    {
+        public List<Node> nodes = new List<Node>();
+        public Node startNode;
+        public Node endNode;
     }
 
     public List<Node> nodes = new List<Node>();
@@ -509,8 +519,14 @@ public class AStar : MonoBehaviour
             // RedoNeighbors(neighborDistance);
         }
     }
+
+    public bool drawGizmos = true;
+
     void OnDrawGizmos()
     {
+        if (!drawGizmos)
+            return;
+
         foreach (var node in nodes)
         {
             Gizmos.color = GetNodeColor(node);
