@@ -56,7 +56,7 @@ public class DogControlPanel : MonoBehaviour
 
         c_toggleDogEnabled.SetUI(dogEnabled);
 
-        if (playTimeline && !skipIntro)
+        if (playTimeline && !skipIntro) 
         {
             if (dogEnabled)
             {
