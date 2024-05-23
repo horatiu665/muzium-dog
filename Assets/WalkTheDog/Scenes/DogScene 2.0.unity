@@ -12220,10 +12220,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Castle with Dog
       objectReference: {fileID: 0}
-    - target: {fileID: 5824628012787484386, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 18.41
-      objectReference: {fileID: 0}
     - target: {fileID: 6149385765225832663, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -12279,22 +12275,6 @@ PrefabInstance:
     - target: {fileID: 6614791204052090925, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: initConcertState
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7313864631369195410, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7313864631369195410, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7313864631369195410, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7313864631369195410, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7685417202138720821, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalPosition.y
