@@ -3,7 +3,42 @@ guid: 88e671df7d29f441fb89215c18954b0e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glowwhite
+    second: {fileID: 2100000, guid: df116819f16884753b33e80f67d6c754, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: greyconcrete
+    second: {fileID: 2100000, guid: 91fd31ebfc52a4135ae2d9d01640c876, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light
+    second: {fileID: 2100000, guid: 286e363d3bc714552ad8a33d9ecac5f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal
+    second: {fileID: 2100000, guid: e31a39a5340d149fba00de1b695d1158, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rustygreygreen
+    second: {fileID: 2100000, guid: 4855d62ddf26546828b75f180685043d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shinyblue
+    second: {fileID: 2100000, guid: 2ebfc4e01b05c4aea804cfe7ffef4e7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: void
+    second: {fileID: 2100000, guid: 77e4a11e06daf4a95a48722f65b92828, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
