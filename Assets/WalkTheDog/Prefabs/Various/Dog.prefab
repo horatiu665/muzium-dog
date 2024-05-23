@@ -859,6 +859,7 @@ MonoBehaviour:
   aStarSettings: {fileID: 11400000, guid: fa53c98cf85344ccaae6ae87728345f4, type: 2}
   nodeUpdateInterval: 0.5
   drawObstacleRaycast: 0
+  drawGizmos: 0
 --- !u!114 &1876726704312379818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2616,6 +2617,9 @@ MonoBehaviour:
   dogRefs: {fileID: 6098441059665146737}
   rbRoot: {fileID: 7469781139469790497}
   allowKinematicControl: 1
+  doOwnGravity: 1
+  groundedCastRadius: 0.5
+  groundedDebugThing: {fileID: 0}
   topSpeed: 15
   targetSpeed01: 1
   stopDistance: 0.5
@@ -3319,7 +3323,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 39b0110de50ed4608a41b7f15af11635, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
