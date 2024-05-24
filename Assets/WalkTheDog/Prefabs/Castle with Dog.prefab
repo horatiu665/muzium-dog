@@ -3778,7 +3778,7 @@ MonoBehaviour:
   hideOnKeypress: 112
   activeWhenBlocked:
   - {fileID: 7460267091844711258}
-  - {fileID: 0}
+  - {fileID: 122709859113128039}
   - {fileID: 7459150963081665281}
   showThatItIsBlocked: {fileID: 0}
   concertCandleSystem: {fileID: 2784031252177221834}
@@ -6130,6 +6130,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 030ea379b1c4d4ecbb1aa8f0f0322803, type: 3}
+--- !u!1 &122709859113128039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7975534691048775888, guid: 030ea379b1c4d4ecbb1aa8f0f0322803, type: 3}
+  m_PrefabInstance: {fileID: 8006618921084137655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &790420612115860189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7342303522361457258, guid: 030ea379b1c4d4ecbb1aa8f0f0322803, type: 3}

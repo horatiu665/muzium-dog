@@ -2541,6 +2541,7 @@ GameObject:
   - component: {fileID: 549477761148075898}
   - component: {fileID: 5830309404068657004}
   - component: {fileID: 537591028388179491}
+  - component: {fileID: 2246546609753943930}
   m_Layer: 12
   m_Name: Dog
   m_TagString: Untagged
@@ -2640,6 +2641,7 @@ MonoBehaviour:
   _dogRefs: {fileID: 6098441059665146737}
   dogAstar: {fileID: 8547330104227770343}
   dogLook: {fileID: 1164898141063847991}
+  dogLookingBrain: {fileID: 2246546609753943930}
   dogSniffingBrain: {fileID: 0}
   dogBarkingBrain: {fileID: 549477761148075898}
   dogPettingBrain: {fileID: 8841717388332335818}
@@ -2973,6 +2975,20 @@ MonoBehaviour:
   animBarkTrigger: Bark
   animPantBool: Pant
   animMouthMildBool: MouthMild
+--- !u!114 &2246546609753943930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863227645618225541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a2337fab2224b079a8d7087d749349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookingRadius: 10
+  updateRate: 0.551
 --- !u!1 &6998521515863420705
 GameObject:
   m_ObjectHideFlags: 0

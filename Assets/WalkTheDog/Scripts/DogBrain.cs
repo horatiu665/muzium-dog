@@ -114,6 +114,8 @@ public class DogBrain : MonoBehaviour
 
     public DogLookAttention dogLook;
 
+    public DogLookingBrain dogLookingBrain;
+
     public DogSniffingBrain dogSniffingBrain;
 
     public DogBarkingBrain dogBarkingBrain;

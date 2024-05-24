@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DogLookAttention : MonoBehaviour
 {
+    [Header("This script has the low-level look functionality. Request to look at stuff here. Highest priority request wins.")]
     public DogRefs dogRefs;
 
     public DogAstar dogAstar => dogRefs.dogBrain.dogAstar;
