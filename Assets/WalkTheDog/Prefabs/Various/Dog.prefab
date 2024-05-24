@@ -2597,7 +2597,6 @@ GameObject:
   - component: {fileID: 60873633750966107}
   - component: {fileID: 4077100967814972511}
   - component: {fileID: 7469781139469790497}
-  - component: {fileID: 3853134229190789630}
   - component: {fileID: 6660028680411522864}
   - component: {fileID: 1164898141063847991}
   - component: {fileID: 728643463397910104}
@@ -2610,6 +2609,7 @@ GameObject:
   - component: {fileID: 5830309404068657004}
   - component: {fileID: 537591028388179491}
   - component: {fileID: 2246546609753943930}
+  - component: {fileID: 1562281440276884399}
   m_Layer: 12
   m_Name: Dog
   m_TagString: Untagged
@@ -2763,20 +2763,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3853134229190789630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6863227645618225541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d81672034914004a82e8366dd7a923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  threshold: -50
-  alsoRb: 1
 --- !u!114 &6660028680411522864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3059,6 +3045,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookingRadius: 10
   updateRate: 0.551
+--- !u!114 &1562281440276884399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863227645618225541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad22e856e7cc42d28cfae633a51df58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetWhenDogBelowY: 1
+  resetY: -30
+  saveCheckpointWhenDogStandsStill: 1
+  minTimeStandingStill: 5
 --- !u!1 &6998521515863420705
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,6 +41,9 @@ public class DogLocomotion : MonoBehaviour
     // triggered when the next position we are meant to move to is not grounded. useful to readjust the path.
     public event System.Action OnNextPositionNotGrounded;
 
+    /// <summary>
+    /// Calculated as fakeVelocity / topSpeed, based on actual position delta between frames.
+    /// </summary>
     public float currentSpeed01
     {
         get
@@ -105,8 +108,9 @@ public class DogLocomotion : MonoBehaviour
                     var nodeAbove = dogRefs.dogBrain.dogAstar.aStar.GetNearestNode(rbRoot.position, dogRefs.dogBrain.dogAstar.ignoredNodes);
                     if (nodeAbove != null)
                     {
-                        Debug.Log("NodeAbove!");
-                        Debug.DrawLine(Vector3.zero, nodeAbove.position + Random.onUnitSphere * 0.1f, Color.white, 0.15f);
+                        // debug to see when this crazy thing happens. 
+                        // Debug.Log("NodeAbove!");
+                        // Debug.DrawLine(Vector3.zero, nodeAbove.position + Random.onUnitSphere * 0.1f, Color.white, 0.15f);
 
                         var distToNodeAbove = Vector3.Distance(nodeAbove.position, rbRoot.position);
                         if (distToNodeAbove < teleportToNodeAboveMaxDistanceIfNotGrounded)

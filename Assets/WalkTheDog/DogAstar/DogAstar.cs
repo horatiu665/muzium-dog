@@ -58,6 +58,9 @@ public class DogAstar : MonoBehaviour
 
     private void OnNextPositionNotGrounded()
     {
+        if (_path == null)
+            return;
+
         // previous node where we're coming from
         var prevNode = _prevVisitedNode;
         var nextNode = GetNextNode();
@@ -66,7 +69,7 @@ public class DogAstar : MonoBehaviour
             // remove neighbor
             prevNode.neighbors.Remove(nextNode);
             nextNode.neighbors.Remove(prevNode);
-            
+
             // recalculate path.
             hasPath = false;
         }
