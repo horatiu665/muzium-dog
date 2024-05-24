@@ -8879,6 +8879,17 @@ Transform:
   - {fileID: 1395045318}
   m_Father: {fileID: 1386968816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2041101898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7854707213715660368, guid: e713aaecdf7e4405dbee16a6ed897bce, type: 3}
+  m_PrefabInstance: {fileID: 1176254825}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b93f9da0554341828ab7441cd4aaedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2062242250
 GameObject:
   m_ObjectHideFlags: 0
@@ -10104,34 +10115,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1177788970149394644, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: minTimeBetweenLooks
-      value: 33
-      objectReference: {fileID: 0}
-    - target: {fileID: 1177788970149394644, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: minTimeLookingAtPlayer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1177788970149394644, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: minTimeInFrontOfPlayerToEnd
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1374573071611638025, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: priority
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1374573071611638025, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: minTimeBetweenStateActive
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 1374573071611638025, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: timeWithoutPetsBeforeGivingUp
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2936460854802971898, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: minTimeBetweenBarkState
-      value: 21
-      objectReference: {fileID: 0}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog
@@ -10302,7 +10285,7 @@ MonoBehaviour:
   toScale: {fileID: 9156096564573980223}
   dogBarkableObjects:
   - {fileID: 1647565840}
-  growl: {fileID: 0}
+  growl: {fileID: 2041101898}
   talking: {fileID: 1176254826}
   isFriendly: 0
   stayFriendlyTime: 60

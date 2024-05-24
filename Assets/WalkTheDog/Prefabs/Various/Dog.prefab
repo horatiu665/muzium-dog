@@ -49,7 +49,7 @@ MonoBehaviour:
   dogHeadFwd: {fileID: 341167853098931048}
   leftEye: {fileID: 3825650694898009557}
   rightEye: {fileID: 3344754233824702132}
-  frameLeft: 4
+  frameLeft: 5
   frameRight: 3
   frameForward: 1
   frameUp: 2
@@ -1228,7 +1228,7 @@ MonoBehaviour:
   timeSpentBarkingPerObject: 3
   maxTimeSpentBarkingPerTurn: 10
   _barkStartTime: 0
-  minTimeBetweenBarkState: 7
+  minTimeBetweenBarkState: 21
   barkIntervalRange: {x: 0.4, y: 1}
 --- !u!1 &2416843884197301410
 GameObject:
@@ -1564,9 +1564,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priorityWhenPlayerIsMoving: 1.5
   priorityWhenPlayerIsStill: 5
-  minTimeInFrontOfPlayerToEnd: 3
-  minTimeLookingAtPlayer: 3
-  minTimeBetweenLooks: 25
+  minTimeInFrontOfPlayerToEnd: 5
+  minTimeLookingAtPlayer: 8
+  minTimeBetweenLooks: 33
   followPathDelay: 0.5
   targetSpeed01: 1
   targetSpeedWhenInFrontOfPlayer: 0.5
@@ -3060,6 +3060,7 @@ MonoBehaviour:
   resetWhenDogBelowY: 1
   resetY: -30
   saveCheckpointWhenDogStandsStill: 1
+  saveCheckpointOnlyWithValidGroundedRaycastAndAstarNode: 1
   minTimeStandingStill: 5
 --- !u!1 &6998521515863420705
 GameObject:
@@ -3306,17 +3307,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d1c97c9e7766421a9e5f4dc9710d2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 20
+  priority: 15
   minDistanceForStartFollow: 3
   minTimeInFrontOfPlayerToEnd: 3
-  minTimeBetweenStateActive: 15
+  minTimeBetweenStateActive: 45
   recalculatePathDelay: 1.2
   targetSpeed01: 1
   targetSpeedWhenInFrontOfPlayer: 0.6
   frontOfPlayerDistance: 1.45
   maxPlayerExtrapolateVelocity: 3.5
   pettingStopDelayAmount: 1.15
-  timeWithoutPetsBeforeGivingUp: 10
+  timeWithoutPetsBeforeGivingUp: 25
 --- !u!1 &7081099884590681614
 GameObject:
   m_ObjectHideFlags: 0

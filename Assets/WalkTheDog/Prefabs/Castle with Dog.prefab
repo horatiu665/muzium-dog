@@ -5794,10 +5794,6 @@ PrefabInstance:
       propertyPath: poemPosition
       value: 
       objectReference: {fileID: 655882702918303139}
-    - target: {fileID: 4859893412706309350, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
-      propertyPath: frameLeft
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4931173779407822430, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: groundedDebugThing
       value: 
