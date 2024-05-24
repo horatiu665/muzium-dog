@@ -46,10 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b93f9da0554341828ab7441cd4aaedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
   dogSound: {fileID: 891869602402934447}
   settings: {fileID: 0}
   dogToMove: {fileID: 0}
   playRandomSounds: 0
+  maxDistanceFromPlayer: 10
+  maxDistanceFromDawg: 10
 --- !u!82 &891869602402934447
 AudioSource:
   m_ObjectHideFlags: 0
@@ -159,7 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 891869602402934447}
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 0122ce0e64710490e9c0eb8d205eae0c, type: 3}
   playRandomClip: 1
   doNotInterrupt: 0
   randomPitchRange: {x: 1, y: 1}

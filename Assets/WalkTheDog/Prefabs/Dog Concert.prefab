@@ -5672,7 +5672,7 @@ MonoBehaviour:
   aStarSettings: {fileID: 11400000, guid: 7e61a792154f1475a8cbc511cd875e42, type: 2}
   nodeUpdateInterval: 0.5
   drawObstacleRaycast: 0
-  drawGizmos: 1
+  drawGizmos: 0
 --- !u!1 &6077079898538407411
 GameObject:
   m_ObjectHideFlags: 0

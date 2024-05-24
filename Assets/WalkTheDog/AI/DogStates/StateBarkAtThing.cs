@@ -207,7 +207,7 @@ namespace DogAI
 
             dogRefs.dogBrain.dogLook.LookAt(null, this);
 
-            dogRefs.dogBrain.dogVoice.Sniff(0f);
+            // dogRefs.dogBrain.dogVoice.Sniff(0f);
 
             _barkPose = 0;
 

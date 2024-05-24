@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AStar : MonoBehaviour
 {
@@ -162,8 +165,59 @@ public class AStar : MonoBehaviour
         }
 
         return nearestNode;
+    }
+
+
+    /// <summary>
+    /// WARNING! MIGHT BE EXPENSIVE. QUERIES ALL NODES.
+    /// </summary>
+    public Node GetNearestConnectedNode(Vector3 destination, Node connectedTo)
+    {
+        Node nearestNode = connectedTo;
+        float nearestSqrDistance = (connectedTo.position - destination).sqrMagnitude;
+
+        // which are the connected nodes? we only know it by querying the disjoint set.
+        // so we have to enumerate all nodes and check.
+        foreach (var node in nodes)
+        {
+            if (disjointSet.Connected(node, connectedTo))
+            {
+                var sqrDist = (node.position - destination).sqrMagnitude;
+                if (sqrDist < nearestSqrDistance)
+                {
+                    nearestSqrDistance = sqrDist;
+                    nearestNode = node;
+                }
+            }
+        }
+        return nearestNode;
 
     }
+
+    public Node GetNearestNode(Vector3 position, IEnumerable<Node> exceptNodes)
+    {
+        Node nearestNode = null;
+        float nearestDistance = float.MaxValue;
+
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            // foreach (var node in nodes)
+            var node = nodes[i];
+            if (exceptNodes.Contains(node))
+                continue;
+
+            var dist = Vector3.Distance(node.position, position);
+            if (dist < nearestDistance)
+            {
+                nearestDistance = dist;
+                nearestNode = node;
+            }
+        }
+
+        return nearestNode;
+
+    }
+
     public Node GetNearestNode(Vector3 position)
     {
         Node nearestNode = null;
@@ -188,6 +242,9 @@ public class AStar : MonoBehaviour
         Node nearestNode = null;
         float nearestSqrDistance = float.MaxValue;
 
+        // find the neighbor of connectedTo which is closest to the destination. 
+        // which might be further than the connectedTo node.
+        // but then the next iteration will select the connectedTo again, so it's fine.
         foreach (var node in connectedTo.neighbors)
         {
             // var dist = Vector3.Distance(node.position, destination);
@@ -362,6 +419,22 @@ public class AStar : MonoBehaviour
         }
 
         return tooClose;
+    }
+
+    /// THIS IS NOT IMPLEMENTED. NOT SURE HOW TO DO IT CORRECTLY YET.
+    public void RemoveNode(Node existingNode)
+    {
+        // THIS IS NOT IMPLEMENTED. NOT SURE HOW TO DO IT CORRECTLY YET.
+
+        throw new NotImplementedException();
+        // var oldNeighbors = existingNode.neighbors;
+        // nodes.Remove(existingNode);
+        // disjointSet.Remove(existingNode);
+        // foreach (var neighbor in oldNeighbors)
+        // {
+        //     neighbor.neighbors.Remove(existingNode);
+        // }
+        // // redo neighbors when? maybe not now.
     }
 
     public Node AddNode(Node existingNode)

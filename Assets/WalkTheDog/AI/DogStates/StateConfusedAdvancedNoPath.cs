@@ -44,24 +44,27 @@ namespace DogAI
 
 
         [Header("Confusion steps")]
-        // if confused twice within this time, increase the confusion step
-        public float confusionStepIncreaseCooldown = 3f;
-
-        // if not confused within this time, decrease the confusion step
-        public float confusionStepDecreaseCooldown = 20f;
+        public List<ConfusionStep> steps = new();
 
         private int currentConfusionStepIndex = 0;
         private ConfusionStep currentConfusionStep; // updated OnExit to prevent weird glitches with ConditionsMet().
         private float lastConfusionTime = 0f;
 
-        public List<ConfusionStep> steps = new();
 
         [System.Serializable]
         public class ConfusionStep
         {
             public float timeSpentConfused;
             public float whimperChance = 0.5f;
+            public bool shouldStopMoving = false;
+
             public bool goToNearestNode = false;
+
+            // if confused twice within this time, increase the confusion step
+            public float confusionStepIncreaseCooldown = 3f;
+
+            // if not confused within this time, decrease the confusion step
+            public float confusionStepDecreaseCooldown = 20f;
 
 
         }
@@ -96,14 +99,15 @@ namespace DogAI
                 currentConfusionStep = steps[currentConfusionStepIndex];
             }
 
-            dogRefs.dogBrain.dogAstar.StopMovement();
-            dogRefs.dogLocomotion.StopMovement();
-            dogRefs.dogLocomotion.StopRotation();
+            // don't stop moving.
+            // dogRefs.dogBrain.dogAstar.StopMovement();
+            // dogRefs.dogLocomotion.StopMovement();
+            // dogRefs.dogLocomotion.StopRotation();
 
             // if confused again, increase confusion step
             // do it here in OnExit so the new confusion parameters are valid only from the next check.
             var timeSinceLastConfusion = Time.time - lastConfusionTime;
-            if (timeSinceLastConfusion < confusionStepIncreaseCooldown)
+            if (timeSinceLastConfusion < currentConfusionStep.confusionStepIncreaseCooldown)
             {
                 currentConfusionStepIndex++;
                 if (currentConfusionStepIndex >= steps.Count)
@@ -135,7 +139,7 @@ namespace DogAI
             if (Time.frameCount % 60 == 0)
             {
                 // decrease confusion step over time.
-                if (Time.time - lastConfusionTime > confusionStepDecreaseCooldown)
+                if (Time.time - lastConfusionTime > currentConfusionStep.confusionStepDecreaseCooldown)
                 {
                     currentConfusionStepIndex--;
                     if (currentConfusionStepIndex < 0)
@@ -153,6 +157,12 @@ namespace DogAI
             if (Time.time > lookAroundConfusedTime)
             {
                 LookAtRandomPlace();
+            }
+
+            if (currentConfusionStep.shouldStopMoving)
+            {
+                dogRefs.dogBrain.dogAstar.StopMovement();
+                dogRefs.dogLocomotion.StopMovement();
             }
 
             if (currentConfusionStep.goToNearestNode)
@@ -188,5 +198,9 @@ namespace DogAI
             return false;
         }
 
+        private void OnGUI()
+        {
+            GUILayout.Label("ConfusionStep: " + currentConfusionStepIndex);
+        }
     }
 }

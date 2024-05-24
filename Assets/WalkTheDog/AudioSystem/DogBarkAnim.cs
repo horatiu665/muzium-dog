@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DogBarkAnim : MonoBehaviour
 {
+    public bool activated = false;
+
     public AudioSource dogSound;
 
     public float envelope { get; private set; }
@@ -27,20 +29,19 @@ public class DogBarkAnim : MonoBehaviour
         if (DogControlPanel.instance.dog.dogBrain.player == null)
             return;
 
+        if (!activated)
+        {
+            ElegantStop();
+            return;
+        }
+
         var distToPlayer = Vector3.Distance(dogToMove.position, DogControlPanel.instance.dog.dogBrain.player.position);
         var distToDog = Vector3.Distance(dogToMove.position, DogControlPanel.instance.dog.transform.position);
         if (distToPlayer > maxDistanceFromPlayer && distToDog > maxDistanceFromDawg)
         {
-            smoothOffset = Vector3.zero;
-            dogToMove.position += smoothOffset - prevOffset;
-            prevOffset = Vector3.zero;
-
-            var ssd = GetComponent<SmartSoundDog>();
-            ssd.Stop();
+            ElegantStop();
             return;
         }
-
-
 
         // animate
         var newOffset =
@@ -61,6 +62,16 @@ public class DogBarkAnim : MonoBehaviour
         }
     }
 
+    private void ElegantStop()
+    {
+        smoothOffset = Vector3.zero;
+        dogToMove.position += smoothOffset - prevOffset;
+        prevOffset = Vector3.zero;
+
+        var ssd = GetComponent<SmartSoundDog>();
+        ssd.Stop();
+    }
+
     private void OnAudioFilterRead(float[] data, int channels)
     {
         // compute envelope
@@ -69,6 +80,7 @@ public class DogBarkAnim : MonoBehaviour
         {
             envelope = Mathf.Max(envelope, Mathf.Abs(data[i]));
         }
+
     }
 
 

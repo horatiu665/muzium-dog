@@ -14,8 +14,10 @@ public class DogLocomotion : MonoBehaviour
 
     public bool doOwnGravity = true;
     public float groundedCastRadius = 0.5f;
+    public float teleportToNodeAboveMaxDistanceIfNotGrounded = 3f;
 
     public GameObject groundedDebugThing;
+    public Collider groundedUponThis;
 
     public float topSpeed = 20f;
     public float targetSpeed01 = 1f;
@@ -34,6 +36,10 @@ public class DogLocomotion : MonoBehaviour
 
     private Vector3 fakeVelocity;
     private Vector3 prevPos;
+
+
+    // triggered when the next position we are meant to move to is not grounded. useful to readjust the path.
+    public event System.Action OnNextPositionNotGrounded;
 
     public float currentSpeed01
     {
@@ -85,19 +91,42 @@ public class DogLocomotion : MonoBehaviour
                 groundedCastRadius, Vector3.down, out hit, groundedCastRadius * 2 + 0.1f, dogRefs.dogBrain.dogAstar.aStar.aStarSettings.layerMask))
             {
                 groundedDebugThing.SetActive(true);
+                groundedUponThis = hit.collider;
             }
             else
             {
                 groundedDebugThing.SetActive(false);
-                // we are airborne
-                // if (rbRoot.isKinematic)
+                groundedUponThis = null;
+
+                // only move up to the nearest node if we are kinematic. if we are physics based we might as well fall off.
+                if (rbRoot.isKinematic)
                 {
-                    rbRoot.MovePosition(rbRoot.position + Physics.gravity * Time.fixedDeltaTime);
+                    // if we have a node above within the teleportToNodeAboveMaxDistanceIfNotGrounded distance, move to it
+                    var nodeAbove = dogRefs.dogBrain.dogAstar.aStar.GetNearestNode(rbRoot.position, dogRefs.dogBrain.dogAstar.ignoredNodes);
+                    if (nodeAbove != null)
+                    {
+                        Debug.Log("NodeAbove!");
+                        Debug.DrawLine(Vector3.zero, nodeAbove.position + Random.onUnitSphere * 0.1f, Color.white, 0.15f);
+
+                        var distToNodeAbove = Vector3.Distance(nodeAbove.position, rbRoot.position);
+                        if (distToNodeAbove < teleportToNodeAboveMaxDistanceIfNotGrounded)
+                        {
+                            // move on Y axis
+                            var targetPos = rbRoot.position;
+                            // reversed gravity (x2) so it falls upward to save itself...?!!?!
+                            targetPos.y = Mathf.MoveTowards(rbRoot.position.y, targetPos.y, 2 * Physics.gravity.y * Time.fixedDeltaTime);
+                            rbRoot.MovePosition(targetPos);
+
+                        }
+
+                    }
+                    else
+                    // we are airborne
+                    {
+                        rbRoot.MovePosition(rbRoot.position + Physics.gravity * Time.fixedDeltaTime);
+                    }
+
                 }
-                // else
-                // {
-                //     rbRoot.AddForce(Physics.gravity, ForceMode.Acceleration);
-                // }
 
             }
 
@@ -115,23 +144,31 @@ public class DogLocomotion : MonoBehaviour
 
             var nextPosition = rbRoot.position + dir.normalized * topSpeed * targetSpeed01 * Time.fixedDeltaTime;
 
-            // if next position is floating in the air.... avoid it??? how?
-            //()
-
-            rbRoot.MovePosition(nextPosition);
-
-            if (Vector3.Distance(rbRoot.position, destination) < stopDistance)
+            // if next position is floating in the air.... avoid it??? how? raycast?
+            var nextPositionGrounded = dogRefs.dogBrain.dogAstar.aStar.GetGroundedPosition(nextPosition, out bool isNextPosGrounded);
+            if (!isNextPosGrounded)
             {
-                StopMovement();
+                // what should we do when next pos is not grounded?
+                OnNextPositionNotGrounded?.Invoke();
+
+            }
+            else
+            {
+                rbRoot.MovePosition(nextPosition);
+
+                if (Vector3.Distance(rbRoot.position, destination) < stopDistance)
+                {
+                    StopMovement();
+                }
             }
         }
         else
         {
             // slow down cause we don't have a destination
-            if (!rbRoot.isKinematic)
-            {
-                rbRoot.velocity *= 0.9f;
-            }
+            // if (!rbRoot.isKinematic)
+            // {
+            //     rbRoot.velocity *= 0.9f;
+            // }
         }
 
         if (hasTargetRotation)

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 ///  Uses AStar and the DogLocomotion system to move the dog on a path.
@@ -17,6 +18,8 @@ public class DogAstar : MonoBehaviour
     public bool hasPath { get; private set; }
     private List<AStar.Node> _path = new List<AStar.Node>();
 
+    private AStar.Node _prevVisitedNode;
+
     public float rareNodeRaycastCheck = 0.2f;
     private float rareNodeRaycastLastTime;
 
@@ -26,6 +29,8 @@ public class DogAstar : MonoBehaviour
 
     public float cantFindPathTime;
     public float lastPathCalculationTime;
+
+    public readonly List<AStar.Node> ignoredNodes = new();
 
     public void SetDestination(Vector3 destination)
     {
@@ -39,6 +44,33 @@ public class DogAstar : MonoBehaviour
     {
         hasDestination = false;
         dogLocomotion.StopMovement();
+    }
+
+    private void OnEnable()
+    {
+        dogLocomotion.OnNextPositionNotGrounded += OnNextPositionNotGrounded;
+    }
+
+    private void OnDisable()
+    {
+        dogLocomotion.OnNextPositionNotGrounded -= OnNextPositionNotGrounded;
+    }
+
+    private void OnNextPositionNotGrounded()
+    {
+        // previous node where we're coming from
+        var prevNode = _prevVisitedNode;
+        var nextNode = GetNextNode();
+        if (nextNode != null && _prevVisitedNode != null)
+        {
+            // remove neighbor
+            prevNode.neighbors.Remove(nextNode);
+            nextNode.neighbors.Remove(prevNode);
+            
+            // recalculate path.
+            hasPath = false;
+        }
+
     }
 
     private void Update()
@@ -79,6 +111,7 @@ public class DogAstar : MonoBehaviour
                     // skip node if close enough
                     if (dir.magnitude < stopDistance)
                     {
+                        _prevVisitedNode = _path[0];
                         _path.RemoveAt(0);
                     }
 
@@ -94,6 +127,7 @@ public class DogAstar : MonoBehaviour
                 if (startNode == null)
                 {
                     startNode = aStar.AddNode(transform.position);
+                    ignoredNodes.Add(startNode);
                     if (startNodeIgnoresRaycast)
                     {
                         // an attempt to reduce the moments when it got stuck. but it might cause glitches thru walls n stuff.
@@ -111,6 +145,7 @@ public class DogAstar : MonoBehaviour
                 {
                     // node position should be exactly the destination (but destination should be reachable. we assume this in SetDestination()).
                     endNode = aStar.AddNode(destination);
+                    ignoredNodes.Add(endNode);
                 }
                 else
                 {
@@ -176,19 +211,12 @@ public class DogAstar : MonoBehaviour
 
         // alternative option: find the nearest point on the nodes map to the destination, and go there.
         {
-            // first abandon the end node so it doesn't interfere
-            endNode.position = startNode.position;
-            var nearestNode = aStar.GetNearestNeighborNode(destination, startNode, 10);
-            if (nearestNode == null)
-            {
-                StopMovement();
-            }
-            else
-            {
-                // direct line to nearest node
-                dogLocomotion.SetDestination(nearestNode.position);
-                //SetDestination(nearestNode.position);
-            }
+            // maybe we don't have to remove the end node since it won't be connected.
+            //aStar.RemoveNode(endNode);
+
+            var nearestConnectedNode = aStar.GetNearestConnectedNode(destination, startNode);
+            SetDestination(nearestConnectedNode.position);
+
         }
     }
 

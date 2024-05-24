@@ -738,21 +738,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 30
   whimperDelayRange: {x: 5, y: 10}
-  confusionStepIncreaseCooldown: 5.5
-  confusionStepDecreaseCooldown: 20
   steps:
   - timeSpentConfused: 1
     whimperChance: 0
+    shouldStopMoving: 0
     goToNearestNode: 0
+    confusionStepIncreaseCooldown: 3
+    confusionStepDecreaseCooldown: 10
   - timeSpentConfused: 2
     whimperChance: 0.23
+    shouldStopMoving: 0
     goToNearestNode: 0
+    confusionStepIncreaseCooldown: 4
+    confusionStepDecreaseCooldown: 10
   - timeSpentConfused: 3
     whimperChance: 0.5
-    goToNearestNode: 0
-  - timeSpentConfused: 5
-    whimperChance: 0.66
+    shouldStopMoving: 0
     goToNearestNode: 1
+    confusionStepIncreaseCooldown: 5
+    confusionStepDecreaseCooldown: 20
+  - timeSpentConfused: 3
+    whimperChance: 0.66
+    shouldStopMoving: 1
+    goToNearestNode: 0
+    confusionStepIncreaseCooldown: 6
+    confusionStepDecreaseCooldown: 20
+  - timeSpentConfused: 5
+    whimperChance: 0.4
+    shouldStopMoving: 0
+    goToNearestNode: 1
+    confusionStepIncreaseCooldown: 6
+    confusionStepDecreaseCooldown: 10
 --- !u!1 &1742927839248269492
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +876,7 @@ MonoBehaviour:
   aStarSettings: {fileID: 11400000, guid: fa53c98cf85344ccaae6ae87728345f4, type: 2}
   nodeUpdateInterval: 0.5
   drawObstacleRaycast: 0
-  drawGizmos: 0
+  drawGizmos: 1
 --- !u!114 &1876726704312379818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2670,9 +2686,11 @@ MonoBehaviour:
   dogRefs: {fileID: 6098441059665146737}
   rbRoot: {fileID: 7469781139469790497}
   allowKinematicControl: 1
-  doOwnGravity: 1
+  doOwnGravity: 0
   groundedCastRadius: 0.5
+  teleportToNodeAboveMaxDistanceIfNotGrounded: 3
   groundedDebugThing: {fileID: 0}
+  groundedUponThis: {fileID: 0}
   topSpeed: 15
   targetSpeed01: 1
   stopDistance: 0.5

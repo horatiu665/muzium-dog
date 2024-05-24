@@ -7,6 +7,9 @@ using UnityEngine.Events;
 
 public class DogProximity : MonoBehaviour
 {
+    public Transform debugDawg;
+
+
     [Serializable]
     public class AreaData
     {
@@ -16,9 +19,17 @@ public class DogProximity : MonoBehaviour
         public bool isDogInside;
     }
 
+    [Header("This system is convoluted and doesn't really work so well. Sorry!")]
     public List<AreaData> areas = new List<AreaData>();
-    public AreaData currentPlayerArea;
-    public AreaData currentDogArea;
+    public AreaData innermostPlayerArea;
+    public AreaData innermostDogArea;
+
+    public bool drawGizmos = true;
+
+    public delegate void AreaChangedDelegate(AreaData newArea, AreaData oldArea);
+
+    public event AreaChangedDelegate OnPlayerAreaChanged;
+    public event AreaChangedDelegate OnDogAreaChanged;
 
     public event System.Action<AreaData> OnPlayerEnterArea;
     public event System.Action<AreaData> OnPlayerExitArea;
@@ -61,15 +72,15 @@ public class DogProximity : MonoBehaviour
         if (!DogCastleReferences.instance.dogControlPanel.dogEnabled)
         {
             // exit all areas and return
-            if (currentDogArea != null)
+            if (innermostDogArea != null)
             {
-                OnDogExitArea?.Invoke(currentDogArea);
-                currentDogArea = null;
+                OnDogExitArea?.Invoke(innermostDogArea);
+                innermostDogArea = null;
             }
-            if (currentPlayerArea != null)
+            if (innermostPlayerArea != null)
             {
-                OnPlayerExitArea?.Invoke(currentPlayerArea);
-                currentPlayerArea = null;
+                OnPlayerExitArea?.Invoke(innermostPlayerArea);
+                innermostPlayerArea = null;
             }
             return;
         }
@@ -77,64 +88,72 @@ public class DogProximity : MonoBehaviour
         var playerPos = DogCastleReferences.instance.dogBrain.player.transform.position;
         var playerDist = Vector3.Distance(playerPos, transform.position);
         var dogPos = DogCastleReferences.instance.dogBrain.transform.position;
+        if (debugDawg != null)
+            dogPos = debugDawg.position;
         var dogDist = Vector3.Distance(dogPos, transform.position);
-        var oldPlayerArea = currentPlayerArea;
-        var oldDogArea = currentDogArea;
-        currentPlayerArea = null; // if too far from any area, it's null.
-        currentDogArea = null;
-        for (int i = 0; i < areas.Count; i++)
+        var oldPlayerArea = innermostPlayerArea;
+        var oldDogArea = innermostDogArea;
+
+        // innermost area = the smallest radius that the player/dog is inside.
+        innermostPlayerArea = null; // if too far from any area, it's null.
+        innermostDogArea = null;
+
+        // area large to small
+        for (int i = areas.Count - 1; i >= 0; i--)
         {
             var area = areas[i];
+            area.isPlayerInside = playerDist < area.areaRadius;
+            area.isDogInside = dogDist < area.areaRadius;
+
             if (playerDist < area.areaRadius)
             {
-                currentPlayerArea = area;
-                break;
+                innermostPlayerArea = area;
             }
-        }
-        for (int i = 0; i < areas.Count; i++)
-        {
-            var area = areas[i];
             if (dogDist < area.areaRadius)
             {
-                currentDogArea = area;
-                break;
+                innermostDogArea = area;
             }
         }
 
         // changed player area
-        if (currentPlayerArea != oldPlayerArea)
+        if (innermostPlayerArea != oldPlayerArea)
         {
             if (oldPlayerArea != null)
             {
                 oldPlayerArea.isPlayerInside = false;
                 OnPlayerExitArea?.Invoke(oldPlayerArea);
             }
-            if (currentPlayerArea != null)
+            if (innermostPlayerArea != null)
             {
-                currentPlayerArea.isPlayerInside = true;
-                OnPlayerEnterArea?.Invoke(currentPlayerArea);
+                innermostPlayerArea.isPlayerInside = true;
+                OnPlayerEnterArea?.Invoke(innermostPlayerArea);
             }
+            OnPlayerAreaChanged?.Invoke(innermostPlayerArea, oldPlayerArea);
         }
 
         // changed dog area
-        if (currentDogArea != oldDogArea)
+        if (innermostDogArea != oldDogArea)
         {
             if (oldDogArea != null)
             {
                 oldDogArea.isDogInside = false;
                 OnDogExitArea?.Invoke(oldDogArea);
             }
-            if (currentDogArea != null)
+            if (innermostDogArea != null)
             {
-                currentDogArea.isDogInside = true;
-                OnDogEnterArea?.Invoke(currentDogArea);
+                innermostDogArea.isDogInside = true;
+                OnDogEnterArea?.Invoke(innermostDogArea);
             }
+            OnDogAreaChanged?.Invoke(innermostDogArea, oldDogArea);
         }
 
     }
 
     private void OnDrawGizmos()
     {
+        if (!drawGizmos)
+            return;
+            
         foreach (var area in areas)
         {
             Gizmos.color = Color.green;
