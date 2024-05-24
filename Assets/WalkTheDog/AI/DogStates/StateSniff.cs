@@ -138,6 +138,8 @@ namespace DogAI
 
                         dogRefs.dogBrain.dogVoice.Sniff(1f);
 
+                        _targetSniffable.InvokeSniffed();
+
                     }
                     else if (_isSniffing)
                     {

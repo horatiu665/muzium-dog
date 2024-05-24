@@ -24,6 +24,13 @@ public class DogSniffableObject : MonoBehaviour
         }
     }
 
+    public event System.Action OnSniffed;
+
+    public void InvokeSniffed()
+    {
+        OnSniffed?.Invoke();
+    }
+
     private void Reset()
     {
         sniffPositionMarker = transform;
