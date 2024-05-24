@@ -1865,8 +1865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateName: StateGetPoem
-  priority: 5
-  priorityRandomAdd: 0.1
+  priority: 15
+  priorityWhenHasPoem: 50
   targetSpeedGoAway01: 1
   targetSpeedReturn01: 0.5
   pathCalculationInterval: 5
@@ -1973,7 +1973,7 @@ MonoBehaviour:
   nodeNeighborDistance: 2.5
   newNodeRadius: 5
   newNodeCount: 5
-  newNodeDuration: 5
+  newNodeDuration: 1
 --- !u!1 &4547518456484965042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,8 +2686,8 @@ MonoBehaviour:
   dogRefs: {fileID: 6098441059665146737}
   rbRoot: {fileID: 7469781139469790497}
   allowKinematicControl: 1
-  doOwnGravity: 0
-  groundedCastRadius: 0.5
+  doOwnGravity: 1
+  groundedCastRadius: 0.35
   teleportToNodeAboveMaxDistanceIfNotGrounded: 3
   groundedDebugThing: {fileID: 0}
   groundedUponThis: {fileID: 0}
@@ -3310,7 +3310,7 @@ MonoBehaviour:
   minTimeBetweenStateActive: 15
   recalculatePathDelay: 1.2
   targetSpeed01: 1
-  targetSpeedWhenInFrontOfPlayer: 0.5
+  targetSpeedWhenInFrontOfPlayer: 0.6
   frontOfPlayerDistance: 1.45
   maxPlayerExtrapolateVelocity: 3.5
   pettingStopDelayAmount: 1.15

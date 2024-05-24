@@ -357,10 +357,6 @@ PrefabInstance:
       value: 3.9137661
       objectReference: {fileID: 0}
     - target: {fileID: 2006623169955237719, guid: 8ffe3e5aa18104ca58424b8b23ec9480, type: 3}
-      propertyPath: priority
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 2006623169955237719, guid: 8ffe3e5aa18104ca58424b8b23ec9480, type: 3}
       propertyPath: priorityRandomAdd
       value: 3
       objectReference: {fileID: 0}

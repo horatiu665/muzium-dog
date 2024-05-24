@@ -25,8 +25,9 @@ namespace DogAI
         public Transform player => dogRefs.dogBrain.player;
 
         public float priority = 5;
-        public float priorityRandomAdd = 0.1f;
         private float nextPriority;
+        public float priorityWhenHasPoem = 50;
+
 
         // sets target speed so the dog wanders at walking pace or running.
         public float targetSpeedGoAway01 = 1;
@@ -41,6 +42,7 @@ namespace DogAI
 
         private float timePoemDelivered;
         public float minTimeBetweenPoems = 180;
+
 
         private void OnEnable()
         {
@@ -65,14 +67,12 @@ namespace DogAI
         bool IState.GetUninterruptible()
         {
             // can't leave this state if has poem. until you pick up the poem. otherwise it will run back to the castle lol
-            return hasPoem;
+            return false;
         }
 
         float IState.GetPriority()
         {
-            nextPriority = Random.Range(0, priorityRandomAdd);
-
-            return priority + nextPriority;
+            return hasPoem ? priorityWhenHasPoem : priority;
         }
 
         void IState.OnEnter()

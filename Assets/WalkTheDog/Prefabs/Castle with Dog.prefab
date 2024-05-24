@@ -1522,7 +1522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -432.24, y: -23.48999}
+  m_AnchoredPosition: {x: -432.24, y: -23.48996}
   m_SizeDelta: {x: 864.00476, y: 103.91168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3771907840347366339
@@ -3165,7 +3165,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 63
+  m_fontSize: 62.95
   m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4539,7 +4539,7 @@ PrefabInstance:
       objectReference: {fileID: 4575386111677115233}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: skipIntro
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: quitDogSound
@@ -4547,7 +4547,7 @@ PrefabInstance:
       objectReference: {fileID: 6868544457205696296}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: startDogEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: castleReferences
@@ -4659,14 +4659,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5527313898642568017, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.28
+      objectReference: {fileID: 0}
     - target: {fileID: 5573363352574371229, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: m_Name
       value: Dog Concert
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027982651349266365, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.28
       objectReference: {fileID: 0}
     - target: {fileID: 7116762720281757093, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: roadblock
       value: 
       objectReference: {fileID: 8737813562571086221}
+    - target: {fileID: 7116762720281757093, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
+      propertyPath: initConcertState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932581871277250438, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10.364983
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932581871277250438, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.267
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5824,15 +5844,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9062494587771447339, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.871
+      value: 22.782606
       objectReference: {fileID: 0}
     - target: {fileID: 9062494587771447339, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.0295982
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9062494587771447339, guid: 97b8e3f16824a4bdba6e604435df017b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.67
+      value: 8.893013
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5930,7 +5950,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4690142565626182557, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
       propertyPath: togglePoemWithO
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125622130995061473, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -23.49002
       objectReference: {fileID: 0}
     - target: {fileID: 7022447781204472175, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
       propertyPath: m_LocalPosition.x

@@ -7,7 +7,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Events;
 
-public class DogNpcChihuahua : MonoBehaviour
+
+public class DogNpcDoggyman : MonoBehaviour
 {
     [Header("Activates when dog enters proximity")]
     public DogProximity dogProximity;
@@ -23,15 +24,15 @@ public class DogNpcChihuahua : MonoBehaviour
     // activate these so the main dog can bark at this dog.
     public List<DogBarkableObject> dogBarkableObjects = new();
 
-    public List<DogBarkAnim> dogGrowls = new();
-
-    public List<DogBarkAnim> dogBarks = new();
-
-    public List<DogBarkAnim> dogPants = new();
+    public DogBarkAnim growl;
+    public DogBarkAnim talking;
 
     public bool isFriendly = false;
     private float isFriendlyTime = 0f;
     public float stayFriendlyTime = 60;
+
+    public PettableObject pettableObject;
+    public bool sayRandomThingWhenPetted = true;
 
     public int sniffsUntilFriendly = 3;
     private int numSniffs = 0;
@@ -43,15 +44,25 @@ public class DogNpcChihuahua : MonoBehaviour
 
     public Transform lookTarget;
 
+    private bool shouldGrowl, shouldTalk;
+    private bool isDogInsideCloseArea = false;
+
+    public Vector2 randomDelayBeforeTalking = new Vector2(1, 5f);
+
+    private float lastTalkTime = 0;
+    public float minTimeBeforeTalkingRandomWhileDogIsInsideCloseArea = 5f;
+
     [DebugButton]
     public void GetRefsFromChildren()
     {
         if (dogProximity == null)
             dogProximity = GetComponent<DogProximity>();
 
-        dogGrowls = GetComponentsInChildren<DogBarkAnim>(true).Where(db => db.name.ToLower().Contains("growl")).ToList();
-        dogBarks = GetComponentsInChildren<DogBarkAnim>(true).Where(db => db.name.ToLower().Contains("bark")).ToList();
-        dogPants = GetComponentsInChildren<DogBarkAnim>(true).Where(db => db.name.ToLower().Contains("pant")).ToList();
+        pettableObject = GetComponentInChildren<PettableObject>();
+
+        growl = GetComponentsInChildren<DogBarkAnim>(true).Where(db => db.name.ToLower().Contains("growl")).FirstOrDefault();
+        talking = GetComponentsInChildren<DogBarkAnim>(true).Where(db => db.name.ToLower().Contains("talk")).FirstOrDefault();
+
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(this);
 #endif
@@ -62,22 +73,15 @@ public class DogNpcChihuahua : MonoBehaviour
     {
         dogSniffableObject = GetComponentInChildren<DogSniffableObject>();
 
-        // disable all barks and stuff
-        foreach (var dogBark in dogGrowls)
-        {
-            dogBark.activated = false;
-        }
-        foreach (var dogBark in dogBarks)
-        {
-            dogBark.activated = false;
-        }
-        foreach (var dogBark in dogPants)
-        {
-            dogBark.activated = false;
-        }
+        growl.activated = false;
+        growl.playRandomSounds = false;
+        talking.activated = true;
+        talking.playRandomSounds = false;
+        isDogInsideCloseArea = false;
 
         dogProximity.OnDogAreaChanged += OnDogAreaChanged;
         dogSniffableObject.OnSniffed += OnSniffed;
+        pettableObject.OnPettingEnd += OnPettingEnd;
 
     }
 
@@ -85,14 +89,24 @@ public class DogNpcChihuahua : MonoBehaviour
     {
         dogProximity.OnDogAreaChanged -= OnDogAreaChanged;
         dogSniffableObject.OnSniffed -= OnSniffed;
+        pettableObject.OnPettingEnd -= OnPettingEnd;
+    }
+
+    private void OnPettingEnd()
+    {
+        if (sayRandomThingWhenPetted)
+        {
+            SaySomethingRandom();
+        }
     }
 
     private void OnDogAreaChanged(DogProximity.AreaData newArea, DogProximity.AreaData oldArea)
     {
         bool shouldShow = false;
-        bool shouldBark = false;
-        bool shouldGrowl = false;
-        bool shouldPant = false;
+
+        shouldGrowl = false;
+        shouldTalk = false;
+        isDogInsideCloseArea = false;
 
         bool shouldBeBarkedAt = false;
 
@@ -114,31 +128,23 @@ public class DogNpcChihuahua : MonoBehaviour
 
             lookTarget = null;
 
+            isDogInsideCloseArea = true;
 
             if (!isFriendly)
+            {
                 shouldBeBarkedAt = true;
-
-
-            if (isFriendly)
-            {
-                shouldPant = true;
-
-                // look at player or main dog
-                lookTarget = Random.value > 0.66f ? mainDogTransform : Random.value > 0.33f ? playerTransform : null;
-            }
-            else
-            {
-                lookTarget = mainDogTransform;
-                shouldBark = true;
-
             }
 
-            //BecomeFriendly();
+            // look at player or main dog
+            RandomizeLookTarget();
+
+            SaySomethingRandom();
 
         }
         else if (newArea.areaName == "MID")
         {
             lookTarget = mainDogTransform;
+
             // if player is closer, look at player
             var distToPlayer = Vector3.Distance(transform.position, playerTransform.position);
             var distToDog = Vector3.Distance(transform.position, mainDogTransform.position);
@@ -154,6 +160,7 @@ public class DogNpcChihuahua : MonoBehaviour
             if (!isFriendly)
                 shouldBeBarkedAt = true;
 
+            SaySomethingRandom();
 
         }
         else if (newArea.areaName == "FAR")
@@ -169,9 +176,6 @@ public class DogNpcChihuahua : MonoBehaviour
             // do smth when dog is far
             shouldShow = true;
 
-            if (!isFriendly)
-                shouldBeBarkedAt = true;
-
         }
 
         targetScale = shouldShow ? 1 : 0;
@@ -181,26 +185,12 @@ public class DogNpcChihuahua : MonoBehaviour
             db.enabled = shouldBeBarkedAt;
         }
 
-        SetNpcDogVocals(shouldBark, shouldGrowl, shouldPant);
-
     }
 
-    private void SetNpcDogVocals(bool shouldBark, bool shouldGrowl, bool shouldPant)
+    private void RandomizeLookTarget()
     {
-        foreach (var dogBark in dogBarks)
-        {
-            dogBark.activated = shouldBark;
-        }
-
-        foreach (var dogBark in dogPants)
-        {
-            dogBark.activated = shouldPant;
-        }
-
-        foreach (var dogBark in dogGrowls)
-        {
-            dogBark.activated = shouldGrowl;
-        }
+        // between dog and player
+        lookTarget = Random.value > 0.551f ? mainDogTransform : playerTransform;
     }
 
     private void BecomeFriendly()
@@ -214,16 +204,12 @@ public class DogNpcChihuahua : MonoBehaviour
             db.enabled = false;
         }
 
-        SetNpcDogVocals(false, false, true);
-
     }
 
     private void BecomeUnfriendly()
     {
         isFriendly = false;
         numSniffs = 0;
-
-        SetNpcDogVocals(true, false, true);
 
     }
 
@@ -234,6 +220,19 @@ public class DogNpcChihuahua : MonoBehaviour
         {
             BecomeFriendly();
         }
+
+        SaySomethingRandom();
+    }
+
+    private void SaySomethingRandom()
+    {
+        lastTalkTime = Time.time;
+
+        StartCoroutine(pTween.Wait(Random.Range(randomDelayBeforeTalking.x, randomDelayBeforeTalking.y), () =>
+        {
+            talking.smartSoundDog.Play();
+            lastTalkTime = Time.time;
+        }));
     }
 
     private void Update()
@@ -247,6 +246,10 @@ public class DogNpcChihuahua : MonoBehaviour
             {
                 isFrozen = !isFrozen;
                 freezeRotationTimer = 0;
+
+                // randomize look target after each freeze
+                RandomizeLookTarget();
+
             }
 
             if (isFrozen)
@@ -264,7 +267,13 @@ public class DogNpcChihuahua : MonoBehaviour
             toScale.transform.localRotation = Quaternion.identity;
         }
 
-
+        if (isDogInsideCloseArea)
+        {
+            if (Time.time - lastTalkTime > minTimeBeforeTalkingRandomWhileDogIsInsideCloseArea)
+            {
+                SaySomethingRandom();
+            }
+        }
     }
 
 

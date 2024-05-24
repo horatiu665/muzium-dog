@@ -24,6 +24,19 @@ public class DogBarkAnim : MonoBehaviour
     public float maxDistanceFromPlayer = 10f;
     public float maxDistanceFromDawg = 10f;
 
+    private SmartSoundDog _smartSoundDog;
+    public SmartSoundDog smartSoundDog
+    {
+        get
+        {
+            if (_smartSoundDog == null)
+            {
+                _smartSoundDog = GetComponent<SmartSoundDog>();
+            }
+            return _smartSoundDog;
+        }
+    }
+
     void Update()
     {
         if (DogControlPanel.instance.dog.dogBrain.player == null)
@@ -55,10 +68,8 @@ public class DogBarkAnim : MonoBehaviour
 
         if (playRandomSounds)
         {
-            var ssd = GetComponent<SmartSoundDog>();
-
-            if (!ssd.audio.isPlaying)
-                ssd.Play();
+            if (!smartSoundDog.audio.isPlaying)
+                smartSoundDog.Play();
         }
     }
 
@@ -68,8 +79,7 @@ public class DogBarkAnim : MonoBehaviour
         dogToMove.position += smoothOffset - prevOffset;
         prevOffset = Vector3.zero;
 
-        var ssd = GetComponent<SmartSoundDog>();
-        ssd.Stop();
+        smartSoundDog.audio.Pause();
     }
 
     private void OnAudioFilterRead(float[] data, int channels)
