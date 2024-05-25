@@ -5,6 +5,21 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.17
+    second: {fileID: 2100000, guid: fef2536957cc845479c01d7ab9b72e52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: l
+    second: {fileID: 2100000, guid: 03a3d7d35c82c401eb0dfc3278bec99c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: r
+    second: {fileID: 2100000, guid: 001398407a61048a39e77015b05cc991, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: firehund_l_centre

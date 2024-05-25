@@ -22,6 +22,7 @@ public class DogEyeController2D : MonoBehaviour
         curEyeFrame = i;
         // set offset 
         eyeRenderer.sharedMaterial.SetTextureOffset("_MainTex", new Vector2(1f / eyeFrames * i, 0));
+        eyeRenderer.sharedMaterial.SetTextureScale("_MainTex", new Vector2(1f / eyeFrames, 1));
     }
 
     [DebugButton]
