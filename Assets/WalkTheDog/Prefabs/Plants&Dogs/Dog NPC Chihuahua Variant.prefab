@@ -44,6 +44,14 @@ PrefabInstance:
       propertyPath: dogPants.Array.data[1]
       value: 
       objectReference: {fileID: 7571837427385388694}
+    - target: {fileID: 6643611848290035795, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}
+      propertyPath: dogBarkableObjects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6643611848290035795, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}
+      propertyPath: dogBarkableObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 5801335815798665996}
     - target: {fileID: 7592482330385987480, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.5
@@ -105,6 +113,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4447022905022183481, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}
   m_PrefabInstance: {fileID: 7898127051636792030}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5801335815798665996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4402748594538998226, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}
+  m_PrefabInstance: {fileID: 7898127051636792030}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e469fe4c27140cb9f8d3e9f7b812af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7571837427385388694 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 328581013202965576, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}

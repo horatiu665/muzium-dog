@@ -4539,7 +4539,7 @@ PrefabInstance:
       objectReference: {fileID: 4575386111677115233}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: skipIntro
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: quitDogSound
@@ -4547,7 +4547,7 @@ PrefabInstance:
       objectReference: {fileID: 6868544457205696296}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: startDogEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: castleReferences
@@ -4677,7 +4677,7 @@ PrefabInstance:
       objectReference: {fileID: 8737813562571086221}
     - target: {fileID: 7116762720281757093, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: initConcertState
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7932581871277250438, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: m_LocalScale.x
@@ -5946,7 +5946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4690142565626182557, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
       propertyPath: togglePoemWithO
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6125622130995061473, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
       propertyPath: m_AnchoredPosition.y

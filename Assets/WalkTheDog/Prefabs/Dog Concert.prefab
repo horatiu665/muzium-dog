@@ -4742,6 +4742,8 @@ MonoBehaviour:
   headLookAutoAdd: 1
   headLookTargetChangeTimeRange: {x: 1, y: 5}
   headLookMaxAngleFromForward: 55
+  handsLiftLerpParam: 0.5
+  handsSmoothParam: 0.1
 --- !u!320 &3074952827538030761
 PlayableDirector:
   m_ObjectHideFlags: 0

@@ -63,6 +63,11 @@ public class PianoPlayerCharacterController : MonoBehaviour
     private float headLookMoveHeadTime = 0;
     public float headLookMaxAngleFromForward = 45;
 
+private float leftHandCurSmooth, rightHandCurSmooth;
+    private float leftHandMaxDelta, rightHandMaxDelta;
+    public float handsLiftLerpParam = 0.5f;
+    public float handsSmoothParam = 0.5f;
+
     void OnEnable()
     {
         if (headLookAutoAdd)
@@ -81,9 +86,23 @@ public class PianoPlayerCharacterController : MonoBehaviour
     {
         pianistAnim.SetFloat("MouthEnv", audioMouth.GetEnv(mouthEnvVariant) * mouthAmplitude);
         pianistAnim.SetFloat("MouthEnvHi", audioMouth.GetEnv(mouthEnvHiVariant) * mouthHiAmplitude);
+
+        // hands should be mostly on the piano and only lift when there is a recent big delta. 
+        var leftEnv = audioPiano.GetEnv(pianoEnvLoVariant) * pianoLoAmplitude;
+        leftHandCurSmooth = Mathf.Lerp(leftHandCurSmooth, leftEnv, Time.deltaTime * 60 * handsLiftLerpParam);
+        leftHandMaxDelta = Mathf.Max(leftHandMaxDelta, leftHandCurSmooth);
+        leftHandMaxDelta = Mathf.Lerp(leftHandMaxDelta, 0, Time.deltaTime * handsLiftLerpParam);
+        var leftEnv01 = Mathf.InverseLerp(-0.001f, leftHandMaxDelta, leftHandCurSmooth);
+
+        var rightEnv = audioPiano.GetEnv(pianoEnvHiVariant) * pianoHiAmplitude;
+        rightHandCurSmooth = Mathf.Lerp(rightHandCurSmooth, rightEnv, Time.deltaTime * 60 * handsLiftLerpParam);
+        rightHandMaxDelta = Mathf.Max(rightHandMaxDelta, rightHandCurSmooth);
+        rightHandMaxDelta = Mathf.Lerp(rightHandMaxDelta, 0, Time.deltaTime * handsLiftLerpParam);
+        var rightEnv01 = Mathf.InverseLerp(-0.001f, rightHandMaxDelta, rightHandCurSmooth);
+
         pianistAnim.SetFloat("PianoEnv", audioPiano.GetEnv(pianoEnvVariant) * pianoAmplitude);
-        pianistAnim.SetFloat("PianoEnvLo", audioPiano.GetEnv(pianoEnvLoVariant) * pianoLoAmplitude);
-        pianistAnim.SetFloat("PianoEnvHi", audioPiano.GetEnv(pianoEnvHiVariant) * pianoHiAmplitude);
+        pianistAnim.SetFloat("PianoEnvLo", leftEnv01);
+        pianistAnim.SetFloat("PianoEnvHi", rightEnv01);
 
         tailWagT += Time.deltaTime * tailWagSpeed;
         tail.localRotation = Quaternion.Euler(0, 0, Mathf.Sin(tailWagT) * tailWagAmplitude);

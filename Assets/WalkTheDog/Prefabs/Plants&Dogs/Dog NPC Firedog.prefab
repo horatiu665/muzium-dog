@@ -138,7 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dogProximity: {fileID: 1859762629266546718}
   toScale: {fileID: 6480121760943372261}
-  dogBarkableObjects: []
+  dogBarkableObjects:
+  - {fileID: 6890816897553800078}
   dogGrowls:
   - {fileID: 3180430579243118469}
   - {fileID: 1855398741197193553}
