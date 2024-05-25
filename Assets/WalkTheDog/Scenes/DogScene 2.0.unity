@@ -9053,6 +9053,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1317066095792967010, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: useCheat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317066095792967010, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: cheatSkipSecondsOnKey
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog

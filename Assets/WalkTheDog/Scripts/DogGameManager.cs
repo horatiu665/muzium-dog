@@ -13,11 +13,27 @@ public class DogGameManager : MonoBehaviour
         DogCastleReferences.instance.dogControlPanel.skipIntro = false;
         DogCastleReferences.instance.dogConcert.dogConcertHideShow.initConcertState = DogConcertHideShow.ConcertState.Playing;
         DogCastleReferences.instance.dogConcert.useCheat = false;
+        DogCastleReferences.instance.dogConcert.cheatSkipSecondsOnKey = false;
         PoemSystem.instance.togglePoemWithO = false;
 
         WriteLog(false);
         SetDirty();
 
+    }
+
+    [DebugButton]
+    public void SetConcertDebugMode()
+    {
+
+        DogCastleReferences.instance.dogControlPanel.startDogEnabled = false;
+        DogCastleReferences.instance.dogControlPanel.skipIntro = false;
+        DogCastleReferences.instance.dogConcert.dogConcertHideShow.initConcertState = DogConcertHideShow.ConcertState.Playing;
+        DogCastleReferences.instance.dogConcert.useCheat = true;
+        DogCastleReferences.instance.dogConcert.cheatSkipSecondsOnKey = true;
+        PoemSystem.instance.togglePoemWithO = false;
+
+        WriteLog(true);
+        SetDirty();
     }
 
     [DebugButton]
@@ -28,6 +44,7 @@ public class DogGameManager : MonoBehaviour
         DogCastleReferences.instance.dogControlPanel.skipIntro = true;
         DogCastleReferences.instance.dogConcert.dogConcertHideShow.initConcertState = DogConcertHideShow.ConcertState.Hidden;
         DogCastleReferences.instance.dogConcert.useCheat = true;
+        DogCastleReferences.instance.dogConcert.cheatSkipSecondsOnKey = true;
         PoemSystem.instance.togglePoemWithO = true;
 
         WriteLog(true);
@@ -53,6 +70,7 @@ public class DogGameManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(DogCastleReferences.instance.dogControlPanel);
         UnityEditor.EditorUtility.SetDirty(DogCastleReferences.instance.dogConcert.dogConcertHideShow);
+        UnityEditor.EditorUtility.SetDirty(DogCastleReferences.instance.dogConcert);
         UnityEditor.EditorUtility.SetDirty(PoemSystem.instance);
 #endif
 

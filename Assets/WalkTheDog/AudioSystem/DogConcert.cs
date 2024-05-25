@@ -117,6 +117,16 @@ public class DogConcert : MonoBehaviour
 
     public void SetConcert(PlayableAsset whichOne)
     {
+        // if encore, we want it to loop
+        if (whichOne == concertEncoreLoop)
+        {
+            concertTimeline.extrapolationMode = DirectorWrapMode.Loop;
+        }
+        else
+        {
+            concertTimeline.extrapolationMode = DirectorWrapMode.None;
+        }
+
         concertTimeline.playableAsset = whichOne;
         RestartConcert();
 
