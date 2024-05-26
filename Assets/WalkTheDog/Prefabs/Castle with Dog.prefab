@@ -4433,11 +4433,11 @@ PrefabInstance:
       objectReference: {fileID: 5744583597952383505}
     - target: {fileID: 6562185737741643488, guid: 18b732f42052e46c087a4c3987e6f21b, type: 3}
       propertyPath: skipIntro
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6562185737741643488, guid: 18b732f42052e46c087a4c3987e6f21b, type: 3}
       propertyPath: startDogEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6562185737741643488, guid: 18b732f42052e46c087a4c3987e6f21b, type: 3}
       propertyPath: castleReferences
@@ -4698,6 +4698,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6503769146255440817}
     m_Modifications:
+    - target: {fileID: 2282614576985914690, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
+      propertyPath: useCheatToCompleteArtworks
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3040183042596033520, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 46.95
@@ -4738,6 +4742,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3118897582382188778, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
+      propertyPath: useCheat
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118897582382188778, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
+      propertyPath: cheatSkipSecondsOnKey
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5573363352574371229, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: m_Name
       value: Dog Concert (move me)
@@ -4748,7 +4760,7 @@ PrefabInstance:
       objectReference: {fileID: 8737813562571086221}
     - target: {fileID: 7116762720281757093, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: initConcertState
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4948,7 +4960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4690142565626182557, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
       propertyPath: togglePoemWithO
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6125622130995061473, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
       propertyPath: m_AnchoredPosition.y

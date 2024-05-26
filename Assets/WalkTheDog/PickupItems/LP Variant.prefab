@@ -91,7 +91,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   inHands: 0
   pickableObject: 1
   referenceTransform: {fileID: 0}
+  positionOffset: {x: 0, y: 0, z: 0}
   rotationSpeed: 5
   observeOffset: {x: 0, y: 0, z: 2}
   canZoomWhileLookedAt: 0
