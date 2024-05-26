@@ -30,4 +30,6 @@
 
  - On the script you just created, you can choose with the boolean "pickableObject" if you want to make your custom object pickable or not
  ---> There is a demo object with a demo script on it, called DemoInteractableObject
+
+ - You can customize the item's position in your hands by tweaking the values of the "Position Offset" on your item script
 	

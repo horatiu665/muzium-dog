@@ -55,6 +55,19 @@ public class DogCastleReferences : MonoBehaviour
     public GameObject plantGeneric;
 
 
+    // simple lazy ref to the main camera
+    private Camera _mainCamera;
+    public Camera mainCamera
+    {
+        get
+        {
+            if (_mainCamera == null || !_mainCamera.isActiveAndEnabled)
+            {
+                _mainCamera = Camera.main;
+            }
+            return _mainCamera;
+        }
+    }
 
 
     /// <summary>

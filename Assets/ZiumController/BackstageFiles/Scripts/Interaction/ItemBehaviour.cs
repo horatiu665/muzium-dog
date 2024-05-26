@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class ItemBehaviour : Interactable
 {
+    [Header("General Settings")]
     private Rigidbody rb;
     [HideInInspector] public bool inHands;
     public bool pickableObject = true;
     private bool isObserving = false;
     [HideInInspector] public Transform referenceTransform;
+    public Vector3 positionOffset = new Vector3(0, 0, 0);
     
     private Transform cameraTransform;
     public float rotationSpeed = 5.0f;
@@ -26,7 +28,7 @@ public class ItemBehaviour : Interactable
     {
         base.Awake();
         gameObject.layer = 7;
-        rb = GetComponent<Rigidbody>();
+        if (pickableObject) rb = GetComponent<Rigidbody>();
         cameraTransform = Camera.main.transform;
     }
 
@@ -59,8 +61,11 @@ public class ItemBehaviour : Interactable
 
     private void HandleInHands()
     {
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        rb.interpolation = RigidbodyInterpolation.None;
+        if (pickableObject) {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            rb.interpolation = RigidbodyInterpolation.None;
+        }
+
         gameObject.layer = 0;
 
         if (Input.GetMouseButtonDown(1)) // Right mouse button clicked
@@ -79,12 +84,19 @@ public class ItemBehaviour : Interactable
                 ExitObserveMode();
             }
         }
+        else {
+            transform.rotation = referenceTransform.rotation;
+            transform.position = referenceTransform.position + transform.right * positionOffset.x + transform.up * positionOffset.y + transform.forward * positionOffset.z;
+        } 
     }
 
     private void HandleOutOfHands()
     {
-        rb.constraints = RigidbodyConstraints.None;
-        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        if (pickableObject) {
+            rb.constraints = RigidbodyConstraints.None;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+        }
+       
         gameObject.layer = 7;
     }
 
@@ -115,14 +127,15 @@ public class ItemBehaviour : Interactable
 
     private void ExitObserveMode()
     {
-        transform.position = referenceTransform.position;
+        transform.position = referenceTransform.position + positionOffset;
         transform.rotation = referenceTransform.rotation;
         isObserving = false;
         FirstPersonController.Instance.isObserving = false;
     }
 
-    public void ThrowItem(Vector3 direction, float force)
+    public void ThrowItem(Transform cam, float force)
     {
-        rb.AddForce(direction * force, ForceMode.Impulse);
+        transform.position = cam.position + cam.forward * 1.4f;
+        rb.AddForce(cam.forward * force, ForceMode.Impulse);
     }
 }

@@ -42,22 +42,22 @@ public class LPPickupItem : ItemBehaviour
         // targetLocalPos = initLocalPos;
 
 
-// this code is like the dog biscuit code: it hides the obj. to be replaced with zium code once we figure out how to make it work.
-{
+        // this code is like the dog biscuit code: it hides the obj. to be replaced with zium code once we figure out how to make it work.
+        {
 
-        Debug.Log(Time.time + " - DogBonePickupItem.OnInteract()");
+            Debug.Log(Time.time + " - DogBonePickupItem.OnInteract()");
 
-        // show poem with text about this bone
+            // show poem with text about this bone
 
-        PoemSystem.instance.ShowCustomText(customText, true);
+            PoemSystem.instance.ShowCustomText(customText, true);
 
-        this.ThrowItem(Vector3.forward, 1);
+            // this.ThrowItem(DogCastleReferences.instance.mainCamera.transform, 1);
 
-        this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
 
-        // sound?
+            // sound?
 
-}
+        }
 
     }
 

@@ -33,6 +33,9 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip[] footstepsConcreteClips;
+    [SerializeField] private AudioClip[] footstepsSnowClips;
+    [SerializeField] private AudioClip[] footstepsCarpetClips;
+    [SerializeField] private AudioClip[] footstepsWoodClips;
     [SerializeField] private AudioClip fallOnConcrete;
     [SerializeField] private AudioClip zoomClip;
     [SerializeField] private AudioClip zoomOutClip;
@@ -52,6 +55,7 @@ public class FirstPersonController : MonoBehaviour
 
     private CharacterController characterController;
     private PlayerPickup pickupScript;
+    private bool shouldPlaySfx = true;
     
     void Awake()
     {
@@ -197,7 +201,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleFootsteps()
     {
-        if (!characterController.isGrounded || axisInput.magnitude == 0) return;
+        if (!characterController.isGrounded || axisInput.magnitude == 0 || !shouldPlaySfx) return;
 
         footstepTimer -= Time.deltaTime;
 
@@ -209,9 +213,21 @@ public class FirstPersonController : MonoBehaviour
             {
                 switch(hit.collider.tag)
                 {
-                    case "Footsteps/Concrete/Default":
+                    case "Footsteps/Concrete":
+                        ShuffleAudioClips(footstepsConcreteClips);
+                        SoundManager.Instance.PlayPlayerSound(footstepsConcreteClips[0]);
                         break;
-                    case "Footsteps/Concrete/Dalles":
+                    case "Footsteps/Snow":
+                        ShuffleAudioClips(footstepsSnowClips);
+                        SoundManager.Instance.PlayPlayerSound(footstepsSnowClips[0]);
+                        break;
+                    case "Footsteps/Wood":
+                        ShuffleAudioClips(footstepsWoodClips);
+                        SoundManager.Instance.PlayPlayerSound(footstepsWoodClips[0]);
+                        break;
+                    case "Footsteps/Carpet":
+                        ShuffleAudioClips(footstepsCarpetClips);
+                        SoundManager.Instance.PlayPlayerSound(footstepsCarpetClips[0]);
                         break;
                     default:
                         ShuffleAudioClips(footstepsConcreteClips);
@@ -233,13 +249,47 @@ public class FirstPersonController : MonoBehaviour
         
     }
 
-private void HandleReticle()
-{
-    if (isObserving)
-        reticle.enabled = false;
-    else
-        reticle.enabled = pickupScript.detectItem;
-}
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.GetComponent<NoPlayerSfxTrigger>())
+        {
+            shouldPlaySfx = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.GetComponent<NoPlayerSfxTrigger>())
+        {
+            shouldPlaySfx = true;
+        }
+    }
+
+    private void HandleReticle()
+    {
+        if (isObserving)
+            reticle.enabled = false;
+        else
+            reticle.enabled = pickupScript.detectItem;
+    }
+
+    private float originalWalkSpeed;
+    private float originalSprintSpeed;
+
+    public void FreezeMovement()
+    {
+        originalWalkSpeed = walkSpeed;
+        originalSprintSpeed = sprintSpeed;
+
+        walkSpeed = 0;
+        sprintSpeed = 0;
+    }
+
+    public void UnfreezeMovement()
+    {
+        walkSpeed = originalWalkSpeed;
+        sprintSpeed = originalSprintSpeed;
+    }
 
 
 

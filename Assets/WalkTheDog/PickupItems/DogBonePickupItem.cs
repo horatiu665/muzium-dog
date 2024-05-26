@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DogBonePickupItem : ItemBehaviour
 {
+
     private Vector3 initLocalPos;
 
     private Vector3 targetLocalPos;
@@ -49,7 +50,7 @@ public class DogBonePickupItem : ItemBehaviour
 
         PoemSystem.instance.ShowCustomText(customText, true);
 
-        this.ThrowItem(Vector3.forward, 1);
+        // this.ThrowItem(DogCastleReferences.instance.mainCamera.transform, 1);
 
         this.gameObject.SetActive(false);
 

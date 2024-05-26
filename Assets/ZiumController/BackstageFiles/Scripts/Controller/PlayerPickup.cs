@@ -21,6 +21,8 @@ public class PlayerPickup : MonoBehaviour
     private Transform cam;
     private FirstPersonController player;
 
+    private bool canInteract = true;
+
     void Awake()
     {
         playerCamera = GetComponentInChildren<Camera>();
@@ -34,6 +36,8 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
+        if (!canInteract) return;
+
         detectItem = Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 5, itemLayer);
         currentInteractable = (detectItem ? hit.transform.GetComponent<ItemBehaviour>() : null);
 
@@ -63,12 +67,12 @@ public class PlayerPickup : MonoBehaviour
                 if (objInHand != null) 
                 {
                     objInHand.GetComponent<ItemBehaviour>().inHands = false;
-                    objInHand.GetComponent<ItemBehaviour>().ThrowItem(playerCamera.transform.forward, throwForce);
                     objInHand.transform.SetParent(null);
+                    objInHand.GetComponent<ItemBehaviour>().ThrowItem(playerCamera.transform, throwForce);
                     objInHand = null;
                     objInHand = hit.transform.gameObject;
                     objInHand.GetComponent<ItemBehaviour>().inHands = true;
-                    objInHand.transform.position = itemHolder.position;
+                    objInHand.transform.position = itemHolder.position + objInHand.GetComponent<ItemBehaviour>().positionOffset;
                     objInHand.transform.rotation = itemHolder.rotation;
                     objInHand.GetComponent<ItemBehaviour>().referenceTransform = itemHolder;
                     objInHand.transform.rotation = itemHolder.rotation;
@@ -77,7 +81,7 @@ public class PlayerPickup : MonoBehaviour
                 else{
                     objInHand = hit.transform.gameObject;
                     objInHand.GetComponent<ItemBehaviour>().inHands = true;
-                    objInHand.transform.position = itemHolder.position;
+                    objInHand.transform.position = itemHolder.position + objInHand.GetComponent<ItemBehaviour>().positionOffset;
                     objInHand.transform.rotation = itemHolder.rotation;
                     objInHand.GetComponent<ItemBehaviour>().referenceTransform = itemHolder;
                     objInHand.transform.SetParent(itemHolder);
@@ -86,8 +90,8 @@ public class PlayerPickup : MonoBehaviour
             else if (objInHand != null && !player.isObserving) 
             {
                 objInHand.GetComponent<ItemBehaviour>().inHands = false;
-                objInHand.GetComponent<ItemBehaviour>().ThrowItem(playerCamera.transform.forward, throwForce);
                 objInHand.transform.SetParent(null);
+                objInHand.GetComponent<ItemBehaviour>().ThrowItem(playerCamera.transform, throwForce);
                 objInHand = null;
             }
         }
@@ -111,6 +115,13 @@ public class PlayerPickup : MonoBehaviour
             messageText.color = new Color(tmpColor.r, tmpColor.g, tmpColor.b, Mathf.Lerp(messageText.color.a, 0, plaqueTextFadeSpeed * Time.deltaTime));
             if (messageText.color.a < 0.05f) messageText.gameObject.SetActive(false);
         }
+    }
+
+    public void StopInteracting() {
+        objInHand.GetComponent<ItemBehaviour>().inHands = false;
+        objInHand.GetComponent<ItemBehaviour>().ThrowItem(playerCamera.transform, throwForce);
+        objInHand.transform.SetParent(null);
+        objInHand = null;
     }
 
 
