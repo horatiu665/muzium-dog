@@ -85,6 +85,7 @@ public class DogConcertAudience : MonoBehaviour
         if (isAtConcert)
         {
             transform.position = targetAtConcert.position;
+            RotateOnSpot();
         }
         else
         {
@@ -239,8 +240,8 @@ public class DogConcertAudience : MonoBehaviour
         {
             StartCoroutine(pTween.To(0.3f, t =>
             {
-                transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 0.1f);
+                transform.position = Vector3.Lerp(transform.position, targetPos, t);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, t);
             }));
         }
 

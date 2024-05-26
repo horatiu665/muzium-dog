@@ -47,11 +47,6 @@ public class DogConcertHideShow : MonoBehaviour
     private void OnEnable()
     {
         SetConcertState(initConcertState);
-        // audience rotate on spot...
-        foreach (var a in audience)
-        {
-            a.RotateOnSpot();
-        }
     }
 
     private void Update()
