@@ -9111,6 +9111,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[19].value
       value: 
       objectReference: {fileID: 6215526449657933329}
+    - target: {fileID: 2784031252177221834, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: useCheatToCompleteArtworks
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog

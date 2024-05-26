@@ -18,11 +18,20 @@ public class AudioSourceNearestToLineSegment : MonoBehaviour
             return _listener;
         }
     }
-    
+
     private void Update()
     {
+        var sqrDist = (B.position - A.position).sqrMagnitude;
+        if (float.IsNaN(sqrDist) || sqrDist == 0)
+            return;
+
+        var factorrr = Mathf.Clamp01(Vector3.Dot(listener.position - A.position, B.position - A.position)
+             / sqrDist);
+        if (float.IsNaN(factorrr))
+            return;
+
         // move the audio source to the nearest point on the line segment A-B, clamped between A and B
-        Vector3 nearestPoint = Vector3.Lerp(A.position, B.position, Mathf.Clamp01(Vector3.Dot(listener.position - A.position, B.position - A.position) / Vector3.SqrMagnitude(B.position - A.position)));
+        Vector3 nearestPoint = Vector3.Lerp(A.position, B.position, factorrr);
         transform.position = nearestPoint;
 
     }

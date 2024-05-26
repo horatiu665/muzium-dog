@@ -198,9 +198,5 @@ namespace DogAI
             return false;
         }
 
-        private void OnGUI()
-        {
-            GUILayout.Label("ConfusionStep: " + currentConfusionStepIndex);
-        }
     }
 }

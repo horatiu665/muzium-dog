@@ -203,13 +203,5 @@ namespace DogAI
 
         }
 
-
-        private void OnGUI()
-        {
-            if (_isActive)
-            {
-                GUI.Label(new Rect(10, 10, 200, 20), "front: " + timeInFrontOfPlayer.ToString("F2"));
-            }
-        }
     }
 }

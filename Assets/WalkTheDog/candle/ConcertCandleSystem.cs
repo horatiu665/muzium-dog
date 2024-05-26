@@ -12,6 +12,9 @@ public class ConcertCandleSystem : MonoBehaviour
 
     public List<Candle> candles = new List<Candle>();
 
+    public bool useCheatToCompleteArtworks = false;
+    public KeyCode cheatKey = KeyCode.U;
+
     public bool AreAllArtworksCompleted()
     {
         // all other artworks here
@@ -46,6 +49,15 @@ public class ConcertCandleSystem : MonoBehaviour
     {
         dogConcert.OnPlayerEnterConcertRadius -= OnPlayerEnterConcertRadius;
 
+    }
+
+    private void Update()
+    {
+        if (useCheatToCompleteArtworks && Input.GetKeyDown(cheatKey))
+        {
+            Editor_ToggleArtworksToCompletedOrNot();
+            SetAllCandlesToArtworksStatus();
+        }
     }
 
     private void OnPlayerEnterConcertRadius()

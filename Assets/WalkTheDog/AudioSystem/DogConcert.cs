@@ -216,11 +216,9 @@ public class DogConcert : MonoBehaviour
         dogConcertHideShow.SetConcertState(DogConcertHideShow.ConcertState.Ending);
 
         // set the concert to hidden after the ending is done.
-        StartCoroutine(pTween.Wait(10, () =>
+        StartCoroutine(pTween.Wait(5, () =>
         {
             dogConcertHideShow.SetConcertState(DogConcertHideShow.ConcertState.Hidden);
-
-            PauseConcert();
 
         }));
 

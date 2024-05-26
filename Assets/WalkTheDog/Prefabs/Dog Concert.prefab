@@ -4717,8 +4717,6 @@ MonoBehaviour:
   - {fileID: 3084200033812554799}
   - {fileID: 1885174504607229616}
   - {fileID: 7114266592144239803}
-  concertEnding_hidePiano: 0
-  concertEnding_byebye: 0
   roadblock: {fileID: 0}
 --- !u!114 &3118897582382188778
 MonoBehaviour:
@@ -4935,7 +4933,6 @@ MonoBehaviour:
   - {fileID: 3819192209142497155}
   - {fileID: 4816587801428928547}
   - {fileID: 8682766214000909135}
-  dogConcertSeen: 0
 --- !u!1 &5646662992663111110
 GameObject:
   m_ObjectHideFlags: 0
@@ -13430,7 +13427,8 @@ PrefabInstance:
       value: blackboard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -2845779275431937956, guid: 684b0c5255ebf4cb6a2f4754a1d9f158, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -4775076213079693207, guid: 684b0c5255ebf4cb6a2f4754a1d9f158, type: 3}
       insertIndex: -1
@@ -14630,7 +14628,8 @@ PrefabInstance:
       value: boxoffice
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -2845779275431937956, guid: b9f20c35e5b7b48b7b522cd76295795d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b9f20c35e5b7b48b7b522cd76295795d, type: 3}
       insertIndex: -1

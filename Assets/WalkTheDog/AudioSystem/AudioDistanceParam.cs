@@ -34,6 +34,8 @@ public class AudioDistanceParam : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(target.position, source.position);
+        if (float.IsNaN(distance))
+            return;
 
         float distance01 = Mathf.Clamp01((distance - minDistance) / (maxDistance - minDistance));
 

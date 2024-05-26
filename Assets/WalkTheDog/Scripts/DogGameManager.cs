@@ -14,6 +14,7 @@ public class DogGameManager : MonoBehaviour
         DogCastleReferences.instance.dogConcert.dogConcertHideShow.initConcertState = DogConcertHideShow.ConcertState.Playing;
         DogCastleReferences.instance.dogConcert.useCheat = false;
         DogCastleReferences.instance.dogConcert.cheatSkipSecondsOnKey = false;
+        DogCastleReferences.instance.dogConcert.candleSystem.useCheatToCompleteArtworks = false;
         PoemSystem.instance.togglePoemWithO = false;
 
         WriteLog(false);
@@ -30,6 +31,7 @@ public class DogGameManager : MonoBehaviour
         DogCastleReferences.instance.dogConcert.dogConcertHideShow.initConcertState = DogConcertHideShow.ConcertState.Playing;
         DogCastleReferences.instance.dogConcert.useCheat = true;
         DogCastleReferences.instance.dogConcert.cheatSkipSecondsOnKey = true;
+        DogCastleReferences.instance.dogConcert.candleSystem.useCheatToCompleteArtworks = true;
         PoemSystem.instance.togglePoemWithO = false;
 
         WriteLog(true);
@@ -45,6 +47,7 @@ public class DogGameManager : MonoBehaviour
         DogCastleReferences.instance.dogConcert.dogConcertHideShow.initConcertState = DogConcertHideShow.ConcertState.Hidden;
         DogCastleReferences.instance.dogConcert.useCheat = true;
         DogCastleReferences.instance.dogConcert.cheatSkipSecondsOnKey = true;
+        DogCastleReferences.instance.dogConcert.candleSystem.useCheatToCompleteArtworks = true;
         PoemSystem.instance.togglePoemWithO = true;
 
         WriteLog(true);
@@ -61,6 +64,7 @@ public class DogGameManager : MonoBehaviour
         Debug.Log("Concert state: " + DogCastleReferences.instance.dogConcert.dogConcertHideShow.initConcertState, DogCastleReferences.instance.dogConcert.gameObject);
         Debug.Log("Concert cheat: " + DogCastleReferences.instance.dogConcert.useCheat, DogCastleReferences.instance.dogConcert.gameObject);
         Debug.Log("Poem toggle with O: " + PoemSystem.instance.togglePoemWithO, PoemSystem.instance.gameObject);
+        Debug.Log("Candle cheat: " + DogCastleReferences.instance.dogConcert.candleSystem.useCheatToCompleteArtworks, DogCastleReferences.instance.dogConcert.candleSystem.gameObject);
 
     }
 
@@ -72,6 +76,8 @@ public class DogGameManager : MonoBehaviour
         UnityEditor.EditorUtility.SetDirty(DogCastleReferences.instance.dogConcert.dogConcertHideShow);
         UnityEditor.EditorUtility.SetDirty(DogCastleReferences.instance.dogConcert);
         UnityEditor.EditorUtility.SetDirty(PoemSystem.instance);
+        UnityEditor.EditorUtility.SetDirty(DogCastleReferences.instance.dogConcert.candleSystem);
+
 #endif
 
     }
