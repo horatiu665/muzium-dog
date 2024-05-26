@@ -8,7 +8,7 @@ public class ConcertRestartItemBehaviour : ItemBehaviour
 
     public DogConcert dogConcert;
 
-    public float concertStartDelaySeconds = 60;
+    public float concertStartDelaySeconds = 5;
 
     public override void Awake()
     {
@@ -70,6 +70,8 @@ public class ConcertRestartItemBehaviour : ItemBehaviour
         StartCoroutine(pTween.Wait(concertStartDelaySeconds, () =>
         {
             dogConcert.dogConcertHideShow.SetConcertState(DogConcertHideShow.ConcertState.Playing);
+
+            dogConcert.RestartMainConcertFromTicketOffice();
 
         }));
     }

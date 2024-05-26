@@ -4473,6 +4473,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207375591}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1207381719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1705184032487501846, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+  m_PrefabInstance: {fileID: 6215526449657933328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1217162463
 GameObject:
   m_ObjectHideFlags: 0
@@ -6294,6 +6299,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f09918ab05fe6405bac9e79fb807b3b2, type: 3}
+--- !u!1 &1564210979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4300678033563469852, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+  m_PrefabInstance: {fileID: 6215526449657933328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1567751536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9061,6 +9071,46 @@ PrefabInstance:
       propertyPath: cheatSkipSecondsOnKey
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 680ae4c7c7ca94480a9bc6ab220a4625, type: 2}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.data[16].key
+      value: 
+      objectReference: {fileID: -8931051498249563612, guid: 680ae4c7c7ca94480a9bc6ab220a4625, type: 2}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.data[17].key
+      value: 
+      objectReference: {fileID: -7460512548048606311, guid: 002bb5c66b9db432299297a7a85c22cb, type: 2}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.data[18].key
+      value: 
+      objectReference: {fileID: 6598780536445600560, guid: 5e4755354ca00401fb63ce1f13b7696b, type: 2}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.data[19].key
+      value: 
+      objectReference: {fileID: 6598780536445600560, guid: 5e4755354ca00401fb63ce1f13b7696b, type: 2}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.data[16].value
+      value: 
+      objectReference: {fileID: 1564210979}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.data[17].value
+      value: 
+      objectReference: {fileID: 1207381719}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.data[18].value
+      value: 
+      objectReference: {fileID: 6215526449657933329}
+    - target: {fileID: 1415195981480756513, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_SceneBindings.Array.data[19].value
+      value: 
+      objectReference: {fileID: 6215526449657933329}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog
@@ -9110,6 +9160,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+--- !u!1 &6215526449657933329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 26823782355041428, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+  m_PrefabInstance: {fileID: 6215526449657933328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7689285061222398477
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ToyBoxHHH;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class ConcertCandleSystem : MonoBehaviour
 
     public bool AreAllArtworksCompleted()
     {
+        // all other artworks here
         for (int i = 0; i < artworkCompleted.Count; i++)
         {
             if (!artworkCompleted[i])
@@ -113,7 +115,7 @@ public class ConcertCandleSystem : MonoBehaviour
         }
     }
 
-[DebugButton]
+    [DebugButton]
     public void Editor_ToggleArtworksToCompletedOrNot()
     {
         var curValue = artworkCompleted[0];
@@ -124,5 +126,15 @@ public class ConcertCandleSystem : MonoBehaviour
 
     }
 
+    public int GetArtworksCompletedCount()
+    {
+        // return (dogConcertSeen ? 1 : 0) + artworkCompleted.Count(ac => ac);
+        return artworkCompleted.Count(ac => ac);
+    }
 
+    public int GetTotalArtworkCount()
+    {
+        // return (dogConcertSeen ? 1 : 0) + artworkCompleted.Count;
+        return artworkCompleted.Count;
+    }
 }

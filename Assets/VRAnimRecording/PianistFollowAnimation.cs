@@ -39,7 +39,7 @@ public class PianistFollowAnimation : MonoBehaviour
             return;
         }
 
-        float t = (currentTime - prevKeyframe.time) / (nextKeyframe.time - prevKeyframe.time);
+        float t = (currentTime - prevKeyframe.time) / Mathf.Max(0.001f, (nextKeyframe.time - prevKeyframe.time));
         var lerpPose = VRAnimationData.FullBodyPose.Lerp(prevKeyframe.pose, nextKeyframe.pose, t);
 
         lerpPose.SetLocalPositionsToTargets(headIK, leftHandIK, rightHandIK);

@@ -260,26 +260,5 @@ namespace DogAI
 
         }
 
-
-        private void OnGUI()
-        {
-            if (_isActive)
-            {
-                GUI.color = Color.white;
-
-                var rect = new Rect(10, 40, 200, 20);
-                if (_isLookingAtPlayer)
-                {
-                    GUI.color = Color.blue;
-                    GUI.Label(rect, "yes looking");
-                }
-                else
-                {
-                    GUI.color = Color.red;
-                    GUI.Label(rect, "can't see player");
-                }
-
-            }
-        }
     }
 }

@@ -99,7 +99,7 @@ public class CastleRoadblock : MonoBehaviour
         if (includeArtworkCountInMessageText)
         {
             textComponent.text += "\n" +
-                concertCandleSystem.artworkCompleted.Count(ac => ac) + "/" + concertCandleSystem.artworkCompleted.Count + " artworks visited.";
+                concertCandleSystem.GetArtworksCompletedCount() + "/" + concertCandleSystem.GetTotalArtworkCount() + " artworks visited.";
         }
     }
 

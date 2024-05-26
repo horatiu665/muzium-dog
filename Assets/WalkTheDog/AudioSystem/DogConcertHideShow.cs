@@ -7,8 +7,6 @@ public class DogConcertHideShow : MonoBehaviour
 {
     public DogConcert dogConcert;
 
-
-
     [Header("Concert state")]
     [ReadOnly]
     public ConcertState concertState = ConcertState.Hidden;
@@ -46,10 +44,6 @@ public class DogConcertHideShow : MonoBehaviour
 
     public List<DogConcertAudience> audience = new();
 
-    public bool concertEnding_hidePiano = false;
-    public bool concertEnding_byebye = false;
-
-
     private void OnEnable()
     {
         SetConcertState(initConcertState);
@@ -62,15 +56,6 @@ public class DogConcertHideShow : MonoBehaviour
 
     private void Update()
     {
-        if (concertEnding_hidePiano && concertState == ConcertState.Playing)
-        {
-            SetConcertState(ConcertState.Ending);
-        }
-        else if (concertEnding_byebye && concertState == ConcertState.Ending)
-        {
-            SetConcertState(ConcertState.Hidden);
-        }
-
         Update_ConcertExists();
     }
 

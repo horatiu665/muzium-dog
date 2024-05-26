@@ -74,7 +74,7 @@ public class AudioExposeInfo : MonoBehaviour
         {
             sum += Mathf.Abs(data[i]);
         }
-        envelope = sum / data.Length;
+        envelope = sum / Mathf.Max(1, data.Length);
 
     }
 

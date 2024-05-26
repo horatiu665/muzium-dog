@@ -3786,6 +3786,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1927888628611373169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4130056390784432412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4549413442622145191}
+  - component: {fileID: 3011927303384669840}
+  m_Layer: 0
+  m_Name: CheckEncoreOrEnding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4549413442622145191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130056390784432412}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3040183042596033520}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3011927303384669840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130056390784432412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643e7f821e4e637459dab7f790461561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3118897582382188778}
+        m_TargetAssemblyTypeName: DogConcert, Assembly-CSharp
+        m_MethodName: CheckEncoreOrEnding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4229294413867923855
 GameObject:
   m_ObjectHideFlags: 0
@@ -4618,6 +4677,7 @@ Transform:
   - {fileID: 4626601158707188466}
   - {fileID: 6669748932417526298}
   - {fileID: 5897772594985897385}
+  - {fileID: 4549413442622145191}
   - {fileID: 8113164256100904601}
   - {fileID: 4120879017191824257}
   m_Father: {fileID: 0}
@@ -4693,6 +4753,7 @@ MonoBehaviour:
   cheatSkipSecondsOnKey: 0
   cheatSkipKey: 108
   cheatSkipSeconds: 10
+  cheatSkipSecondsMax: 60
 --- !u!114 &3825825150392950580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4874,6 +4935,7 @@ MonoBehaviour:
   - {fileID: 3819192209142497155}
   - {fileID: 4816587801428928547}
   - {fileID: 8682766214000909135}
+  dogConcertSeen: 0
 --- !u!1 &5646662992663111110
 GameObject:
   m_ObjectHideFlags: 0

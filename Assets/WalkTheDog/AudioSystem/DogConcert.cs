@@ -47,6 +47,18 @@ public class DogConcert : MonoBehaviour
     public bool cheatSkipSecondsOnKey = false;
     public KeyCode cheatSkipKey = KeyCode.L;
     public float cheatSkipSeconds = 10f;
+    public float cheatSkipSecondsMax = 60f;
+    private float cheatSkipSecondsLastTime;
+    private float cheatSkipSecondsCurValue;
+
+    private bool isReplayingConcert = false;
+
+    private void Start()
+    {
+        // haven't seen the concert when you start the game.
+        // candleSystem.SetDogConcertSeenStatus(false);
+
+    }
 
     private void Update()
     {
@@ -60,11 +72,28 @@ public class DogConcert : MonoBehaviour
         if (dogConcertHideShow.concertState == DogConcertHideShow.ConcertState.Playing)
         {
             Update_ConcertDistance();
+        } else
+        {
+            // if the concert is not playing, we should not be in the concert range.
+            playerIsInConcertRange = false;
+
+            // if concert is not playing we stop replaying the concert.
+            isReplayingConcert = false;
+
         }
 
         if (cheatSkipSecondsOnKey && Input.GetKeyDown(cheatSkipKey))
         {
-            ContinueConcertFromTime((float)(concertTimeline.time + cheatSkipSeconds));
+            if (Time.time - cheatSkipSecondsLastTime < 0.2f)
+            {
+                cheatSkipSecondsCurValue = Mathf.Lerp(cheatSkipSecondsCurValue, cheatSkipSecondsMax, 0.1f);
+            }
+            else
+            {
+                cheatSkipSecondsCurValue = cheatSkipSeconds;
+            }
+            cheatSkipSecondsLastTime = Time.time;
+            ContinueConcertFromTime((float)(concertTimeline.time + cheatSkipSecondsCurValue));
         }
 
     }
@@ -85,6 +114,16 @@ public class DogConcert : MonoBehaviour
 
             OnPlayerEnterConcertRadius?.Invoke();
             OnPlayerEnterConcertRadius_UE.Invoke();
+
+            if (!isReplayingConcert)
+            {
+                // player just entered concert range
+                if (candleSystem.AreAllArtworksCompleted())
+                {
+                    SetEndingConcert();
+                }
+            }
+
         }
         if (playerIsInConcertRange && dist > concertHearingThreshold + 1)
         {
@@ -94,16 +133,28 @@ public class DogConcert : MonoBehaviour
             OnPlayerLeaveConcertRadius?.Invoke();
             OnPlayerLeaveConcertRadius_UE.Invoke();
 
+            // when you leave the concert area, after having been inside it, you have officially seen the concert
+            // (so if it's the last artwork you see, this is the way to trigger the proper end of it....???)
+            // candleSystem.SetDogConcertSeenStatus(true);
+
+
         }
 
         // pause and resume the concert based on player's presence
         if (playerIsInConcertRange)
         {
-            Update_ContinueConcertSmart();
-
+            // resume concert if it's not playing
+            // the timelines themselves handle what happens at the end of them.
+            if (!IsTimelinePlaying())
+            {
+                ResumeConcert();
+            }
         }
         else if (!playerIsInConcertRange)
         {
+            // if you leave the area, you are no longer replaying the concert.
+            isReplayingConcert = false;
+
             if (IsTimelinePlaying())
             {
                 var timeSincePlayerLeft = Time.time - playerLeaveTime;
@@ -115,21 +166,28 @@ public class DogConcert : MonoBehaviour
         }
     }
 
-    public void SetConcert(PlayableAsset whichOne)
+    private void SetConcert(PlayableAsset whichOne)
     {
-        // if encore, we want it to loop
-        if (whichOne == concertEncoreLoop)
-        {
-            concertTimeline.extrapolationMode = DirectorWrapMode.Loop;
-        }
-        else
-        {
-            concertTimeline.extrapolationMode = DirectorWrapMode.None;
-        }
+        // we actually don't want to loop using the concert timeline, we want the script to control it.
+        concertTimeline.extrapolationMode = DirectorWrapMode.None;
 
         concertTimeline.playableAsset = whichOne;
         RestartConcert();
 
+    }
+
+    public void RestartMainConcertFromTicketOffice()
+    {
+        Debug.Log("RestartMainConcertFromTicketOffice ");
+
+        isReplayingConcert = true;
+
+        SetConcert(concertMain);
+        playedTimelines.Clear();
+
+        // candleSystem.SetDogConcertSeenStatus(false);
+
+        RestartConcert();
     }
 
     [DebugButton]
@@ -150,61 +208,20 @@ public class DogConcert : MonoBehaviour
         SetConcert(concertEncoreLoop);
     }
 
-    // this resumes the concert based on some rules
-    // - if the player has never been to the concert, starts at the beginning
-    // - if the player left and came back, continue from where it left plus a bit of buffer.
-    // - if the candles are blown, play the end of the concert and then stop.
-    // - do the gameplay of restarting the concert via the concert banner.... 
-    // figure out the concert states maybe and let the banner set those states rather than directly playing/stopping the concert.
-    public void Update_ContinueConcertSmart()
-    {
-        // by default, it plays / continues the main concert.
-        // if the main concert ends, it plays the encore concert on loop forever.
-        // but if the candle system says all artworks have been found, we play the ending and then stop the concert.
-
-        // if all artworks are completed, play ending once.
-        if (candleSystem.AreAllArtworksCompleted())
-        {
-            // if we haven't set the ending yet,
-            if (!playedTimelines.Contains(concertEnding))
-            {
-                playedTimelines.Add(concertEnding);
-                // set the ending
-                SetEndingConcert();
-                ResumeConcert();
-            }
-            else
-            {
-                // resume as usual, in case there was a break cause the player left.
-                if (!IsTimelinePlaying())
-                {
-                    ResumeConcert();
-                }
-
-                // the ending will call the SetConcertStateToEndingAndHidden() function when it's done using an object OnEnable in the timeline.
-            }
-        }
-        else // artworks are not all completed
-        {
-            // continue playing main concert.
-            if (!IsTimelinePlaying())
-            {
-                ResumeConcert();
-            }
-
-            // main concert will call the SetConcertToEncore() function with an object OnEnable in the timeline.
-        }
-    }
-
     // Called by Ending timeline with an object. easier to setup visually in the timeline, altho confusing in the code.
     public void SetConcertStateToEndingAndHidden()
     {
+        Debug.Log("SetConcertStateToEndingAndHidden ");
+
         dogConcertHideShow.SetConcertState(DogConcertHideShow.ConcertState.Ending);
 
         // set the concert to hidden after the ending is done.
         StartCoroutine(pTween.Wait(10, () =>
         {
             dogConcertHideShow.SetConcertState(DogConcertHideShow.ConcertState.Hidden);
+
+            PauseConcert();
+
         }));
 
     }
@@ -212,12 +229,29 @@ public class DogConcert : MonoBehaviour
     // Called by Main concert timeline with an object. easier to setup visually in the timeline, altho confusing in the code.
     public void SetConcertToEncore()
     {
+        Debug.Log("SetConcertToEncore ");
+
         SetEncoreConcert();
+    }
+
+    // Called by the timeline. If we finished all the artworks, we should head to the ending. Else we should loop the encore.
+    public void CheckEncoreOrEnding()
+    {
+        Debug.Log("CheckEncoreOrEnding ");
+
+        if (candleSystem.AreAllArtworksCompleted())
+        {
+            SetEndingConcert();
+        }
+        else
+        {
+            SetEncoreConcert();
+        }
     }
 
     private bool IsTimelinePlaying()
     {
-        if (concertTimeline.playableGraph.IsValid() == false)
+        if (!concertTimeline.playableGraph.IsValid())
             return false;
 
         return concertTimeline.playableGraph.GetRootPlayable(0).GetSpeed() > 0;
@@ -234,13 +268,17 @@ public class DogConcert : MonoBehaviour
     [DebugButton]
     public void PauseConcert()
     {
+        if (!concertTimeline.playableGraph.IsValid())
+            return;
+
+        concertTimeline.time = concertTimeline.time;
         concertTimeline.playableGraph.GetRootPlayable(0).SetSpeed(0);
     }
 
     [DebugButton]
     public void ResumeConcert()
     {
-        if (concertTimeline.playableGraph.IsValid() == false)
+        if (!concertTimeline.playableGraph.IsValid())
         {
             RestartConcert();
             return;
