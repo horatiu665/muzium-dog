@@ -19,8 +19,6 @@ public class DogControlPanel : MonoBehaviour
         }
     }
 
-
-
     public DogRefs dog;
 
     public bool startDogEnabled = true;
@@ -41,6 +39,7 @@ public class DogControlPanel : MonoBehaviour
 
     public SmartSoundDog quitDogSound;
 
+    public GameObject dogUIRoot;
 
 
     // API to set dog status.
@@ -48,6 +47,9 @@ public class DogControlPanel : MonoBehaviour
     {
         this.dogEnabled = dogEnabled;
         dog.gameObject.SetActive(dogEnabled);
+
+        dogUIRoot.SetActive(dogEnabled);
+
         if (skipIntro)
         {
             dog.transform.position = dogStartPosition.position;
@@ -56,7 +58,7 @@ public class DogControlPanel : MonoBehaviour
 
         c_toggleDogEnabled.SetUI(dogEnabled);
 
-        if (playTimeline && !skipIntro) 
+        if (playTimeline && !skipIntro)
         {
             if (dogEnabled)
             {
@@ -84,11 +86,14 @@ public class DogControlPanel : MonoBehaviour
 
     private void Update()
     {
+        // refactor this to use ZIUM interaction system.
+
         // consider only doing this when within range of the thing (<5m??)
 
         // consider highlighting the control panel buttons when the player raycasts in front of them. 
         // that's more of an interaction system thing for the main game tho.
         c_toggleDogEnabled.SetHighlight(false);
+
 
         // raycast
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

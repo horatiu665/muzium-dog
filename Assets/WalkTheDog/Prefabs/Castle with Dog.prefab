@@ -4538,6 +4538,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4575386111677115233}
     - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
+      propertyPath: dogUIRoot
+      value: 
+      objectReference: {fileID: 5744583597952383505}
+    - target: {fileID: 8887505604748432034, guid: 08ed4016d5c8f4457954edf3e8256f08, type: 3}
       propertyPath: skipIntro
       value: 0
       objectReference: {fileID: 0}

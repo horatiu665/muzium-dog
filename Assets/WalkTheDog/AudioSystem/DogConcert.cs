@@ -72,7 +72,8 @@ public class DogConcert : MonoBehaviour
         if (dogConcertHideShow.concertState == DogConcertHideShow.ConcertState.Playing)
         {
             Update_ConcertDistance();
-        } else
+        }
+        else
         {
             // if the concert is not playing, we should not be in the concert range.
             playerIsInConcertRange = false;
@@ -289,6 +290,15 @@ public class DogConcert : MonoBehaviour
     [DebugButton]
     public void ContinueConcertFromTime(float time)
     {
+        if (!concertTimeline.playableGraph.IsValid())
+            return;
+
+        // clamp time
+        if (time > (float)(concertTimeline.duration) - 1f)
+        {
+            time = (float)(concertTimeline.duration) - 1f;
+        }
+
         concertTimeline.time = time;
         concertTimeline.playableGraph.GetRootPlayable(0).SetSpeed(1);
     }

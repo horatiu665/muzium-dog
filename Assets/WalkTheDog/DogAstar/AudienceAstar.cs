@@ -15,7 +15,7 @@ public class AudienceAstar : MonoBehaviour
 
     public List<Transform> staircaseNodes = new();
 
-    private void OnEnable()
+    private void Start()
     {
         if (addNodesOnAudiencePositions)
         {
