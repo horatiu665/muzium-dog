@@ -69,7 +69,7 @@ public class ConcertCandleSystem : MonoBehaviour
     /// Sets candles from list to match artwork ID 1..N where N is the number of candles.
     /// </summary>
     [DebugButton]
-    public void Editor_SetCandles1N()
+    public void Editor_FindAllCandlesInChildren()
     {
         var foundCandles = GetComponentsInChildren<Candle>();
         for (int i = 0; i < foundCandles.Length; i++)

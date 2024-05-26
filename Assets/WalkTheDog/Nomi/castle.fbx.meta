@@ -1,0 +1,324 @@
+fileFormatVersion: 2
+guid: 00b3d3682be634470b71ca3cbe267eae
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.4
+    second: {fileID: 2100000, guid: 3249ac0188c114f5f97c42cb8922f762, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.5
+    second: {fileID: 2100000, guid: 272cae1a865354ae098e68c9b6b8917c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.6
+    second: {fileID: 2100000, guid: 0b6231d996d504666a10c371485bf6df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.7
+    second: {fileID: 2100000, guid: 99ffcfb2f8a1a4e82b5a8eb062538855, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.8
+    second: {fileID: 2100000, guid: 457483f2a0a8c4d15b396cf6b9483e66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.9
+    second: {fileID: 2100000, guid: f448ac1aa25484034b44c85b1a8d8a40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bricks
+    second: {fileID: 2100000, guid: 3224ad68ae1ad4d298fdadf99368d74e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bricks.1
+    second: {fileID: 2100000, guid: 588af3b723ae94a9280c0102a5aa9883, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bricks.2
+    second: {fileID: 2100000, guid: 117b2f4ac04af4df59a5913a69147fc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridge
+    second: {fileID: 2100000, guid: 7d574a430f20d4a868bd651ace5d2d08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: foodbowl
+    second: {fileID: 2100000, guid: c6b46018d78674bb0a2e1e1316008e4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gold
+    second: {fileID: 2100000, guid: 0c72a4003872f45e7bb3eb784bd02e92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grass
+    second: {fileID: 2100000, guid: 9cb3f42c5dfdd4992951acd795693756, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal
+    second: {fileID: 2100000, guid: 688e9b4716121474ea716a78bc348e3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stainedglass_bone
+    second: {fileID: 2100000, guid: c69852a112bff4d9280ed62f639b7fae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stainedglass_dog
+    second: {fileID: 2100000, guid: e175c9aa1f6b34efe8eb3189aed78d06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stainedglass_grass
+    second: {fileID: 2100000, guid: f2741292d78274ada9d6b26e6250723b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: water
+    second: {fileID: 2100000, guid: fa64b24a2fcf241a88d7a375a14b2100, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: waterbowl
+    second: {fileID: 2100000, guid: 6fd81eece39ea4f28a547aaeda9b5dae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window
+    second: {fileID: 2100000, guid: 4b5d9d4ec80554137b9c19160a4ceabe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window.1
+    second: {fileID: 2100000, guid: 485e37a4658944f828be5e7d56b88e5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window.2
+    second: {fileID: 2100000, guid: 9f9a0871941bf4f59b22949a568c2bb4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood
+    second: {fileID: 2100000, guid: d8547ec91cb7243c18ac0a3f5ea5f3fd, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BricksReclaimedWhitewashedOffset001_AO_500x500_SPECULAR
+    second: {fileID: 2800000, guid: be7224020e88646a0a940a1cb5e88106, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BricksReclaimedWhitewashedOffset001_GLOSS_2K_SPECULAR
+    second: {fileID: 2800000, guid: d2e063c97eb864eac971f60accc60b50, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BricksReclaimedWhitewashedOffset001_GLOSS_500x500_SPECULAR
+    second: {fileID: 2800000, guid: cf573fc585229455289410fff6d22bb0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BricksReclaimedWhitewashedOffset001_NRM_500x500_SPECULAR
+    second: {fileID: 2800000, guid: 167dc9f690d0241f79e60109a8b022eb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundGrassGreen002_AO_500x500
+    second: {fileID: 2800000, guid: 5d182a59f6f064ca4b883a075279a1dc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundGrassGreen002_BUMP_500x500
+    second: {fileID: 2800000, guid: 7cfd8a0240a7f4963a16aa021491d621, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundGrassGreen002_COL_500x500
+    second: {fileID: 2800000, guid: 344f28865ff314e36931c54854134815, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundGrassGreen002_NRM_500x500
+    second: {fileID: 2800000, guid: 7513f97552f1f468f9a3211ffb095808, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MetalGoldPaint002_NRM_2K_SPECULAR
+    second: {fileID: 2800000, guid: 977877b907cce4701b083a32fb50ff73, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wood_027_normal
+    second: {fileID: 2800000, guid: 8b90e4903559d4cf38fc9d578fbb0dd9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: black-white-tile_albedo
+    second: {fileID: 2800000, guid: ad88d416f5d9c4675bf8e0e896ddbbe1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: black-white-tile_height
+    second: {fileID: 2800000, guid: e018d0ffab61f4c4eaa0a54bd115638f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: black-white-tile_normal-ogl
+    second: {fileID: 2800000, guid: 072e3f7791b7c45d68b0a8edc227b756, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: cobblestone-curved_2_albedo
+    second: {fileID: 2800000, guid: 99fe910550a504e3d8cd4f1aa52f6b75, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: cobblestone-curved_2_normal-ogl
+    second: {fileID: 2800000, guid: 7123b76fd6a8547beb2a4877124f7218, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: stacked-stone-siding_height
+    second: {fileID: 2800000, guid: 1f960df11ce00455abb218d5a0b4e882, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: stacked-stone-siding_normal-ogl
+    second: {fileID: 2800000, guid: fcd75e3ef07914d3b8b22e394b164ee4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: stainedglass_bone
+    second: {fileID: 2800000, guid: 6007052dd084e422183088431b84cf9f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: stainedglass_dog
+    second: {fileID: 2800000, guid: c738ea49896034533a47158dad3e774d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: stainedglass_grass
+    second: {fileID: 2800000, guid: 3c61b122b403d4ef4a96978dfe98cac9, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

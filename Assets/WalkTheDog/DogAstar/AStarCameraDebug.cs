@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AStarCameraDebug : MonoBehaviour
 {
+    [Header("Add this to the scene to draw gizmos at the node you are pointing at with the mouse.")]
     public AStar aStar;
 
     private AStar.Node nearestNode;

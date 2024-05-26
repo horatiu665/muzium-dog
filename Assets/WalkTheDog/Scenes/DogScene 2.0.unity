@@ -243,7 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 27624114}
   m_Layer: 0
-  m_Name: env interactive
+  m_Name: env demo interactive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3319,17 +3319,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1386968816}
   m_LocalEulerAnglesHint: {x: -0.184, y: 0, z: 0}
---- !u!114 &931508520 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4082480743979700955, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}
-  m_PrefabInstance: {fileID: 4716235697005975768}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83a4e579d4540d29fc0a840379a9fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1000848442
 GameObject:
   m_ObjectHideFlags: 0
@@ -5605,7 +5594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1386968816}
   m_Layer: 0
-  m_Name: env static
+  m_Name: env demo static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8934,10 +8923,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dog NPC Firedog
       objectReference: {fileID: 0}
-    - target: {fileID: 6643611848290035795, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}
-      propertyPath: dogSniffableObject
-      value: 
-      objectReference: {fileID: 931508520}
     - target: {fileID: 7592482330385987480, guid: f7f308f08437b4b6bbef6f7796776987, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.853851
@@ -9053,6 +9038,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1386899983841498744, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -63.243
+      objectReference: {fileID: 0}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog
@@ -9096,10 +9085,6 @@ PrefabInstance:
     - target: {fileID: 6503769146255440817, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7675077915568490843, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
