@@ -4663,48 +4663,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3118897582382188778, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-      propertyPath: useCheat
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5527313898642568017, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.28
-      objectReference: {fileID: 0}
     - target: {fileID: 5573363352574371229, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: m_Name
       value: Dog Concert
-      objectReference: {fileID: 0}
-    - target: {fileID: 6027982651349266365, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.28
       objectReference: {fileID: 0}
     - target: {fileID: 7116762720281757093, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
       propertyPath: roadblock
       value: 
       objectReference: {fileID: 8737813562571086221}
-    - target: {fileID: 7116762720281757093, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-      propertyPath: initConcertState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7932581871277250438, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10.364983
-      objectReference: {fileID: 0}
-    - target: {fileID: 7932581871277250438, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.267
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 932255075429315269, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3389205001488396007}
-    - targetCorrespondingSourceObject: {fileID: 7379677559242672155, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6131813741214714671}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
 --- !u!114 &1317066095792967010 stripped
 MonoBehaviour:
@@ -4738,60 +4708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2326f0575d0c945c69ca61e03fc0038c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &3891019351339349837 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 932255075429315269, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-  m_PrefabInstance: {fileID: 4111685791288411528}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &3389205001488396007
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3891019351339349837}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5543852910939878438, guid: 88e671df7d29f441fb89215c18954b0e, type: 3}
---- !u!1 &6874258663873219987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7379677559242672155, guid: 304bc4e5668934c22bb49ea8fff9dee4, type: 3}
-  m_PrefabInstance: {fileID: 4111685791288411528}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &6131813741214714671
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6874258663873219987}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2138796739762357153, guid: 88e671df7d29f441fb89215c18954b0e, type: 3}
 --- !u!1001 &4586363964036871486
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -56,39 +56,48 @@ public class AStar : MonoBehaviour
     HashSet<Node> closedSet = new HashSet<Node>();
     List<Node> cancelledNodes = new List<Node>();
 
+    public bool hack_AllowSpecialNodes = true;
+
     [Header("Debug")]
     public bool drawObstacleRaycast = false;
 
     private void OnEnable()
     {
+        // TODO: REFACTOR THIS! we should not have nodes live any other place than inside the AStar class. Because we want AStar to be possible to have multiple instances of.
         // find all existing static nodes.
-        foreach (var sn in AStarStaticNodes.allStaticNodes)
+        if (hack_AllowSpecialNodes)
         {
-            for (int i = 0; i < sn.nodes.Count; i++)
+            foreach (var sn in AStarStationaryNodes.allStaticNodes)
             {
-                var node = sn.nodes[i];
-                AddNode(node);
+                for (int i = 0; i < sn.nodes.Count; i++)
+                {
+                    var node = sn.nodes[i];
+                    AddNode(node);
+                }
             }
-        }
-        AStarStaticNodes.OnStaticNodesRemoved += OnStaticNodesRemoved;
-        AStarStaticNodes.OnStaticNodesAdded += OnStaticNodesAdded;
+            AStarStationaryNodes.OnStaticNodesRemoved += OnStaticNodesRemoved;
+            AStarStationaryNodes.OnStaticNodesAdded += OnStaticNodesAdded;
 
-        // find all moving nodes
-        foreach (var ntm in AStarNodeThatMoves.all)
-        {
-            AddNode(ntm.specialNode);
+            // find all moving nodes
+            foreach (var ntm in AStarNodeThatMoves.all)
+            {
+                AddNode(ntm.specialNode);
+            }
+            AStarNodeThatMoves.OnNodeAdded += OnMovingNodeAdded;
+            AStarNodeThatMoves.OnNodeRemoved += OnMovingNodeRemoved;
         }
-        AStarNodeThatMoves.OnNodeAdded += OnMovingNodeAdded;
-        AStarNodeThatMoves.OnNodeRemoved += OnMovingNodeRemoved;
     }
 
     private void OnDisable()
     {
-        AStarStaticNodes.OnStaticNodesRemoved -= OnStaticNodesRemoved;
-        AStarStaticNodes.OnStaticNodesAdded -= OnStaticNodesAdded;
+        if (hack_AllowSpecialNodes)
+        {
+            AStarStationaryNodes.OnStaticNodesRemoved -= OnStaticNodesRemoved;
+            AStarStationaryNodes.OnStaticNodesAdded -= OnStaticNodesAdded;
 
-        AStarNodeThatMoves.OnNodeAdded -= OnMovingNodeAdded;
-        AStarNodeThatMoves.OnNodeRemoved -= OnMovingNodeRemoved;
+            AStarNodeThatMoves.OnNodeAdded -= OnMovingNodeAdded;
+            AStarNodeThatMoves.OnNodeRemoved -= OnMovingNodeRemoved;
+        }
 
         nodes.Clear();
         disjointSet.Clear();
@@ -109,12 +118,12 @@ public class AStar : MonoBehaviour
         nodes.Remove(nodeThatMoves.specialNode);
     }
 
-    private void OnStaticNodesRemoved(AStarStaticNodes staticNodes)
+    private void OnStaticNodesRemoved(AStarStationaryNodes staticNodes)
     {
         nodes.RemoveAll(n => staticNodes.nodes.Contains(n));
     }
 
-    private void OnStaticNodesAdded(AStarStaticNodes staticNodes)
+    private void OnStaticNodesAdded(AStarStationaryNodes staticNodes)
     {
         // nodes.AddRange(staticNodes.nodes);
 
@@ -421,24 +430,26 @@ public class AStar : MonoBehaviour
         return tooClose;
     }
 
-    /// THIS IS NOT IMPLEMENTED. NOT SURE HOW TO DO IT CORRECTLY YET.
-    public void RemoveNode(Node existingNode)
-    {
-        // THIS IS NOT IMPLEMENTED. NOT SURE HOW TO DO IT CORRECTLY YET.
-
-        throw new NotImplementedException();
-        // var oldNeighbors = existingNode.neighbors;
-        // nodes.Remove(existingNode);
-        // disjointSet.Remove(existingNode);
-        // foreach (var neighbor in oldNeighbors)
-        // {
-        //     neighbor.neighbors.Remove(existingNode);
-        // }
-        // // redo neighbors when? maybe not now.
-    }
+    // /// THIS IS NOT IMPLEMENTED. NOT SURE HOW TO DO IT CORRECTLY YET.
+    // public void RemoveNode(Node existingNode)
+    // {
+    //     // THIS IS NOT IMPLEMENTED. NOT SURE HOW TO DO IT CORRECTLY YET.
+    //     throw new NotImplementedException();
+    //     // var oldNeighbors = existingNode.neighbors;
+    //     // nodes.Remove(existingNode);
+    //     // disjointSet.Remove(existingNode);
+    //     // foreach (var neighbor in oldNeighbors)
+    //     // {
+    //     //     neighbor.neighbors.Remove(existingNode);
+    //     // }
+    //     // // redo neighbors when? maybe not now.
+    // }
 
     public Node AddNode(Node existingNode)
     {
+        // THIS IS WHY this needs to be refactored. because multiple AStar classes with different settings might be using the same node. 
+        // So insted of the same node, it should be two identical copies of the node that don't know about each other.
+        // TODO: REFACTOR!
         AssignNeighbors(existingNode);
 
         nodes.Add(existingNode);

@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AStarStaticNodes : MonoBehaviour
+public class AStarStationaryNodes : MonoBehaviour
 {
-    public static List<AStarStaticNodes> allStaticNodes = new List<AStarStaticNodes>();
+    public static List<AStarStationaryNodes> allStaticNodes = new List<AStarStationaryNodes>();
 
-    public static event System.Action<AStarStaticNodes> OnStaticNodesRemoved;
-    public static event System.Action<AStarStaticNodes> OnStaticNodesAdded;
+    public static event System.Action<AStarStationaryNodes> OnStaticNodesRemoved;
+    public static event System.Action<AStarStationaryNodes> OnStaticNodesAdded;
 
     [Header("use TransparentFX layer so collider is out of the way.")]
     public AStarSettings aStarSettings;
 
     public bool disableMeshRendererOnEnable = true;
 
+    // we should NOT have nodes here. because multiple AStar classes might use those nodes, and thus create massive chaos.
+    // refactor later!!!
     public List<AStar.Node> nodes = new List<AStar.Node>();
 
     public new Collider collider => GetComponent<Collider>();

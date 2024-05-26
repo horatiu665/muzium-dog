@@ -12,6 +12,7 @@ public class PlantProximity : MonoBehaviour
     public GameObject plantInnerArea;
 
     private float targetScale = 0f;
+    private float curScale = 0f;
 
     private bool playerInside => dogProximity.areas[0].isPlayerInside;
     private bool dogInside => dogProximity.areas[0].isDogInside;
@@ -30,6 +31,7 @@ public class PlantProximity : MonoBehaviour
         {
             sniffableObject = GetComponent<DogSniffableObject>();
         }
+        curScale = plantInnerArea.transform.localScale.x;
     }
 
     private void OnEnable()
@@ -50,7 +52,16 @@ public class PlantProximity : MonoBehaviour
         {
             sniffTimer = t;
 
-            plantInnerArea.transform.localScale = Vector3.Lerp(plantInnerArea.transform.localScale, Vector3.one * sniffScaleCurve.Evaluate(t), Time.deltaTime * 5f);
+            curScale = Mathf.Lerp(curScale, sniffScaleCurve.Evaluate(t), Time.deltaTime * 5f);
+            if (curScale < 0.01f)
+            {
+                plantInnerArea.SetActive(false);
+            }
+            else
+            {
+                plantInnerArea.SetActive(true);
+                plantInnerArea.transform.localScale = Vector3.one * curScale;
+            }
             plantInnerArea.transform.localEulerAngles = new Vector3(0, 0, sniffRotZCurve.Evaluate(sniffTimer));
 
             if (t == 1)
@@ -70,7 +81,17 @@ public class PlantProximity : MonoBehaviour
         {
             // keeping this update loop light.
             targetScale = (dogInside) ? 1f : 0f;
-            plantInnerArea.transform.localScale = Vector3.Lerp(plantInnerArea.transform.localScale, Vector3.one * targetScale, Time.deltaTime * 5f);
+            curScale = Mathf.Lerp(curScale, targetScale, Time.deltaTime * 5f);
+            if (curScale < 0.01f)
+            {
+                plantInnerArea.SetActive(false);
+            }
+            else
+            {
+                plantInnerArea.SetActive(true);
+                plantInnerArea.transform.localScale = Vector3.one * curScale;
+            }
+            //plantInnerArea.transform.localScale = Vector3.Lerp(plantInnerArea.transform.localScale, Vector3.one * targetScale, Time.deltaTime * 5f);
         }
 
     }

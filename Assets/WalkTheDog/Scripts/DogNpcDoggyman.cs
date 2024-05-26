@@ -19,6 +19,7 @@ public class DogNpcDoggyman : MonoBehaviour
     public Transform playerTransform => DogCastleReferences.instance.dogBrain.player;
 
     public Transform toScale;
+    private float curScale = 0f;
     private float targetScale = 0f;
 
     // activate these so the main dog can bark at this dog.
@@ -237,7 +238,17 @@ public class DogNpcDoggyman : MonoBehaviour
 
     private void Update()
     {
-        toScale.transform.localScale = Vector3.Lerp(toScale.transform.localScale, Vector3.one * targetScale, Time.deltaTime * 5f);
+        curScale = Mathf.Lerp(curScale, targetScale, Time.deltaTime * 5f);
+        if (curScale < 0.01f)
+        {
+            toScale.gameObject.SetActive(false);
+        }
+        else
+        {
+            toScale.gameObject.SetActive(true);
+            toScale.transform.localScale = Vector3.one * curScale;
+        }
+        // toScale.transform.localScale = Vector3.Lerp(toScale.transform.localScale, Vector3.one * targetScale, Time.deltaTime * 5f);
 
         if (lookTarget != null)
         {

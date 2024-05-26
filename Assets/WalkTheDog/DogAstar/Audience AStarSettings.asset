@@ -16,5 +16,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   nodeVerticalOffset: 0.3
-  neighborDistance: 5
+  neighborDistance: 3.76
   redoNeighborsOnPath: 0
