@@ -29,6 +29,7 @@ public class DogControlPanel : MonoBehaviour
     public bool skipIntro = false;
 
     public Transform dogStartPosition;
+    public Transform dogCourtyardPosition;
 
     public PlayableDirector dogIntroTimeline;
     public DogCastleReferences castleReferences;
@@ -52,8 +53,8 @@ public class DogControlPanel : MonoBehaviour
 
         if (skipIntro)
         {
-            dog.transform.position = dogStartPosition.position;
-            dog.transform.rotation = dogStartPosition.rotation;
+            dog.transform.position = dogCourtyardPosition.position;
+            dog.transform.rotation = dogCourtyardPosition.rotation;
         }
 
         c_toggleDogEnabled.SetUI(dogEnabled);

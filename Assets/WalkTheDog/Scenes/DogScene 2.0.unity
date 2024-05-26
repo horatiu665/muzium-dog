@@ -8270,9 +8270,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 519845903981783210, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: togglePoemWithO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317066095792967010, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: useCheat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317066095792967010, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: cheatSkipSecondsOnKey
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2699824933071626789, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784031252177221834, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: useCheatToCompleteArtworks
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206685887020357844, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: skipIntro
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206685887020357844, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: startDogEnabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6503769146255440817, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8312,6 +8340,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503769146255440817, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614791204052090925, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: initConcertState
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

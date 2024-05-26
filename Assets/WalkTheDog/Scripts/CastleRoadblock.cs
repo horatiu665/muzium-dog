@@ -15,8 +15,9 @@ public class CastleRoadblock : MonoBehaviour
 
     public KeyCode hideOnKeypress = KeyCode.P;
 
+    public CastleRoadblockTrigger trigger;
+
     public GameObject[] activeWhenBlocked;
-    public GameObject showThatItIsBlocked;
 
     public ConcertCandleSystem concertCandleSystem;
 
@@ -45,13 +46,30 @@ public class CastleRoadblock : MonoBehaviour
 
     private void OnEnable()
     {
+        trigger.OnTriggerEnterTriggered += OnTriggerEnterTriggered;
         dogConcert.OnPlayerEnterConcertRadius += OnPlayerEnterConcertRadius;
         SetUI(false);
     }
 
     private void OnDisable()
     {
+        trigger.OnTriggerEnterTriggered -= OnTriggerEnterTriggered;
         dogConcert.OnPlayerEnterConcertRadius -= OnPlayerEnterConcertRadius;
+    }
+
+    private void OnTriggerEnterTriggered(Collider other)
+    {
+        if (other.transform == player)
+        {
+            if (teleportPlayer)
+            {
+                player.position = resetPlayer.position;
+                player.rotation = resetPlayer.rotation;
+            }
+
+            // show the UI about the roadblock
+            SetUI(true);
+        }
     }
 
     private void OnPlayerEnterConcertRadius()
@@ -64,21 +82,6 @@ public class CastleRoadblock : MonoBehaviour
         foreach (var go in activeWhenBlocked)
         {
             go.SetActive(isBlocked);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform == player)
-        {
-            if (teleportPlayer)
-            {
-                player.position = resetPlayer.position;
-                player.rotation = resetPlayer.rotation;
-            }
-
-            // show the UI about the roadblock
-            SetUI(true);
         }
     }
 
