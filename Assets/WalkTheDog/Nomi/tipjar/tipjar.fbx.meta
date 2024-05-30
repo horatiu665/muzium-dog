@@ -1,9 +1,44 @@
 fileFormatVersion: 2
-guid: 26fe49f00c83d4d1eabe668909469c0a
+guid: 7141a6e6fa600444c97bb196dd1f2249
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: 6935bd5c110e94e6e96d0deb9aa18530, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.2
+    second: {fileID: 2100000, guid: 8fa8428f0649f405c9f5f455947ce25c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.7
+    second: {fileID: 2100000, guid: 647bb0bb29af84622874004c32c16b02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PBR.5
+    second: {fileID: 2100000, guid: 7b1a35d712d7245baadf845e9c1e821b, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 100money
+    second: {fileID: 2800000, guid: 1222dbb4d4c804fb5bea07e090f90160, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 200money
+    second: {fileID: 2800000, guid: e154508b26c6543cfbcd32bea0fe2768, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 50money
+    second: {fileID: 2800000, guid: 4353acc12d1d347948b9bbde291cdadf, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
