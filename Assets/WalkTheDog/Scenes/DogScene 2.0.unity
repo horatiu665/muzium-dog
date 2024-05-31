@@ -8373,10 +8373,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -23.48999
       objectReference: {fileID: 0}
+    - target: {fileID: 4360378772284505445, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa4c51e167c344d8494a08223b1c5f77, type: 2}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog
       objectReference: {fileID: 0}
+    - target: {fileID: 4511499147199546423, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa4c51e167c344d8494a08223b1c5f77, type: 2}
     - target: {fileID: 6503769146255440817, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -83.6
