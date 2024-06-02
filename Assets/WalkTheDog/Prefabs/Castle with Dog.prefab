@@ -537,7 +537,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2918645288443162748, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 0469cd374097943258f693a6aaa5b833, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6420aa6eaa73b48f198b662b505e6192, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1223,7 +1223,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2918645288443162748, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a3d3fd96cca6343289d28d42f0a4bb54, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2106e82f889774e80a149184f674925c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1234,7 +1234,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 56.21459
+  MaxDistance: 64.00041
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2932,7 +2932,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3949816604581418812, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 4defd464ea80a4a4dba5fadfdbb9759c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6c7cf96262711495f8ce874966f5a90f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3202,7 +3202,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 63
+  m_fontSize: 62.95
   m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4126,7 +4126,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2918645288443162748, guid: 458b9726b7402452198fb063b9866eca, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 0469cd374097943258f693a6aaa5b833, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6420aa6eaa73b48f198b662b505e6192, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4948,7 +4948,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: aa6a705784a9e44ebb5417098e04ddf0, type: 2}
     - target: {fileID: 3336462420665575956, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
       propertyPath: m_fontSize
-      value: 34.5
+      value: 34.45
       objectReference: {fileID: 0}
     - target: {fileID: 4690142565626182557, guid: 84d88b2441feb4e67bbdf1f7e11146b3, type: 3}
       propertyPath: togglePoemWithO
