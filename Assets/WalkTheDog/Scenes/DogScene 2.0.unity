@@ -8270,6 +8270,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1378930618757001686, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -23.48999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066537020341186078, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b81a50ee4f9246758dad8fe477bf66b, type: 2}
+    - target: {fileID: 2265018563527741420, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b81a50ee4f9246758dad8fe477bf66b, type: 2}
     - target: {fileID: 4379729472221495358, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
       propertyPath: m_Name
       value: Castle with Dog
@@ -8314,8 +8326,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7831069761593135691, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b81a50ee4f9246758dad8fe477bf66b, type: 2}
+    - target: {fileID: 8550697463455043108, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -23.48999
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1893853568103326091, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+    - {fileID: 7605220628778777644, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
+    - {fileID: 1840696623575482489, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16cb0cfbbe3e14ae9bcaf3124afdd1e1, type: 3}

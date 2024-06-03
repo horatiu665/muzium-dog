@@ -3,22 +3,7 @@ guid: f6705df25a4f14785a7a22a4a25363ac
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: micmetal
-    second: {fileID: 2100000, guid: 33a9f2574a79d4ce8b4dd108a245698d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mrwoofmantic_poster
-    second: {fileID: 2100000, guid: 4b81a50ee4f9246758dad8fe477bf66b, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: mrwoofmanticposter
-    second: {fileID: 2800000, guid: 21b10c6bd1f934353bacd56bb74fa2b9, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
