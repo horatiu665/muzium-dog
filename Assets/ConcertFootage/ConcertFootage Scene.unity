@@ -4749,6 +4749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player ECM (Dawg game)
       objectReference: {fileID: 0}
+    - target: {fileID: 8761671496356057150, guid: 48cc12928a2934797982e33b6242a696, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8762807067624277710, guid: 48cc12928a2934797982e33b6242a696, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28.420029
@@ -5465,6 +5469,67 @@ Transform:
   - {fileID: 1217162464}
   m_Father: {fileID: 1386968816}
   m_LocalEulerAnglesHint: {x: -0.155, y: -14.428, z: -0.099}
+--- !u!1001 &1459713582
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1306733731586717051, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_Name
+      value: Zium Controller Suite
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789152383430437168, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743776445007525042, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 329dea2cb71774a76b4ebb39e1f19d54, type: 3}
 --- !u!1 &1463208135
 GameObject:
   m_ObjectHideFlags: 0
@@ -8290,3 +8355,4 @@ SceneRoots:
   - {fileID: 1386968816}
   - {fileID: 430441757}
   - {fileID: 1373414511}
+  - {fileID: 1459713582}
